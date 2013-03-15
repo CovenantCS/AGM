@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="CoreAssets"/>
+	<classpathentry kind="src" path="Brickles"/>
+	<classpathentry kind="src" path="Pong"/>
+	<classpathentry kind="src" path="Bowl"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="J2MELIB"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

@@ -1,0 +1,9 @@
+MIDlet-3: Bowl,Bowl.png,bowl.BowlingProduct
+MIDlet-2: Pong,Pong.png,pong.PongProduct
+MIDlet-1: Brickles,Brickles.png,brickles.BricklesProduct
+MIDlet-Jar-URL: B2.jar
+MicroEdition-Configuration: CLDC-1.0
+MIDlet-Version: 1.0.0
+MIDlet-Name: B2 Midlet Suite
+MIDlet-Vendor: Midlet Suite Vendor
+MicroEdition-Profile: MIDP-1.0
