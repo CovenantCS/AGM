@@ -1,5 +1,8 @@
 package coreAssets;
 
+import temporarilyDisabled.Puck;
+import temporarilyDisabled.PuckSupply;
+
 public class PracticePuckSupply extends CountedPuckSupply {
 	CountedPuckSupply gameSupply;
 

@@ -1,4 +1,16 @@
-package coreAssets;
+package temporarilyDisabled;
+
+import temporarilyDisabled.GameProduct;
+import temporarilyDisabled.MainMenuFactory;
+import coreAssets.Board;
+import coreAssets.BoardViewer;
+import coreAssets.Game;
+import coreAssets.GameOverException;
+import coreAssets.GenericMainMenu;
+import coreAssets.MainMenuTypes;
+import coreAssets.Score;
+import coreAssets.ScoreBoard;
+import coreAssets.UserInteruptException;
 
 public class GenericGame implements Game, Runnable {
 

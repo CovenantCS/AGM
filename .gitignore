@@ -3,3 +3,6 @@
 *.class
 *.dll
 *.exe
+*.apk
+*.cache
+bin/

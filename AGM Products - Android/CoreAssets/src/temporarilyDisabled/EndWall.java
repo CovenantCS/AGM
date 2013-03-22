@@ -1,4 +1,10 @@
-package coreAssets;
+package temporarilyDisabled;
+
+import coreAssets.GameSprite;
+import coreAssets.Rectangle;
+import coreAssets.SpriteDeletedException;
+import coreAssets.StationarySprite;
+import OldUI.MovableSprite;
 
 
 public class EndWall extends StationarySprite {

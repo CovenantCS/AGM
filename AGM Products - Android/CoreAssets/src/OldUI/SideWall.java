@@ -1,5 +1,7 @@
 package coreAssets;
 
+import OldUI.MovableSprite;
+
 
 public class SideWall extends StationarySprite {
 

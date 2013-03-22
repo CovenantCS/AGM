@@ -1,5 +1,8 @@
 package coreAssets;
 
+import temporarilyDisabled.Puck;
+import temporarilyDisabled.PuckSupply;
+
 public class CountedPuckSupply extends PuckSupply {
 
 	// the allowed number of pucks in this version of the game

@@ -2,9 +2,10 @@ package bowl;
 
 import javax.microedition.midlet.MIDletStateChangeException;
 
+import temporarilyDisabled.GenericGame;
+
 import coreAssets.Board;
 import coreAssets.DigitalScoreBoard;
-import coreAssets.GenericGame;
 import coreAssets.GenericScoreBoard;
 import coreAssets.GenericStartMenu;
 import coreAssets.J2MEProduct;

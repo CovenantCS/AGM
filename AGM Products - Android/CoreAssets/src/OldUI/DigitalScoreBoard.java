@@ -1,6 +1,9 @@
-package coreAssets;
+package OldUI;
 
 import javax.microedition.lcdui.Graphics;
+
+import coreAssets.Rectangle;
+import coreAssets.SimpleScore;
 
 public class DigitalScoreBoard extends GenericScoreBoard {
 	private static final int color = 255 << 16 | 255 << 8 | 0;

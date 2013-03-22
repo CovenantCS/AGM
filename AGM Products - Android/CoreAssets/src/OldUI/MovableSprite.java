@@ -1,6 +1,13 @@
-package coreAssets;
+package OldUI;
 
 import javax.microedition.lcdui.Graphics;
+
+import coreAssets.GameSprite;
+import coreAssets.Point;
+import coreAssets.Rectangle;
+import coreAssets.Size;
+import coreAssets.SpriteDeletedException;
+import coreAssets.Velocity;
 
 public abstract class MovableSprite extends GameSprite {
 	protected Velocity v;

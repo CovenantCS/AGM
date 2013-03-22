@@ -1,4 +1,12 @@
-package coreAssets;
+package temporarilyDisabled;
+
+import coreAssets.CollisionException;
+import coreAssets.GameSprite;
+import coreAssets.Point;
+import coreAssets.Rectangle;
+import coreAssets.Size;
+import coreAssets.Velocity;
+import OldUI.MovableSprite;
 
 
 public class Paddle extends MovableSprite {

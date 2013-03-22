@@ -1,6 +1,8 @@
-package coreAssets;
+package OldUI;
 
 import javax.microedition.lcdui.Graphics;
+
+import coreAssets.ActivationManager;
 
 public class PracticeScoreBoard extends GenericScoreBoard {
 	private static int color = 255 << 16 | 255 << 8 | 0;

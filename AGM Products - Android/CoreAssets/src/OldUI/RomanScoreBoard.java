@@ -1,6 +1,9 @@
-package coreAssets;
+package OldUI;
 
 import javax.microedition.lcdui.Graphics;
+
+import coreAssets.Rectangle;
+import coreAssets.SimpleScore;
 
 public class RomanScoreBoard extends GenericScoreBoard {
 	private static int color = 0 << 16 | 255 << 8 | 255;

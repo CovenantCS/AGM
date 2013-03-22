@@ -1,4 +1,4 @@
-package coreAssets;
+package OldUI;
 
 import javax.microedition.lcdui.Choice;
 import javax.microedition.lcdui.Command;
@@ -6,6 +6,9 @@ import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.List;
 import javax.microedition.lcdui.StringItem;
+
+import coreAssets.Menu;
+import coreAssets.Services;
 
 public class GenericStartMenu implements Menu, CommandListener {
 	protected Services services;

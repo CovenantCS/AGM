@@ -2,8 +2,9 @@ package bowl;
 
 import java.util.Random;
 
+import temporarilyDisabled.EndWall;
+
 import coreAssets.CollisionException;
-import coreAssets.EndWall;
 import coreAssets.GameOverException;
 import coreAssets.Point;
 import coreAssets.Rectangle;

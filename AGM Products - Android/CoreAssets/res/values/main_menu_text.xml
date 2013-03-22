@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="welcome">Welcome!</string>
+    
+    <string name="save_game">Save Game</string>
+    
+    <string name="load_game">Load Game</string>
+    
+    <string name="save_score">Save Score</string>
+    
+    <string name="new_game">New Game</string>
+    
+    <string name="top_scores">Top Scores</string>
+    
+    <string name="exit_game">Exit Game</string>
+    
+    <string name="not_implemented">Feature Not Implemented</string>
+    
+</resources>

@@ -1,8 +1,13 @@
-package coreAssets;
+package OldUI;
 
 import javax.microedition.lcdui.Display;
 import javax.microedition.midlet.MIDlet;
 import javax.microedition.midlet.MIDletStateChangeException;
+
+import coreAssets.Board;
+import coreAssets.Game;
+import coreAssets.GameProduct;
+import coreAssets.Services;
 
 public abstract class J2MEProduct extends MIDlet implements GameProduct {
 	protected Platform platform;

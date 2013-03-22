@@ -1,4 +1,4 @@
-package coreAssets;
+package OldUI;
 
 import javax.microedition.lcdui.Display;
 

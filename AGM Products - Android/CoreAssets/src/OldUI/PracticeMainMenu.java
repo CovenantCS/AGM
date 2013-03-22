@@ -1,9 +1,13 @@
-package coreAssets;
+package OldUI;
 
 import javax.microedition.lcdui.ChoiceGroup;
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.StringItem;
+
+import coreAssets.ActivationManager;
+import coreAssets.Score;
+import coreAssets.Services;
 
 public class PracticeMainMenu extends GenericMainMenu {
 	protected Command selectCmd;

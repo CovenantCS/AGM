@@ -1,7 +1,13 @@
-package coreAssets;
+package OldUI;
 
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.rms.RecordStore;
+
+import coreAssets.Game;
+import coreAssets.GameProduct;
+import coreAssets.Score;
+import coreAssets.Services;
+import coreAssets.SimpleScore;
 
 public class J2MEServices implements Services {
 	protected GameProduct gameProd;

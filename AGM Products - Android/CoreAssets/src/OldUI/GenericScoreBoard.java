@@ -1,6 +1,10 @@
-package coreAssets;
+package OldUI;
 
 import javax.microedition.lcdui.Graphics;
+
+import coreAssets.Rectangle;
+import coreAssets.ScoreBoard;
+import coreAssets.SimpleScore;
 
 public abstract class GenericScoreBoard implements
 		ScoreBoard {

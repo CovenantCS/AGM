@@ -1,10 +1,17 @@
-package coreAssets;
+package OldUI;
 
 import java.util.Vector;
 
 import javax.microedition.lcdui.Canvas;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
+
+import coreAssets.Board;
+import coreAssets.BoardController;
+import coreAssets.BoardViewer;
+import coreAssets.GameOverException;
+import coreAssets.SpriteDesc;
+import coreAssets.UserInteruptException;
 
 /* 
  * this acts as the view portion of an mvc architechture 
