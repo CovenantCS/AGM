@@ -57,6 +57,16 @@ public class AndroidBoardViewer extends View implements BoardViewer,
         }
     }
     
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) 
+    {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+        this.viewWidth = MeasureSpec.getSize(widthMeasureSpec);
+        this.viewHeight = MeasureSpec.getSize(heightMeasureSpec);
+        this.setMeasuredDimension(
+                this.viewWidth, this.viewHeight);
+    }
+    
     public boolean onTouchEvent( MotionEvent event )
     {
         if( event.getAction() == MotionEvent.ACTION_MOVE )

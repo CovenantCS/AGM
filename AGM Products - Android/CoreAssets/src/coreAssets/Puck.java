@@ -20,7 +20,7 @@ public class Puck extends MovableSprite {
 	private static int color = 255 << 16 | 255 << 8 | 0;
 
 	// the height and width of the puck sprite
-	private static final int puckDim = 2;
+	private static final int puckDim = 7;
 
 	// the puck has been deleted or not
 	protected boolean isDead;

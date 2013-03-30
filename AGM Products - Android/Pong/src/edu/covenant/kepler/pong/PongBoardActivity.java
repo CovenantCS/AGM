@@ -1,17 +1,19 @@
 package edu.covenant.kepler.pong;
 
+import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.view.ViewGroup.LayoutParams;
-import android.widget.LinearLayout;
+import android.view.ViewTreeObserver;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import coreAssets.AndroidBoardActivity;
 import coreAssets.AndroidBoardViewer;
 import coreAssets.CountedPuckSupply;
 import coreAssets.GameOverException;
-//import coreAssets.GenericMainMenu;
 import coreAssets.PuckSupply;
 import coreAssets.UserInteruptException;
 import edu.covenant.kepler.pong.R;
 
+@SuppressLint( "NewApi" )
 public class PongBoardActivity extends AndroidBoardActivity
 {
     Thread animationThread;
@@ -24,19 +26,47 @@ public class PongBoardActivity extends AndroidBoardActivity
     public void onCreate( Bundle savedInstanceState )
     {
         super.onCreate( savedInstanceState );
-        
+
         setContentView( R.layout.board_activity );
-        
-        AndroidBoardViewer boardViewer = ( AndroidBoardViewer ) findViewById( R.id.test );
-        this.boardViewer = boardViewer;
-        boardViewer.requestFocus();
-        //boardViewer.setIsFocusableInTouchMode( true );
-        PuckSupply ps = new CountedPuckSupply( 3 );
-        this.boardViewer.setBoard( new PongBoard( 100, 100, ps ) );
-        this.animationThread = new Thread( new PongAnimation( this.boardViewer ) );
-        this.animationThread.start();
+
+        final AndroidBoardViewer boardViewer = ( AndroidBoardViewer ) findViewById( R.id.test );
+
+        ViewTreeObserver viewTreeObserver = boardViewer.getViewTreeObserver();
+        if ( viewTreeObserver.isAlive() )
+        {
+            viewTreeObserver
+                    .addOnGlobalLayoutListener( new OnGlobalLayoutListener()
+                    {
+                        @Override
+                        public void onGlobalLayout()
+                        {
+
+                            if ( android.os.Build.VERSION.SDK_INT >= 16 )
+                            {
+                                boardViewer.getViewTreeObserver()
+                                        .removeOnGlobalLayoutListener( this );
+                            }
+                            else
+                            {
+                                boardViewer.getViewTreeObserver()
+                                        .removeGlobalOnLayoutListener( this );
+                            }
+
+                            boardViewer.requestFocus();
+                            boardViewer.setBackgroundColor( Color.GREEN );
+                            PuckSupply ps = new CountedPuckSupply( 3 );
+
+                            int width = boardViewer.getWidth();
+                            int height = boardViewer.getHeight();
+                            boardViewer.setBoard( new PongBoard( width, height,
+                                    ps ) );
+                            animationThread = new Thread( new PongAnimation(
+                                    boardViewer ) );
+                            animationThread.start();
+                        }
+                    } );
+        }
+
     }
-    
-    
 
 }
