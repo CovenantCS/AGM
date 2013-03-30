@@ -1,7 +1,8 @@
 package coreAssets;
 
-import temporarilyDisabled.Puck;
-import temporarilyDisabled.PuckSupply;
+
+import coreAssets.Puck;
+import coreAssets.PuckSupply;
 
 public class CountedPuckSupply extends PuckSupply {
 
@@ -13,7 +14,6 @@ public class CountedPuckSupply extends PuckSupply {
 
 	// initializes to default values
 	public CountedPuckSupply() {
-		super();
 		maxPucks = 3;
 		usedPucks = 0;
 	}

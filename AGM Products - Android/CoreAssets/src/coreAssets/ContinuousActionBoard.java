@@ -1,10 +1,10 @@
-package temporarilyDisabled;
+package coreAssets;
 
 import coreAssets.CollisionException;
 import coreAssets.GameOverException;
 import coreAssets.SpriteDeletedException;
 import coreAssets.UserInteruptException;
-import OldUI.MovableSprite;
+import coreAssets.MovableSprite;
 
 /*
  * This class is a main loop implementation for the board if the 

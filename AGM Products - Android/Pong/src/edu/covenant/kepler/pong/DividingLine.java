@@ -1,4 +1,4 @@
-package pong;
+package edu.covenant.kepler.pong;
 
 import java.util.Vector;
 

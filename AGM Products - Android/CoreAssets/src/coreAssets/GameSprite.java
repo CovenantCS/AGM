@@ -12,8 +12,9 @@ public abstract class GameSprite {
 	protected Rectangle r;
 
 	public GameSprite(Rectangle r) {
-		this.r = r;
+	    this.r = r;
 		name = "GameSprite";
+		
 	}
 
 	public int getColor() {

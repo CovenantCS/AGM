@@ -1,4 +1,4 @@
-package pong;
+package edu.covenant.kepler.pong;
 
 import coreAssets.CollisionException;
 import coreAssets.ContinuousActionBoard;
@@ -20,11 +20,10 @@ public class PongBoard extends ContinuousActionBoard {
 	private PuckSupply pucksupply;
 	private boolean topHitLast;
 
-	public PongBoard(int width, int height, PuckSupply pucksupply,
-			SimpleScore score) {
+	public PongBoard(int width, int height, PuckSupply pucksupply) {
 		super(width, height);
 		this.pucksupply = pucksupply;
-		this.score = score;
+		//this.score = score;
 		topHitLast = false;
 		buildGameBoard();
 		userInterupt = false;
@@ -129,7 +128,7 @@ public class PongBoard extends ContinuousActionBoard {
 	public void setSaveData(String data) {
 		score = new SimpleScore(Integer.parseInt(data.substring(0, data
 				.indexOf(":"))));
-		sb.setScore(score);
+		//sb.setScore(score);
 		data = data.substring(data.indexOf(":") + 1);
 		if (data.startsWith("true")) {
 			topHitLast = true;
@@ -166,4 +165,18 @@ public class PongBoard extends ContinuousActionBoard {
 			}
 		}
 	}
+
+    @Override
+    public void loadGame()
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void saveGame()
+    {
+        // TODO Auto-generated method stub
+        
+    }
 }

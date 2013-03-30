@@ -1,4 +1,4 @@
-package temporarilyDisabled;
+package coreAssets;
 
 import coreAssets.CollisionException;
 import coreAssets.GameOverException;
@@ -7,7 +7,7 @@ import coreAssets.Point;
 import coreAssets.Rectangle;
 import coreAssets.Size;
 import coreAssets.SpriteDeletedException;
-import OldUI.MovableSprite;
+import coreAssets.MovableSprite;
 
 /*
  * Puck.java

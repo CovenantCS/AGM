@@ -1,4 +1,4 @@
-package temporarilyDisabled;
+package coreAssets;
 
 import java.util.Vector;
 
@@ -11,8 +11,8 @@ import coreAssets.SimpleScore;
 import coreAssets.SpriteDeletedException;
 import coreAssets.UserInteruptException;
 
-import OldUI.GenericScoreBoard;
-import OldUI.MovableSprite;
+//import OldUI.GenericScoreBoard;
+import coreAssets.MovableSprite;
 
 public abstract class GenericBoard implements Board {
 	protected Vector movableComponents;
@@ -25,7 +25,7 @@ public abstract class GenericBoard implements Board {
 
 	protected SimpleScore score;
 
-	protected GenericScoreBoard sb;
+	//protected GenericScoreBoard sb;
 
 	protected boolean gameOver;
 

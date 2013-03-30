@@ -1,11 +1,8 @@
-package OldUI;
-
-import javax.microedition.lcdui.Graphics;
+package coreAssets;
 
 import coreAssets.GameSprite;
 import coreAssets.Point;
 import coreAssets.Rectangle;
-import coreAssets.Size;
 import coreAssets.SpriteDeletedException;
 import coreAssets.Velocity;
 
@@ -22,13 +19,6 @@ public abstract class MovableSprite extends GameSprite {
 
 	public boolean moving() {
 		return moving;
-	}
-
-	public void paint(Graphics g) {
-		Point p = r.getLocation();
-		Size s = r.getSize();
-		g.setColor(255, 255, 255);
-		g.fillRect(p.getRealX(), p.getRealY(), s.getWidth(), s.getHeight());
 	}
 
 	public void move() {

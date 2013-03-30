@@ -11,39 +11,31 @@
         android:text="@string/welcome" />
     
     <Button
-        android:id="@+id/save_game_button"
+        android:id="@+id/resume_game_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/save_game" />
-    
-    <Button
-        android:id="@+id/load_game_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/load_game" />
-    
-    <Button
-        android:id="@+id/save_score_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/save_score" />
+        android:text="@string/resume_game"
+        android:onClick="resumeGame" />
     
     <Button
         android:id="@+id/new_game_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/new_game" />
+        android:text="@string/new_game"
+        android:onClick="newGame" />
     
     <Button
         android:id="@+id/top_scores_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/top_scores" />
+        android:text="@string/top_scores"
+        android:onClick="topScores" />
     
     <Button
         android:id="@+id/exit_game_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/exit_game" />
+        android:text="@string/exit_game"
+        android:onClick="exitGame" />
 
 </LinearLayout>

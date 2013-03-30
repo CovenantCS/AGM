@@ -1,9 +1,9 @@
-package temporarilyDisabled;
+package coreAssets;
 
 import coreAssets.Board;
 import coreAssets.Game;
 import coreAssets.Services;
-import OldUI.Platform;
+import coreAssets.Platform;
 
 public interface GameProduct {
 	Game getGame();

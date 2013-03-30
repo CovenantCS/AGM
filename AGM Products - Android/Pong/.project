@@ -3,6 +3,7 @@
 	<name>Pong</name>
 	<comment></comment>
 	<projects>
+		<project>CoreAssets</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

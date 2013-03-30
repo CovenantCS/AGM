@@ -8,6 +8,10 @@ public interface Board {
 	boolean gameOver();
 
 	String getSaveData();
+	
+	void loadGame();
+	
+	void saveGame();
 
 	void setSaveData(String data);
 

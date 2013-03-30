@@ -2,11 +2,7 @@
 <resources>
     <string name="welcome">Welcome!</string>
     
-    <string name="save_game">Save Game</string>
-    
-    <string name="load_game">Load Game</string>
-    
-    <string name="save_score">Save Score</string>
+    <string name="resume_game">Resume Game</string>
     
     <string name="new_game">New Game</string>
     

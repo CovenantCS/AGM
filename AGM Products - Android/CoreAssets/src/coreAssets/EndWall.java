@@ -1,19 +1,22 @@
 package coreAssets;
 
-import OldUI.MovableSprite;
+import coreAssets.GameSprite;
+import coreAssets.Rectangle;
+import coreAssets.SpriteDeletedException;
+import coreAssets.StationarySprite;
+import coreAssets.MovableSprite;
 
 
-public class SideWall extends StationarySprite {
-
+public class EndWall extends StationarySprite {
 	// indicates whether this sprite absorbs sprites with which it collides
 	private boolean absorb;
 
 	// p: location of the upper left corner of the sprite
 	// s: height and width of sprite
-	public SideWall(Rectangle r, boolean newAbsorb) {
+	public EndWall(Rectangle r, boolean newAbsorb) {
 		super(r);
 		absorb = newAbsorb;
-		name = "SideWall";
+		name = "EndWall";
 	}
 
 	// sprite with which self has collided
@@ -22,7 +25,7 @@ public class SideWall extends StationarySprite {
 			if (absorb) {
 				((MovableSprite) gs).delete();
 			} else {
-				((MovableSprite) gs).reverseX();
+				((MovableSprite) gs).reverseY();
 			}
 		}
 	}
