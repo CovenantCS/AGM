@@ -29,6 +29,8 @@ public class PongBoardActivity extends AndroidBoardActivity
         
         AndroidBoardViewer boardViewer = ( AndroidBoardViewer ) findViewById( R.id.test );
         this.boardViewer = boardViewer;
+        boardViewer.requestFocus();
+        //boardViewer.setIsFocusableInTouchMode( true );
         PuckSupply ps = new CountedPuckSupply( 3 );
         this.boardViewer.setBoard( new PongBoard( 100, 100, ps ) );
         this.animationThread = new Thread( new PongAnimation( this.boardViewer ) );

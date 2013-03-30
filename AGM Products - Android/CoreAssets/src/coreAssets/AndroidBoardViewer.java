@@ -5,10 +5,12 @@ import java.util.Vector;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-//import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
+//import android.graphics.Color;
 
 public class AndroidBoardViewer extends View implements BoardViewer,
         BoardController
@@ -53,6 +55,35 @@ public class AndroidBoardViewer extends View implements BoardViewer,
 
             canvas.drawRect( left, top, right, bottom, paint );
         }
+    }
+    
+    public boolean onTouchEvent( MotionEvent event )
+    {
+        if( event.getAction() == MotionEvent.ACTION_MOVE )
+        {
+            this.board.ptrPressed( (int) event.getX(), (int) event.getY() );
+        }
+        
+        return true;
+    }
+    
+    public boolean onKeyDown( int keyCode, KeyEvent event )
+    {
+        switch( keyCode )
+        {
+            case KeyEvent.KEYCODE_DPAD_LEFT:
+            {
+                this.board.keyLeft( true );
+                return true;
+            }
+            case KeyEvent.KEYCODE_DPAD_RIGHT:
+            {
+                this.board.keyRight( true );
+                return true;
+            }
+        }
+        
+        return super.onKeyDown( keyCode, event );
     }
 
     @Override
