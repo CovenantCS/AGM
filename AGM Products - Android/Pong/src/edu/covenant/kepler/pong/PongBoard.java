@@ -1,9 +1,11 @@
 package edu.covenant.kepler.pong;
 
+import junit.framework.Test;
 import coreAssets.CollisionException;
 import coreAssets.ContinuousActionBoard;
 import coreAssets.EndWall;
 import coreAssets.GameOverException;
+import coreAssets.GameSprite;
 import coreAssets.Paddle;
 import coreAssets.Point;
 import coreAssets.Puck;
@@ -38,6 +40,8 @@ public class PongBoard extends ContinuousActionBoard
         SideWall leftwall;
         SideWall rightwall;
         DividingLine dl;
+        
+        
 
         int paddleWidth = getWidth() / 8;
         int paddleHeight = 3;
@@ -57,7 +61,8 @@ public class PongBoard extends ContinuousActionBoard
 
         dl = new DividingLine( new Rectangle( new Point( getWidth(),
                 getHeight() ), new Size( getWidth(), getHeight() ) ) );
-        addStationaryPiece( dl );
+        addStationaryPiece( dl );  
+        
 
         try
         {

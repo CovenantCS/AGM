@@ -28,28 +28,26 @@ public class PongBoardActivity extends AndroidBoardActivity
         super.onCreate( savedInstanceState );
 
         setContentView( R.layout.board_activity );
-
+        
         final AndroidBoardViewer boardViewer = ( AndroidBoardViewer ) findViewById( R.id.test );
 
         ViewTreeObserver viewTreeObserver = boardViewer.getViewTreeObserver();
         if ( viewTreeObserver.isAlive() )
         {
-            viewTreeObserver
-                    .addOnGlobalLayoutListener( new OnGlobalLayoutListener()
+            viewTreeObserver.addOnGlobalLayoutListener( new OnGlobalLayoutListener()
                     {
-                        @Override
+                        @SuppressWarnings("deprecation")
+						@Override
                         public void onGlobalLayout()
                         {
 
                             if ( android.os.Build.VERSION.SDK_INT >= 16 )
                             {
-                                boardViewer.getViewTreeObserver()
-                                        .removeOnGlobalLayoutListener( this );
+                                boardViewer.getViewTreeObserver().removeOnGlobalLayoutListener( this );
                             }
                             else
                             {
-                                boardViewer.getViewTreeObserver()
-                                        .removeGlobalOnLayoutListener( this );
+                                boardViewer.getViewTreeObserver().removeGlobalOnLayoutListener( this );
                             }
 
                             boardViewer.requestFocus();
