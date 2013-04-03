@@ -2,10 +2,15 @@ package coreAssets;
 
 import java.util.Vector;
 
+import edu.covenant.kepler.coreassets.R;
+
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Picture;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -39,11 +44,16 @@ public class AndroidBoardViewer extends View implements BoardViewer,
 
     protected void onDraw( Canvas canvas )
     {
+    	Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
         super.onDraw( canvas );
+        canvas.drawBitmap(bm, viewWidth/2 - bm.getWidth()/2, viewHeight/2 - bm.getHeight()/2, null);
+       
+        
         Vector sprites = board.getSpriteDesc();
         Paint paint = new Paint();
         for ( int i = 1; i <= sprites.size(); i++ )
         {
+        	
             SpriteDesc sd = ( SpriteDesc ) sprites.elementAt( i - 1 );
 
             paint.setColor( Color.RED );
@@ -54,6 +64,8 @@ public class AndroidBoardViewer extends View implements BoardViewer,
             int right = left + sd.width - 1;
 
             canvas.drawRect( left, top, right, bottom, paint );
+            
+        	
         }
     }
     

@@ -1,4 +1,5 @@
 int drawable ic_launcher 0x7f020000
+int drawable logo 0x7f020001
 int id board_view 0x7f060005
 int id exit_game_button 0x7f060004
 int id message 0x7f060000
