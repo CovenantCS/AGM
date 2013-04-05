@@ -1,12 +1,15 @@
 package edu.covenant.kepler.pong;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import coreAssets.AndroidBoardActivity;
 import coreAssets.AndroidBoardViewer;
+import coreAssets.AndroidProduct;
+import coreAssets.BoardViewer;
 import coreAssets.CountedPuckSupply;
 import coreAssets.GameOverException;
 import coreAssets.PuckSupply;
@@ -16,7 +19,8 @@ import edu.covenant.kepler.pong.R;
 @SuppressLint( "NewApi" )
 public class PongBoardActivity extends AndroidBoardActivity
 {
-    Thread animationThread;
+    private Thread animationThread;
+    private AndroidBoardViewer boardViewer;
 
     public PongBoardActivity()
     {
@@ -40,7 +44,7 @@ public class PongBoardActivity extends AndroidBoardActivity
 						@Override
                         public void onGlobalLayout()
                         {
-
+                            //They renamed it slightly across versions
                             if ( android.os.Build.VERSION.SDK_INT >= 16 )
                             {
                                 boardViewer.getViewTreeObserver().removeOnGlobalLayoutListener( this );
@@ -58,13 +62,24 @@ public class PongBoardActivity extends AndroidBoardActivity
                             int height = boardViewer.getHeight();
                             boardViewer.setBoard( new PongBoard( width, height,
                                     ps ) );
+                            Intent intent = getIntent();
+                            if ( AndroidProduct.LOAD_GAME.equals( intent.getAction() ) )
+                            {
+                                boardViewer.getBoard().loadGame( PongBoardActivity.this );
+                            }
+                            PongBoardActivity.this.boardViewer = boardViewer;
                             animationThread = new Thread( new PongAnimation(
                                     boardViewer ) );
                             animationThread.start();
                         }
                     } );
         }
-
+    }
+    
+    public void onPause()
+    {
+        super.onPause();
+        boardViewer.getBoard().saveGame( this );
     }
 
 }

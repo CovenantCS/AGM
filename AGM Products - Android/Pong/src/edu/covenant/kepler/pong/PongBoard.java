@@ -1,5 +1,14 @@
 package edu.covenant.kepler.pong;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import android.content.Context;
+
 import junit.framework.Test;
 import coreAssets.CollisionException;
 import coreAssets.ContinuousActionBoard;
@@ -22,6 +31,7 @@ public class PongBoard extends ContinuousActionBoard
     private Paddle bottomPaddle;
     private PuckSupply pucksupply;
     private boolean topHitLast;
+    private int puckSize = 7;
 
     public PongBoard( int width, int height, PuckSupply pucksupply )
     {
@@ -40,8 +50,6 @@ public class PongBoard extends ContinuousActionBoard
         SideWall leftwall;
         SideWall rightwall;
         DividingLine dl;
-        
-        
 
         int paddleWidth = getWidth() / 8;
         int paddleHeight = 3;
@@ -61,13 +69,12 @@ public class PongBoard extends ContinuousActionBoard
 
         dl = new DividingLine( new Rectangle( new Point( getWidth(),
                 getHeight() ), new Size( getWidth(), getHeight() ) ) );
-        addStationaryPiece( dl );  
-        
+        addStationaryPiece( dl );
 
         try
         {
             puck = pucksupply.getPuck( new Point( ( getWidth() / 2 ),
-                    ( 3 * getHeight() / 4 ) ) );
+                    ( 3 * getHeight() / 4 ) ), this.puckSize );
             addMovablePiece( puck );
         }
         catch ( Exception e )
@@ -179,7 +186,7 @@ public class PongBoard extends ContinuousActionBoard
         {
             movableComponents.removeElement( puck );
             puck = pucksupply.getPuck( new Point( ( getWidth() / 2 ),
-                    ( getHeight() / 2 ) ) );
+                    ( getHeight() / 2 ) ), puckSize );
             movableComponents.addElement( puck );
         }
         catch ( GameOverException oope )
@@ -202,16 +209,62 @@ public class PongBoard extends ContinuousActionBoard
     }
 
     @Override
-    public void loadGame()
+    public void loadGame( Context context )
     {
-        // TODO Auto-generated method stub
+        String data = "";
+        String fileName = context.getString( R.string.app_name );
+
+        try
+        {
+            InputStream inputStream = context.openFileInput( fileName );
+
+            if ( inputStream != null )
+            {
+                InputStreamReader inputStreamReader = new InputStreamReader(
+                        inputStream );
+                BufferedReader bufferedReader = new BufferedReader(
+                        inputStreamReader );
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ( ( receiveString = bufferedReader.readLine() ) != null )
+                {
+                    stringBuilder.append( receiveString );
+                }
+
+                inputStream.close();
+                data = stringBuilder.toString();
+                setSaveData( data );
+            }
+        }
+        catch ( FileNotFoundException e )
+        {
+            e.printStackTrace();
+        }
+        catch ( IOException e )
+        {
+            e.printStackTrace();
+        }
 
     }
 
     @Override
-    public void saveGame()
+    public void saveGame( Context context )
     {
-        // TODO Auto-generated method stub
-
+        String data = getSaveData();
+        String fileName = context.getString( R.string.app_name );
+        FileOutputStream outputStream;
+        try
+        {
+            context.deleteFile( fileName );
+            outputStream = context.openFileOutput( fileName,
+                    Context.MODE_PRIVATE );
+            outputStream.write( data.getBytes() );
+            outputStream.close();
+        }
+        catch ( Exception e )
+        {
+            e.printStackTrace();
+        }
     }
 }
