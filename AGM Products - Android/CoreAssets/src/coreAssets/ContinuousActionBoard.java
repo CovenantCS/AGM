@@ -23,6 +23,16 @@ public abstract class ContinuousActionBoard extends GenericBoard {
 	public ContinuousActionBoard(int width, int height) {
 		super(width, height);
 	}
+	
+	public ContinuousActionBoard()
+	{
+	    super();
+	}
+	
+	public void buildGameBoard()
+	{
+	    
+	}
 
 	public void handleTick() throws GameOverException, UserInteruptException {
 		if (userInterupt) {

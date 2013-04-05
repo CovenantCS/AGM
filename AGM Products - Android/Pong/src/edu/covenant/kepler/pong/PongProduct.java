@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import coreAssets.AndroidProduct;
-import coreAssets.Board;
 
 
 public class PongProduct extends AndroidProduct
@@ -16,8 +15,6 @@ public class PongProduct extends AndroidProduct
         intent.putExtra( "name", "Pong" );
         setIntent( intent );
         super.onCreate( savedInstanceState );
-        //TextView message = (TextView) findViewById( R.id.message );
-        //message.setText( message.getText() + " to " + this.productName  );
     }
 
     public void newGame( View view )

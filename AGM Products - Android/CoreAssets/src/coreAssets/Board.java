@@ -7,6 +7,16 @@ import android.content.Context;
 public interface Board {
 	void tick() throws GameOverException, UserInteruptException;
 
+	int getWidth();
+
+	void setWidth( int width );
+	
+	int getHeight();
+	
+	void setHeight( int height );
+	
+	void buildGameBoard();
+	
 	boolean gameOver();
 
 	String getSaveData();

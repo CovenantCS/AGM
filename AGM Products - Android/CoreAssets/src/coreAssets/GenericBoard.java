@@ -43,6 +43,15 @@ public abstract class GenericBoard implements Board {
 		score = new SimpleScore();
 		gameOver = false;
 	}
+	
+	public GenericBoard() {
+        movableComponents = new Vector();
+        stationaryComponents = new Vector();
+        speed = 1;
+        moving = true;
+        score = new SimpleScore();
+        gameOver = false;
+    }
 
 	public Score getScore() {
 		return score;
@@ -146,9 +155,19 @@ public abstract class GenericBoard implements Board {
 	public int getWidth() {
 		return width;
 	}
+	
+	public void setWidth( int width )
+	{
+	    this.width = width;
+	}
 
 	public int getHeight() {
 		return height;
+	}
+	
+	public void setHeight( int height )
+	{
+	    this.height = height;
 	}
 
 	/*

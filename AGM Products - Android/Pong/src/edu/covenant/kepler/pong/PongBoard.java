@@ -42,6 +42,15 @@ public class PongBoard extends ContinuousActionBoard
         buildGameBoard();
         userInterupt = false;
     }
+    
+    public PongBoard( PuckSupply pucksupply )
+    {
+        super();
+        this.pucksupply = pucksupply;
+        // this.score = score;
+        topHitLast = false;
+        userInterupt = false;
+    }
 
     public void buildGameBoard()
     {

@@ -20,41 +20,45 @@ import android.view.View;
 public class AndroidBoardViewer extends View implements BoardViewer,
         BoardController
 {
-    Board board;
-    int viewHeight;
-    int viewWidth;
+    protected Board board;
+    protected int viewHeight;
+    protected int viewWidth;
+    protected Bitmap bm;
+    protected Paint paint;
 
     public AndroidBoardViewer( Context context )
     {
         super( context );
-        // TODO Auto-generated constructor stub
+        init();
     }
 
     public AndroidBoardViewer( Context context, AttributeSet attrs )
     {
         super( context, attrs );
-        // TODO Auto-generated constructor stub
+        init();
     }
 
     public AndroidBoardViewer( Context context, AttributeSet attrs, int defStyle )
     {
         super( context, attrs, defStyle );
-        // TODO Auto-generated constructor stub
+        init();
+    }
+    
+    private void init()
+    {
+        bm = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
+        paint = new Paint();
     }
 
     protected void onDraw( Canvas canvas )
     {
-    	Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
-    	bm=Bitmap.createScaledBitmap(bm, (int) (viewWidth/1.4), viewHeight/2, false);//this scales to the screen size
         super.onDraw( canvas );
         canvas.drawBitmap(bm, viewWidth/2 - bm.getWidth()/2, viewHeight/2 - bm.getHeight()/2, null);
-       
         
         Vector sprites = board.getSpriteDesc();
-        Paint paint = new Paint();
+        
         for ( int i = 1; i <= sprites.size(); i++ )
         {
-        	
             SpriteDesc sd = ( SpriteDesc ) sprites.elementAt( i - 1 );
 
             paint.setColor( Color.RED );
@@ -64,9 +68,7 @@ public class AndroidBoardViewer extends View implements BoardViewer,
             int left = sd.x;
             int right = left + sd.width - 1;
 
-            canvas.drawRect( left, top, right, bottom, paint );
-            
-        	
+            canvas.drawRect( left, top, right, bottom, paint );      	
         }
     }
     
@@ -195,6 +197,21 @@ public class AndroidBoardViewer extends View implements BoardViewer,
     public Board getBoard()
     {
         return this.board;
+    }
+
+    public void setupBoard()
+    {
+        if( this.board == null )
+        {
+            throw new NullPointerException( "Game board was not created before attempting to init." );
+        }
+        //TODO: Throw exception if height/width are 0
+        //bitmap can be created here to take advantage of knowing viewHeight/width are set
+        bm = Bitmap.createScaledBitmap(bm, (int) (viewWidth/1.4), viewHeight/2, false);//this scales to the screen size
+        
+        this.board.setWidth( this.viewWidth );
+        this.board.setHeight( this.viewHeight );
+        this.board.buildGameBoard();
     }
 
 }
