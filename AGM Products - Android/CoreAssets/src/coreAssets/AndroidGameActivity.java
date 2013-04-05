@@ -19,13 +19,13 @@ public abstract class AndroidGameActivity extends Activity
         Intent intent = getIntent();
         if ( AndroidProduct.LOAD_GAME.equals( intent.getAction() ) )
         {
-            board.loadGame();
+            board.loadGame( this );
         }
     }
     
     public void onPause()
     {
         super.onPause();
-        board.saveGame();
+        board.saveGame( this );
     }
 }

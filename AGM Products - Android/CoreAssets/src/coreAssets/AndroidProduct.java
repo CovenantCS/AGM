@@ -41,8 +41,7 @@ public abstract class AndroidProduct extends Activity
 
     public void exitGame( View view )
     {
-        TextView message = (TextView) findViewById( R.id.message );
-        message.setText( "exitGame " + getResources().getString( R.string.not_implemented ) );
+        finish();
     }
 
 }

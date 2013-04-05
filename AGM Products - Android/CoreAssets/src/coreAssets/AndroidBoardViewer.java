@@ -190,4 +190,10 @@ public class AndroidBoardViewer extends View implements BoardViewer,
         } );
     }
 
+    @Override
+    public Board getBoard()
+    {
+        return this.board;
+    }
+
 }

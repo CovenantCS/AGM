@@ -2,6 +2,8 @@ package coreAssets;
 
 import java.util.Vector;
 
+import android.content.Context;
+
 public interface Board {
 	void tick() throws GameOverException, UserInteruptException;
 
@@ -9,9 +11,9 @@ public interface Board {
 
 	String getSaveData();
 	
-	void loadGame();
+	void loadGame( Context context );
 	
-	void saveGame();
+	void saveGame( Context context );
 
 	void setSaveData(String data);
 

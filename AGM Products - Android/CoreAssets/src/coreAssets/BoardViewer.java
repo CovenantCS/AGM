@@ -5,6 +5,8 @@ package coreAssets;
  */
 public interface BoardViewer {
 	void setBoard(Board board);
+	
+	public Board getBoard();
 
 	public void tick() throws GameOverException, UserInteruptException;
 }

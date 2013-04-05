@@ -20,16 +20,22 @@ public class Puck extends MovableSprite {
 	private static int color = 255 << 16 | 255 << 8 | 0;
 
 	// the height and width of the puck sprite
-	private static final int puckDim = 7;
+	private static final int defaultSize = 2;
 
 	// the puck has been deleted or not
 	protected boolean isDead;
 
 	public Puck(Point p) {
-		super(new Rectangle(p, new Size(puckDim, puckDim)), 315);
+		super(new Rectangle(p, new Size(defaultSize, defaultSize)), 315);
 		v.setSpeed(2);
 		name = "Puck";
 	}
+	
+	public Puck(Point p, int puckSize) {
+        super(new Rectangle(p, new Size(puckSize, puckSize)), 315);
+        v.setSpeed(2);
+        name = "Puck";
+    }
 
 	public void collideWith(GameSprite gs) throws GameOverException,
 			SpriteDeletedException, CollisionException {

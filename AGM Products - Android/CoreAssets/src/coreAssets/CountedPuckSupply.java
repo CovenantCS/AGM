@@ -45,6 +45,15 @@ public class CountedPuckSupply extends PuckSupply {
 			throw new GameOverException(false, "Out of Pucks");
 		}
 	}
+	
+	public Puck getPuck(Point p, int puckSize) throws GameOverException {
+        if (usedPucks < maxPucks) {
+            usedPucks = usedPucks + 1;
+            return super.getPuck(p, puckSize);
+        } else {
+            throw new GameOverException(false, "Out of Pucks");
+        }
+    }
 
 	public String getSaveData() {
 		return maxPucks + "," + usedPucks;

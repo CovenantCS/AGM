@@ -31,7 +31,6 @@ public class AndroidServices extends IntentService implements Services
     @Override
     public void exit()
     {
-        // TODO Auto-generated method stub
 
     }
 
