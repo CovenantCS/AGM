@@ -45,6 +45,7 @@ public class AndroidBoardViewer extends View implements BoardViewer,
     protected void onDraw( Canvas canvas )
     {
     	Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
+    	bm=Bitmap.createScaledBitmap(bm, (int) (viewWidth/1.4), viewHeight/2, false);//this scales to the screen size
         super.onDraw( canvas );
         canvas.drawBitmap(bm, viewWidth/2 - bm.getWidth()/2, viewHeight/2 - bm.getHeight()/2, null);
        
