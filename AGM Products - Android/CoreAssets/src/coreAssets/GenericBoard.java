@@ -1,6 +1,14 @@
 package coreAssets;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Vector;
+
+import android.content.Context;
 
 import coreAssets.Board;
 import coreAssets.CollisionException;
@@ -20,6 +28,8 @@ public abstract class GenericBoard implements Board {
 	protected Vector stationaryComponents;
 
 	protected int speed;
+	
+	protected String name;
 
 	protected boolean moving;
 
@@ -191,4 +201,64 @@ public abstract class GenericBoard implements Board {
 
 	public void keyUp(boolean down) {
 	};
+	
+	@Override
+    public void loadGame( Context context )
+    {
+        String data = "";
+        String fileName = this.name;
+
+        try
+        {
+            InputStream inputStream = context.openFileInput( fileName );
+
+            if ( inputStream != null )
+            {
+                InputStreamReader inputStreamReader = new InputStreamReader(
+                        inputStream );
+                BufferedReader bufferedReader = new BufferedReader(
+                        inputStreamReader );
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ( ( receiveString = bufferedReader.readLine() ) != null )
+                {
+                    stringBuilder.append( receiveString );
+                }
+
+                inputStream.close();
+                data = stringBuilder.toString();
+                setSaveData( data );
+            }
+        }
+        catch ( FileNotFoundException e )
+        {
+            e.printStackTrace();
+        }
+        catch ( IOException e )
+        {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void saveGame( Context context )
+    {
+        String data = getSaveData();
+        String fileName = this.name;
+        FileOutputStream outputStream;
+        try
+        {
+            context.deleteFile( fileName );
+            outputStream = context.openFileOutput( fileName,
+                    Context.MODE_PRIVATE );
+            outputStream.write( data.getBytes() );
+            outputStream.close();
+        }
+        catch ( Exception e )
+        {
+            e.printStackTrace();
+        }
+    }
 }

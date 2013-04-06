@@ -53,4 +53,10 @@ public abstract class AndroidBoardActivity extends Activity
                     } );
         }
     }
+    
+    public void onPause()
+    {
+        super.onPause();
+        boardViewer.getBoard().saveGame( this );
+    }
 }

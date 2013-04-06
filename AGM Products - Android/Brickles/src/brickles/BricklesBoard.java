@@ -23,11 +23,20 @@ public class BricklesBoard extends ContinuousActionBoard {
 			PuckSupply pucksupply,
 			SimpleScore score) {
 		super(width, height);
+		this.name = "brickles";
 		this.pucksupply = pucksupply;
-		this.score = score;
+		//this.score = score;
 		buildGameBoard();
 		userInterupt = false;
 	}
+	
+	public BricklesBoard(PuckSupply pucksupply) {
+        super();
+        this.name = "brickles";
+        this.pucksupply = pucksupply;
+        //this.score = score;
+        userInterupt = false;
+    }
 
 	public void buildGameBoard() {
 		EndWall ceiling;

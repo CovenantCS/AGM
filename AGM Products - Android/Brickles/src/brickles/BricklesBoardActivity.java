@@ -1,12 +1,12 @@
-package edu.covenant.kepler.pong;
+package brickles;
 
 import android.os.Bundle;
 import coreAssets.AndroidBoardActivity;
 import coreAssets.CountedPuckSupply;
 
-public class PongBoardActivity extends AndroidBoardActivity
+public class BricklesBoardActivity extends AndroidBoardActivity
 {
-    public PongBoardActivity()
+    public BricklesBoardActivity()
     {
         // TODO Auto-generated constructor stub
     }
@@ -14,6 +14,6 @@ public class PongBoardActivity extends AndroidBoardActivity
     public void onCreate( Bundle savedInstanceState )
     {
         super.onCreate( savedInstanceState );
-        this.boardViewer.setBoard( new PongBoard( new CountedPuckSupply( 3 ) ) );
+        this.boardViewer.setBoard( new BricklesBoard( new CountedPuckSupply( 3 ) ) );
     }
 }

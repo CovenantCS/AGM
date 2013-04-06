@@ -11,9 +11,6 @@ public class PongProduct extends AndroidProduct
 {
     protected void onCreate( Bundle savedInstanceState )
     {
-        Intent intent = new Intent();
-        intent.putExtra( "name", "Pong" );
-        setIntent( intent );
         super.onCreate( savedInstanceState );
     }
 

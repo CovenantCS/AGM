@@ -1,20 +1,9 @@
 package edu.covenant.kepler.pong;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
-import android.content.Context;
-
-import junit.framework.Test;
 import coreAssets.CollisionException;
 import coreAssets.ContinuousActionBoard;
 import coreAssets.EndWall;
 import coreAssets.GameOverException;
-import coreAssets.GameSprite;
 import coreAssets.Paddle;
 import coreAssets.Point;
 import coreAssets.Puck;
@@ -36,6 +25,7 @@ public class PongBoard extends ContinuousActionBoard
     public PongBoard( int width, int height, PuckSupply pucksupply )
     {
         super( width, height );
+        this.name = "pong";
         this.pucksupply = pucksupply;
         // this.score = score;
         topHitLast = false;
@@ -46,6 +36,7 @@ public class PongBoard extends ContinuousActionBoard
     public PongBoard( PuckSupply pucksupply )
     {
         super();
+        this.name = "pong";
         this.pucksupply = pucksupply;
         // this.score = score;
         topHitLast = false;
@@ -214,66 +205,6 @@ public class PongBoard extends ContinuousActionBoard
             {
                 score.incScore( 1 );
             }
-        }
-    }
-
-    @Override
-    public void loadGame( Context context )
-    {
-        String data = "";
-        String fileName = context.getString( R.string.app_name );
-
-        try
-        {
-            InputStream inputStream = context.openFileInput( fileName );
-
-            if ( inputStream != null )
-            {
-                InputStreamReader inputStreamReader = new InputStreamReader(
-                        inputStream );
-                BufferedReader bufferedReader = new BufferedReader(
-                        inputStreamReader );
-                String receiveString = "";
-                StringBuilder stringBuilder = new StringBuilder();
-
-                while ( ( receiveString = bufferedReader.readLine() ) != null )
-                {
-                    stringBuilder.append( receiveString );
-                }
-
-                inputStream.close();
-                data = stringBuilder.toString();
-                setSaveData( data );
-            }
-        }
-        catch ( FileNotFoundException e )
-        {
-            e.printStackTrace();
-        }
-        catch ( IOException e )
-        {
-            e.printStackTrace();
-        }
-
-    }
-
-    @Override
-    public void saveGame( Context context )
-    {
-        String data = getSaveData();
-        String fileName = context.getString( R.string.app_name );
-        FileOutputStream outputStream;
-        try
-        {
-            context.deleteFile( fileName );
-            outputStream = context.openFileOutput( fileName,
-                    Context.MODE_PRIVATE );
-            outputStream.write( data.getBytes() );
-            outputStream.close();
-        }
-        catch ( Exception e )
-        {
-            e.printStackTrace();
         }
     }
 }
