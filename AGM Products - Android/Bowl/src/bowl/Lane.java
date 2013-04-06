@@ -10,7 +10,7 @@ import coreAssets.SpriteDesc;
 import coreAssets.StationarySprite;
 
 public class Lane extends StationarySprite {
-	private static final int color = 0 << 16 | 255 << 8 | 255;
+	private static final int color = 255 << 24 | 0 << 16 | 255 << 8 | 255;
 
 	private Gutter left;
 

@@ -15,7 +15,7 @@ import coreAssets.SpriteDeletedException;
 import coreAssets.Velocity;
 
 public class BowlingBall extends MovableSprite {
-	private static final int color = 255 << 16 | 255 << 8 | 0;
+	private static final int color = 255 << 24 | 255 << 16 | 255 << 8 | 0;
 
 	// the height and width of the ball sprite
 	private static final int ballDim = 5;

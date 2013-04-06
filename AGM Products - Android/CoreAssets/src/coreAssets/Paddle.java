@@ -10,7 +10,7 @@ import coreAssets.MovableSprite;
 
 
 public class Paddle extends MovableSprite {
-	private static int color = 255 << 16 | 255 << 8 | 255;
+	private static int color = 255 << 24 | 255 << 16 | 255 << 8 | 0;
 
 	public Paddle(Rectangle r) {
 		super(r, 0);

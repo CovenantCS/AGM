@@ -17,7 +17,7 @@ import coreAssets.Size;
 import coreAssets.SpriteDesc;
 
 public class BowlingPin extends MovableSprite {
-	private static final int color = 255 << 16 | 255 << 8 | 255;
+	private static final int color = 255 << 24 | 255 << 16 | 255 << 8 | 255;
 
 	// the Pin has been hit
 	private boolean isBroken;

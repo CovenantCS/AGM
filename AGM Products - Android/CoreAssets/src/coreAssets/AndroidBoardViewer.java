@@ -61,7 +61,8 @@ public class AndroidBoardViewer extends View implements BoardViewer,
         {
             SpriteDesc sd = ( SpriteDesc ) sprites.elementAt( i - 1 );
 
-            paint.setColor( Color.RED );
+            //color.setRed
+            paint.setColor( sd.color );
 
             int top = sd.y;
             int bottom = top + sd.height - 1;

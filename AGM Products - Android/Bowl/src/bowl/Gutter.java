@@ -7,7 +7,7 @@ import coreAssets.Size;
 import coreAssets.StationarySprite;
 
 public class Gutter extends StationarySprite {
-	private static final int color = 0 << 16 | 0 << 8 | 0;
+	private static final int color = 255 << 24 | 0 << 16 | 0 << 8 | 0;
 
 	private Edge left;
 

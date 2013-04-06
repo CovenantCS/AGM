@@ -2,7 +2,7 @@ package bowl;
 
 import java.util.Random;
 
-import temporarilyDisabled.EndWall;
+import coreAssets.EndWall;
 
 import coreAssets.CollisionException;
 import coreAssets.GameOverException;
@@ -19,13 +19,20 @@ public class BowlingBoard extends StimulasActionBoard {
 	protected int frame = 0; // for each game you get 10 frames
 	protected int ballNum = 1; // for each frame you get two balls
 
-	public BowlingBoard(int width, int height, SimpleScore score) {
+	public BowlingBoard(int width, int height) {
 		super(width, height);
-		this.score = score;
+		this.name = "bowl";
 		rand = new Random();
 		buildGameBoard();
 		gameOver = false;
 	}
+	
+	public BowlingBoard() {
+        super();
+        this.name = "bowl";
+        rand = new Random();
+        gameOver = false;
+    }
 
 	public void buildGameBoard() {
 		EndWall endOfAlley;
