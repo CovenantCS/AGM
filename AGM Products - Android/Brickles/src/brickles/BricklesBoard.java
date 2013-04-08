@@ -54,7 +54,7 @@ public class BricklesBoard extends ContinuousActionBoard {
 
 		try {
 			puck = pucksupply.getPuck(new Point((getWidth() / 2),
-					(getHeight() / 2)));
+					(getHeight() / 2)), 10);
 			addMovablePiece(puck);
 		} catch (GameOverException e) {
 			// this is the first puck. It should always succeed
@@ -111,7 +111,7 @@ public class BricklesBoard extends ContinuousActionBoard {
 		try {
 			movableComponents.removeElement(puck);
 			puck = pucksupply.getPuck(new Point((getWidth() / 2),
-					(getHeight() / 2)));
+					(getHeight() / 2)), 10);
 			movableComponents.addElement(puck);
 		} catch (GameOverException oope) {
 			stopMovement();
