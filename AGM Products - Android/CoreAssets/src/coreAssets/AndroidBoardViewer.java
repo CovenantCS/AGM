@@ -85,9 +85,12 @@ public class AndroidBoardViewer extends View implements BoardViewer,
     
     public boolean onTouchEvent( MotionEvent event )
     {
-        if( event.getAction() == MotionEvent.ACTION_MOVE )
+        if( event.getAction() == MotionEvent.ACTION_MOVE || event.getAction() == MotionEvent.ACTION_DOWN )
         {
             this.board.ptrPressed( (int) event.getX(), (int) event.getY() );
+        }
+        else if ( event.getAction() == MotionEvent.ACTION_UP ) {
+        	this.board.ptrReleased( (int) event.getX(), (int) event.getY() );
         }
         
         return true;

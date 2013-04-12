@@ -75,14 +75,13 @@ public class BowlingBoard extends StimulasActionBoard {
 
 	public void ptrReleased(int x, int y) {
 		if (ball == null) {
-			bowl(x, y);
+			bowl(getWidth() / 2 - 10, 10);
+			ball.startMoving();
 		}
 	}
 
 	public void keyLeft(boolean down) {
-		if (down) {
-			// don't do anything when pressed down
-		} else if (ball == null) {
+		if (ball == null) {
 			bowl(getWidth() / 2 - 10, 10);
 			ball.startMoving();
 		}
