@@ -152,4 +152,14 @@ public class BricklesBoard extends ContinuousActionBoard {
 		userInterupt = true;
 	}
 
+	public void loadGame() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void saveGame() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
