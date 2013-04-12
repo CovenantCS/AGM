@@ -7,7 +7,7 @@ import coreAssets.SimpleScore;
 public class PracticeBowlingBoard extends BowlingBoard {
 
 	public PracticeBowlingBoard(int width, int height, SimpleScore score) {
-		super(width, height, score);
+		super(width, height);
 	}
 
 	protected void handleSpriteDeletedException() throws GameOverException {

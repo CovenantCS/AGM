@@ -17,7 +17,7 @@ import coreAssets.MovableSprite;
 
 
 public class Puck extends MovableSprite {
-	private static int color = 255 << 16 | 255 << 8 | 0;
+	private static int color = 255 << 24 | 255 << 16 | 255 << 8 | 0;
 
 	// the height and width of the puck sprite
 	private static final int defaultSize = 2;

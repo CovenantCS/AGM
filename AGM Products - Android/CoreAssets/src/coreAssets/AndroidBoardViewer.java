@@ -61,7 +61,8 @@ public class AndroidBoardViewer extends View implements BoardViewer,
         {
             SpriteDesc sd = ( SpriteDesc ) sprites.elementAt( i - 1 );
 
-            paint.setColor( Color.RED );
+            //color.setRed
+            paint.setColor( sd.color );
 
             int top = sd.y;
             int bottom = top + sd.height - 1;
@@ -84,9 +85,12 @@ public class AndroidBoardViewer extends View implements BoardViewer,
     
     public boolean onTouchEvent( MotionEvent event )
     {
-        if( event.getAction() == MotionEvent.ACTION_MOVE )
+        if( event.getAction() == MotionEvent.ACTION_MOVE || event.getAction() == MotionEvent.ACTION_DOWN )
         {
             this.board.ptrPressed( (int) event.getX(), (int) event.getY() );
+        }
+        else if ( event.getAction() == MotionEvent.ACTION_UP ) {
+        	this.board.ptrReleased( (int) event.getX(), (int) event.getY() );
         }
         
         return true;

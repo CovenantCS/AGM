@@ -1,6 +1,6 @@
 package coreAssets;
 
-import OldUI.MovableSprite;
+import coreAssets.MovableSprite;
 
 /*
  * This class is a main loop implementation for the board if the 
@@ -18,6 +18,10 @@ public abstract class StimulasActionBoard extends GenericBoard {
 	public StimulasActionBoard(int width, int height) {
 		super(width, height);
 	}
+	
+	public StimulasActionBoard() {
+        super();
+    }
 
 	public void handleTick() throws GameOverException, UserInteruptException {
 		if (userInterupt) {
