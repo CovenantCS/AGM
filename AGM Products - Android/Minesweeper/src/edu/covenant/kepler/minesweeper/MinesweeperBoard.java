@@ -1,4 +1,4 @@
-package minesweeper;
+package edu.covenant.kepler.minesweeper;
 
 import android.content.Context;
 import coreAssets.CollisionException;

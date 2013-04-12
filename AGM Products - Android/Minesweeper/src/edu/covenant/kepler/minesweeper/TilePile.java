@@ -1,4 +1,4 @@
-package minesweeper;
+package edu.covenant.kepler.minesweeper;
 
 import java.util.Vector;
 

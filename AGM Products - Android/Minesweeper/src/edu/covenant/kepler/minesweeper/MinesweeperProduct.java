@@ -1,4 +1,4 @@
-package minesweeper;
+package edu.covenant.kepler.minesweeper;
 
 import android.content.Intent;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package minesweeper;
+package edu.covenant.kepler.minesweeper;
 
 import android.os.Bundle;
 import coreAssets.AndroidBoardActivity;

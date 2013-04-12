@@ -11,8 +11,9 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
-        <activity android:name="minesweeper.MinesweeperProduct"
+        android:theme="@style/AppTheme">
+        <activity 
+            android:name="MinesweeperProduct"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,8 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="minesweeper.msBoardActivity" >
-        </activity>
+        <activity android:name="msBoardActivity"></activity>
     </application>
 
 </manifest>
