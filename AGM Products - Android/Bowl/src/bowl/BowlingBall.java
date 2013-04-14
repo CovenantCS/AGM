@@ -57,28 +57,31 @@ public class BowlingBall extends MovableSprite {
 	}
 
 	public void setSaveData(String data) {
-		String datum = data.substring(0, data.indexOf(","));
-		data = data.substring(data.indexOf(",") + 1);
-		int x = Integer.parseInt(datum);
-		datum = data.substring(0, data.indexOf(","));
-		data = data.substring(data.indexOf(",") + 1);
-		int y = Integer.parseInt(datum);
-		datum = data.substring(0, data.indexOf(","));
-		data = data.substring(data.indexOf(",") + 1);
-		int width = Integer.parseInt(datum);
-		datum = data.substring(0, data.indexOf(","));
-		data = data.substring(data.indexOf(",") + 1);
-		int height = Integer.parseInt(datum);
-		datum = data.substring(0, data.indexOf(","));
-		data = data.substring(data.indexOf(",") + 1);
-		v.setDirection(Integer.parseInt(datum));
-		datum = data.substring(0, data.indexOf(":"));
-		data = data.substring(data.indexOf(":") + 1);
-		v.setSpeed(Integer.parseInt(datum));
-		r.getLocation().setFixedX(x);
-		r.getLocation().setFixedY(y);
-		r.getSize().setWidth(width);
-		r.getSize().setHeight(height);
+		// Check that a ball was indeed saved
+		if (!data.substring(0, 4).equals("null")) {
+			String datum = data.substring(0, data.indexOf(","));
+			data = data.substring(data.indexOf(",") + 1);
+			int x = Integer.parseInt(datum);
+			datum = data.substring(0, data.indexOf(","));
+			data = data.substring(data.indexOf(",") + 1);
+			int y = Integer.parseInt(datum);
+			datum = data.substring(0, data.indexOf(","));
+			data = data.substring(data.indexOf(",") + 1);
+			int width = Integer.parseInt(datum);
+			datum = data.substring(0, data.indexOf(","));
+			data = data.substring(data.indexOf(",") + 1);
+			int height = Integer.parseInt(datum);
+			datum = data.substring(0, data.indexOf(","));
+			data = data.substring(data.indexOf(",") + 1);
+			v.setDirection(Integer.parseInt(datum));
+			datum = data.substring(0, data.indexOf(":"));
+			data = data.substring(data.indexOf(":") + 1);
+			v.setSpeed(Integer.parseInt(datum));
+			r.getLocation().setFixedX(x);
+			r.getLocation().setFixedY(y);
+			r.getSize().setWidth(width);
+			r.getSize().setHeight(height);
+		}
 	}
 
 	public Velocity getVelocity() {

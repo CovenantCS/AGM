@@ -91,13 +91,23 @@ public class BowlingBoard extends StimulasActionBoard {
 		userInterupt = true;
 	}
 
-	public String getSaveData() {
-		return ball.getSaveData() + ":" + rack.getSaveData();
-		// add scores
+	public String getSaveData() {		
+		if (ball == null) {
+			return "null:" + rack.getSaveData();
+			// add scores
+		} else {
+			return ball.getSaveData() + ":" + rack.getSaveData();
+			// add scores
+		}
 	}
 
 	public void setSaveData(String data) {
-		ball.setSaveData(data);
+		if (!data.substring(0, 4).equals("null")) {
+			if (ball == null) {
+				bowl(getWidth() / 2 - 10, 10);
+			}
+			ball.setSaveData(data);
+		}
 		data = data.substring(data.indexOf(":") + 1);
 		data = data.substring(data.indexOf(":") + 1);
 		rack.setSaveData(data);

@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import edu.covenant.kepler.coreassets.R;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -25,6 +26,7 @@ public class AndroidBoardViewer extends View implements BoardViewer,
     protected int viewWidth;
     protected Bitmap bm;
     protected Paint paint;
+    protected Activity activity;
 
     public AndroidBoardViewer( Context context )
     {
@@ -122,6 +124,13 @@ public class AndroidBoardViewer extends View implements BoardViewer,
 
     }
 
+    @Override
+    public void setActivity( Activity activity )
+    {
+        this.activity = activity;
+
+    }
+
     protected void onSizeChanged( int xNew, int yNew, int xOld, int yOld )
     {
         super.onSizeChanged( xNew, yNew, xOld, yOld );
@@ -201,6 +210,12 @@ public class AndroidBoardViewer extends View implements BoardViewer,
     public Board getBoard()
     {
         return this.board;
+    }
+
+    @Override
+    public Activity getActivity()
+    {
+        return this.activity;
     }
 
     public void setupBoard()

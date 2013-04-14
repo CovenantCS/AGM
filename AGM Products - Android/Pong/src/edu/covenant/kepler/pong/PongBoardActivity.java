@@ -15,5 +15,6 @@ public class PongBoardActivity extends AndroidBoardActivity
     {
         super.onCreate( savedInstanceState );
         this.boardViewer.setBoard( new PongBoard( new CountedPuckSupply( 3 ) ) );
+        this.boardViewer.setActivity(this);
     }
 }

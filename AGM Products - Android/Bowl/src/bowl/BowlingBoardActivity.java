@@ -14,5 +14,6 @@ public class BowlingBoardActivity extends AndroidBoardActivity
     {
         super.onCreate( savedInstanceState );
         this.boardViewer.setBoard( new BowlingBoard() );
+        this.boardViewer.setActivity(this);
     }
 }

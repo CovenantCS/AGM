@@ -15,5 +15,6 @@ public class msBoardActivity extends AndroidBoardActivity
     {
         super.onCreate( savedInstanceState );
         this.boardViewer.setBoard( new MinesweeperBoard());
+        this.boardViewer.setActivity(this);
     }
 }
