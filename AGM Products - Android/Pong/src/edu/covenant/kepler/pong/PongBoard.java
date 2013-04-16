@@ -21,24 +21,34 @@ public class PongBoard extends ContinuousActionBoard
     private PuckSupply pucksupply;
     private boolean topHitLast;
     private int puckSize = 7;
+    private int paddleColor;
+    private int lineColor;
 
     public PongBoard( int width, int height, PuckSupply pucksupply )
     {
         super( width, height );
-        this.name = "pong";
-        this.pucksupply = pucksupply;
-        // this.score = score;
-        topHitLast = false;
         buildGameBoard();
-        userInterupt = false;
+        init( pucksupply );
     }
     
     public PongBoard( PuckSupply pucksupply )
     {
         super();
+        init( pucksupply );
+    }
+    
+    public PongBoard( PuckSupply pucksupply, int paddleColor, int lineColor )
+    {
+        super();
+        this.paddleColor = paddleColor;
+        this.lineColor = lineColor;
+        init( pucksupply );
+    }
+    
+    private void init( PuckSupply pucksupply )
+    {
         this.name = "pong";
         this.pucksupply = pucksupply;
-        // this.score = score;
         topHitLast = false;
         userInterupt = false;
     }
@@ -53,22 +63,22 @@ public class PongBoard extends ContinuousActionBoard
 
         int paddleWidth = getWidth() / 8;
         int paddleHeight = 3;
-
+        
         topPaddle = new Paddle( new Rectangle( new Point( ( getWidth() / 2 )
                 - ( paddleWidth / 2 ) + 15, ( getHeight() / 10 ) ), new Size(
-                paddleWidth, paddleHeight ) ) );
+                paddleWidth, paddleHeight ) ), this.paddleColor );
         topPaddle.startMoving();
         addMovablePiece( topPaddle );
 
         bottomPaddle = new Paddle( new Rectangle(
                 new Point( ( getWidth() / 2 ) - ( paddleWidth / 2 ) + 15,
                         getHeight() - ( getHeight() / 10 ) ), new Size(
-                        paddleWidth, paddleHeight ) ) );
+                        paddleWidth, paddleHeight ) ), this.paddleColor );
         bottomPaddle.startMoving();
         addMovablePiece( bottomPaddle );
 
         dl = new DividingLine( new Rectangle( new Point( getWidth(),
-                getHeight() ), new Size( getWidth(), getHeight() ) ) );
+                getHeight() ), new Size( getWidth(), getHeight() ) ), this.lineColor );
         addStationaryPiece( dl );
 
         try

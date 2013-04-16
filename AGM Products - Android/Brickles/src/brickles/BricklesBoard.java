@@ -18,25 +18,34 @@ public class BricklesBoard extends ContinuousActionBoard {
 	private Puck puck;
 	private BrickPile brickpile;
 	private PuckSupply pucksupply;
+	private int paddleColor;
+	private int brickColor;
 
-	public BricklesBoard(int width, int height, 
-			PuckSupply pucksupply,
-			SimpleScore score) {
+	public BricklesBoard(int width, int height, PuckSupply pucksupply) {
 		super(width, height);
-		this.name = "brickles";
-		this.pucksupply = pucksupply;
-		//this.score = score;
+		init( pucksupply );
 		buildGameBoard();
-		userInterupt = false;
 	}
 	
 	public BricklesBoard(PuckSupply pucksupply) {
         super();
-        this.name = "brickles";
-        this.pucksupply = pucksupply;
-        //this.score = score;
-        userInterupt = false;
+        init( pucksupply );
     }
+	
+	public BricklesBoard( PuckSupply pucksupply, int paddleColor, int brickColor )
+	{
+	    super();
+	    init( pucksupply );
+	    this.paddleColor = paddleColor;
+	    this.brickColor = brickColor;
+	}
+	
+	private void init( PuckSupply pucksupply )
+	{
+	    this.name = "brickles";
+        this.pucksupply = pucksupply;
+        userInterupt = false;
+	}
 
 	public void buildGameBoard() {
 		EndWall ceiling;
@@ -48,7 +57,7 @@ public class BricklesBoard extends ContinuousActionBoard {
 		int paddleHeight = 2;
 		paddle = new Paddle(new Rectangle(new Point((getWidth() / 2)
 				- (paddleWidth / 2) + 15, getHeight() - (getHeight() / 10)),
-				new Size(paddleWidth, paddleHeight)));
+				new Size(paddleWidth, paddleHeight)), this.paddleColor);
 		paddle.startMoving();
 		addMovablePiece(paddle);
 
@@ -78,7 +87,7 @@ public class BricklesBoard extends ContinuousActionBoard {
 
 		brickpile = new BrickPile(new Rectangle(new Point(getWidth() / 20,
 				getHeight() / 20), new Size(getWidth() - (getWidth() / 10),
-				getHeight() / 5)));
+				getHeight() / 5)), brickColor);
 		addStationaryPiece(brickpile);
 	}
 

@@ -17,7 +17,7 @@ import coreAssets.MovableSprite;
 
 
 public class Puck extends MovableSprite {
-	private static int color = 255 << 24 | 255 << 16 | 255 << 8 | 0;
+	private int color = 255 << 24 | 255 << 16 | 255 << 8 | 0;
 
 	// the height and width of the puck sprite
 	private static final int defaultSize = 2;
@@ -37,7 +37,15 @@ public class Puck extends MovableSprite {
         name = "Puck";
     }
 
-	public void collideWith(GameSprite gs) throws GameOverException,
+	public Puck( Point p, int puckSize, int puckColor )
+    {
+	    super(new Rectangle(p, new Size(puckSize, puckSize)), 315);
+        v.setSpeed(2);
+        name = "Puck";
+        this.color = puckColor;
+    }
+
+    public void collideWith(GameSprite gs) throws GameOverException,
 			SpriteDeletedException, CollisionException {
 		gs.collideWith(this);
 	}

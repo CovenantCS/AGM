@@ -10,12 +10,18 @@ import coreAssets.MovableSprite;
 
 
 public class Paddle extends MovableSprite {
-	private static int color = 255 << 24 | 255 << 16 | 255 << 8 | 0;
+	private int color = 255 << 24 | 255 << 16 | 255 << 8 | 0;
 
 	public Paddle(Rectangle r) {
 		super(r, 0);
 		v = new Velocity(0, 0);
 		name = "Paddle";
+	}
+	
+	public Paddle( Rectangle r, int color )
+	{
+	    this( r );
+	    this.color = color;
 	}
 
 	// implementation of how to behave in a collision

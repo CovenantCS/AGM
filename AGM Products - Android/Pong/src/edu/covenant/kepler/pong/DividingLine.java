@@ -8,11 +8,16 @@ import coreAssets.SpriteDesc;
 import coreAssets.StationarySprite;
 
 public class DividingLine extends StationarySprite {
-	private static final int color = 255 << 24 | 255 << 16 | 255 << 8 | 255;
+	private int color = 255 << 24 | 255 << 16 | 255 << 8 | 255;
 
 	public DividingLine(Rectangle r) {
 		super(r);
 	}
+	
+	public DividingLine(Rectangle r, int color) {
+        super(r);
+        this.color = color;
+    }
 
 	public void collideWith(GameSprite m) {
 	}

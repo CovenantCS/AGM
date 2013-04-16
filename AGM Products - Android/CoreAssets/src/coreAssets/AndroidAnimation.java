@@ -9,19 +9,20 @@ import android.content.Intent;
 public class AndroidAnimation implements Runnable
 {
     BoardViewer boardViewer;
-    Activity activity;
+    AndroidBoardActivity activity;
 
-    public AndroidAnimation( BoardViewer boardViewer )
+    public AndroidAnimation( BoardViewer boardViewer, AndroidBoardActivity activity )
     {
         this.boardViewer = boardViewer;
-        this.activity = boardViewer.getActivity();
+        this.activity = activity;
     }
 
     // Ported over from GenericGame in J2ME version
     @Override
     public void run()
     {
-        while ( true )
+        boolean activityRunning = this.activity.running;
+        while ( true  && activityRunning )
         {
             try
             {
@@ -33,6 +34,7 @@ public class AndroidAnimation implements Runnable
             }
             catch ( GameOverException e )
             {
+                
                 Score score = this.boardViewer.getBoard().getScore();
                 score.saveScore( activity );
                 final AlertDialog.Builder builder = new AlertDialog.Builder( this.activity );
@@ -47,16 +49,32 @@ public class AndroidAnimation implements Runnable
                     public void onClick( DialogInterface arg0, int arg1 )
                     {
                         //Drop us back to main menu when done.
-                        activity.finish();
+                        try
+                        {
+                            activity.finish();
+                        }
+                        catch( NullPointerException npe )
+                        {
+                            //was still running after game was closed
+                            //exits gracefully
+                        }
                     }
                 });
-                activity.runOnUiThread( new Runnable()
+                try
                 {
-                    public void run()
+                    activity.runOnUiThread( new Runnable()
                     {
-                        builder.show();
-                    }
-                });
+                        public void run()
+                        {
+                            builder.show();
+                        }
+                    } );
+                }
+                catch( NullPointerException npe )
+                {
+                    //was still running after game was closed
+                    //exits gracefully
+                }
             }
             try
             {
@@ -64,6 +82,14 @@ public class AndroidAnimation implements Runnable
             }
             catch ( Exception ex )
             {
+            }
+            try
+            {
+                activityRunning = this.activity.running;
+            }
+            catch( NullPointerException npe )
+            {
+                //see above
             }
         }
     }

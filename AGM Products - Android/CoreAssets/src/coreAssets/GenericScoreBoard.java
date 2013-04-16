@@ -11,7 +11,7 @@ import edu.covenant.kepler.coreassets.R;
 public abstract class GenericScoreBoard extends View implements ScoreBoard 
 {
 	protected SimpleScore score;
-	protected int numScoresToKeep;
+	protected int numScoresToKeep = 10;
 	protected String label = "";
 
 	public GenericScoreBoard( Context context )
