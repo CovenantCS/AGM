@@ -26,6 +26,8 @@ public abstract class GenericBoard implements Board {
 	protected Vector movableComponents;
 
 	protected Vector stationaryComponents;
+	
+	protected Vector<TextSprite> textComponents;
 
 	protected int speed;
 	
@@ -48,6 +50,7 @@ public abstract class GenericBoard implements Board {
 		this.height = height;
 		movableComponents = new Vector();
 		stationaryComponents = new Vector();
+		textComponents = new Vector<TextSprite>();
 		speed = 1;
 		moving = true;
 		score = new SimpleScore();
@@ -57,6 +60,7 @@ public abstract class GenericBoard implements Board {
 	public GenericBoard() {
         movableComponents = new Vector();
         stationaryComponents = new Vector();
+		textComponents = new Vector<TextSprite>();
         speed = 1;
         moving = true;
         score = new SimpleScore();
@@ -111,6 +115,15 @@ public abstract class GenericBoard implements Board {
 		stationaryComponents.removeElement(sp);
 	}
 
+	public void addText(TextSprite tsp) {
+		if (tsp != null) // skip optional pieces without comment
+			textComponents.addElement(tsp);
+	}
+
+	public void removeText(TextSprite tsp) {
+		textComponents.removeElement(tsp);
+	}
+
 	public void resetList() {
 		movableComponents.removeAllElements();
 	}
@@ -156,6 +169,10 @@ public abstract class GenericBoard implements Board {
 			gs.buildSpriteDesc(sprites);
 		}
 		return sprites;
+	}
+	
+	public Vector<TextSprite> getTextSprites() {
+		return textComponents;
 	}
 
 	public boolean gameOver() {

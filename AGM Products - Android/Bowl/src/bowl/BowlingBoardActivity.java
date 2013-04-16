@@ -2,6 +2,7 @@ package bowl;
 
 import android.os.Bundle;
 import coreAssets.AndroidBoardActivity;
+import coreAssets.SimpleScore;
 
 public class BowlingBoardActivity extends AndroidBoardActivity
 {
@@ -13,7 +14,8 @@ public class BowlingBoardActivity extends AndroidBoardActivity
     public void onCreate( Bundle savedInstanceState )
     {
         super.onCreate( savedInstanceState );
-        this.boardViewer.setBoard( new BowlingBoard() );
+        SimpleScore score = new SimpleScore();
+        this.boardViewer.setBoard( new BowlingBoard( score ) );
         this.boardViewer.setActivity(this);
     }
 }
