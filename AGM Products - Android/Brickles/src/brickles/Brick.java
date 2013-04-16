@@ -22,7 +22,7 @@ public class Brick extends StationarySprite {
 	// the brick has been hit
 	private boolean isBroken;
 
-	private static final int color = 0 << 16 | 255 << 8 | 255;
+	private static final int color = 255 << 24 | 0 << 16 | 0 << 8 | 255;
 
 	public Brick(Rectangle r) {
 		super(r);

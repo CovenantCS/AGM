@@ -22,6 +22,8 @@
         </activity>
         <activity android:name="brickles.BricklesBoardActivity" >
         </activity>
+        <activity android:name="coreAssets.BasicScoreboardActivity" >
+        </activity>
     </application>
 
 </manifest>

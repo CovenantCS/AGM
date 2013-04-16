@@ -1,6 +1,9 @@
 package coreAssets;
 
+import edu.covenant.kepler.coreassets.R;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 
 public class AndroidAnimation implements Runnable
@@ -30,7 +33,30 @@ public class AndroidAnimation implements Runnable
             }
             catch ( GameOverException e )
             {
-				activity.finish();
+                Score score = this.boardViewer.getBoard().getScore();
+                score.saveScore( activity );
+                final AlertDialog.Builder builder = new AlertDialog.Builder( this.activity );
+                String message = "Your score for this game is: " + score;
+                String title = this.activity.getString( R.string.app_name ) + " Score";
+                builder.setMessage( message );
+                builder.setTitle( title );
+                builder.setNegativeButton( "OK", new DialogInterface.OnClickListener()
+                {
+
+                    @Override
+                    public void onClick( DialogInterface arg0, int arg1 )
+                    {
+                        //Drop us back to main menu when done.
+                        activity.finish();
+                    }
+                });
+                activity.runOnUiThread( new Runnable()
+                {
+                    public void run()
+                    {
+                        builder.show();
+                    }
+                });
             }
             try
             {
