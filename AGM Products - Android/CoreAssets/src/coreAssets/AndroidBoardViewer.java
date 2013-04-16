@@ -65,13 +65,19 @@ public class AndroidBoardViewer extends View implements BoardViewer,
 
             //color.setRed
             paint.setColor( sd.color );
-
             int top = sd.y;
             int bottom = top + sd.height - 1;
             int left = sd.x;
             int right = left + sd.width - 1;
 
-            canvas.drawRect( left, top, right, bottom, paint );      	
+            if(sd.bitmap == null)
+            {
+            	canvas.drawRect( left, top, right, bottom, paint ); 	
+            }
+            else
+            {
+            	canvas.drawBitmap(sd.bitmap, left, top, paint);
+			}
         }
     }
     

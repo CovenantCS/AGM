@@ -14,7 +14,6 @@ public class BricklesBoardActivity extends AndroidBoardActivity
     public void onCreate( Bundle savedInstanceState )
     {
         super.onCreate( savedInstanceState );
-        this.boardViewer.setBoard( new BricklesBoard( new CountedPuckSupply( 3 ) ) );
-        this.boardViewer.setActivity(this);
+        this.boardViewer.setBoard( new BricklesBoard(this,  new CountedPuckSupply( 3 ) ) );
     }
 }

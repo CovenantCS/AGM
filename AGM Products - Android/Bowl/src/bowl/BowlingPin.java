@@ -34,9 +34,12 @@ public class BowlingPin extends MovableSprite {
 
 		if (!isBroken || moving()) {
 
-			sdv.addElement(new SpriteDesc(getColor(), r.getLocation()
-					.getRealX() + 1, r.getLocation().getRealY() + 1, r
-					.getSize().getWidth() - 1, r.getSize().getHeight() - 1));
+			sdv.addElement(new SpriteDesc(getBm(), 
+					getColor(),
+					r.getLocation().getRealX() + 1,
+					r.getLocation().getRealY() + 1,
+					r.getSize().getWidth() - 1,
+					r.getSize().getHeight() - 1));
 		}
 	}
 

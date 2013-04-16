@@ -1,5 +1,6 @@
 package brickles;
 
+import android.content.Context;
 import coreAssets.CollisionException;
 import coreAssets.ContinuousActionBoard;
 import coreAssets.EndWall;
@@ -18,11 +19,13 @@ public class BricklesBoard extends ContinuousActionBoard {
 	private Puck puck;
 	private BrickPile brickpile;
 	private PuckSupply pucksupply;
+	private Context context;
 
-	public BricklesBoard(int width, int height, 
+	public BricklesBoard(Context context, int width, int height, 
 			PuckSupply pucksupply,
 			SimpleScore score) {
-		super(width, height);
+		super(width, height); 
+		this.context = context;
 		this.name = "brickles";
 		this.pucksupply = pucksupply;
 		//this.score = score;
@@ -30,8 +33,9 @@ public class BricklesBoard extends ContinuousActionBoard {
 		userInterupt = false;
 	}
 	
-	public BricklesBoard(PuckSupply pucksupply) {
+	public BricklesBoard(Context context, PuckSupply pucksupply) {
         super();
+        this.context = context;
         this.name = "brickles";
         this.pucksupply = pucksupply;
         //this.score = score;
@@ -44,8 +48,8 @@ public class BricklesBoard extends ContinuousActionBoard {
 		SideWall leftwall;
 		SideWall rightwall;
 
-		int paddleWidth = getWidth() / 10;
-		int paddleHeight = 2;
+		int paddleWidth = getWidth() / 8;
+		int paddleHeight = getHeight() /40;
 		paddle = new Paddle(new Rectangle(new Point((getWidth() / 2)
 				- (paddleWidth / 2) + 15, getHeight() - (getHeight() / 10)),
 				new Size(paddleWidth, paddleHeight)));
@@ -54,7 +58,7 @@ public class BricklesBoard extends ContinuousActionBoard {
 
 		try {
 			puck = pucksupply.getPuck(new Point((getWidth() / 2),
-					(getHeight() / 2)), 10);
+					(getHeight() / 2)), 30);
 			addMovablePiece(puck);
 		} catch (GameOverException e) {
 			// this is the first puck. It should always succeed
@@ -76,7 +80,7 @@ public class BricklesBoard extends ContinuousActionBoard {
 				new Size(5, getHeight() + 10)), false);
 		addStationaryPiece(rightwall);
 
-		brickpile = new BrickPile(new Rectangle(new Point(getWidth() / 20,
+		brickpile = new BrickPile(context, new Rectangle(new Point(getWidth() / 20,
 				getHeight() / 20), new Size(getWidth() - (getWidth() / 10),
 				getHeight() / 5)));
 		addStationaryPiece(brickpile);
@@ -150,16 +154,6 @@ public class BricklesBoard extends ContinuousActionBoard {
 
 	public void keyUp(boolean down) {
 		userInterupt = true;
-	}
-
-	public void loadGame() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void saveGame() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

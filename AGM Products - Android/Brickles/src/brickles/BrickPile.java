@@ -8,6 +8,8 @@ package brickles;
 
 import java.util.Vector;
 
+import android.content.Context;
+
 import coreAssets.CollisionException;
 import coreAssets.GameOverException;
 import coreAssets.GameSprite;
@@ -32,7 +34,7 @@ public class BrickPile extends StationarySprite {
 	// aggregated sprites that havent been hit
 	private int numLeft;
 
-	public BrickPile(Rectangle r) {
+	public BrickPile(Context context, Rectangle r) {
 		super(r);
 		Point p = r.getLocation();
 		Size s = r.getSize();
@@ -45,7 +47,7 @@ public class BrickPile extends StationarySprite {
 		for (int i = 0; i < numRows; i++) {
 			x = initialX;
 			for (int j = 0; j < numberOfBricksPerRow; j++) {
-				pile[i][j] = new Brick(new Rectangle(new Point(x, y), new Size(
+				pile[i][j] = new Brick(context, new Rectangle(new Point(x, y), new Size(
 						s.getWidth() / numberOfBricksPerRow, s.getHeight()
 								/ numRows)));
 				x += s.getWidth() / numberOfBricksPerRow;
@@ -136,9 +138,5 @@ public class BrickPile extends StationarySprite {
 					data = data.substring(data.indexOf(";") + 1);
 			}
 		}
-	}
-
-	public int getColor() {
-		return -1;
 	}
 }

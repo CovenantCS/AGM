@@ -33,6 +33,7 @@ public class BricklesProduct extends AndroidProduct
         startActivity( intent );
     }
     
+    
 //	public BricklesProduct() {
 //		super();
 //		services = new J2MEServices(this, "brickles");
