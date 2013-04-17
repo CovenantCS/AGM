@@ -54,6 +54,7 @@ public class Brick extends StationarySprite {
 	public void collideWith(GameSprite gs) throws CollisionException {
 		if (!isBroken && (gs instanceof Puck)) {
 			isBroken = true;
+			((Puck) gs).increaseSpeed( 1 );
 			((Puck) gs).reverseY();
 			throw new CollisionException(gs, this);
 		}

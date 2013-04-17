@@ -4,6 +4,7 @@ import edu.covenant.kepler.coreassets.R;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
@@ -17,6 +18,7 @@ public abstract class AndroidBoardActivity extends Activity
     protected void onCreate( Bundle savedInstanceState )
     {
         super.onCreate( savedInstanceState );
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView( R.layout.board_activity );
         
         this.boardViewer = ( AndroidBoardViewer ) findViewById( R.id.test );

@@ -67,6 +67,11 @@ public class Puck extends MovableSprite {
 		return p.getFixedX() + "," + p.getFixedY() + "," + s.getWidth() + ","
 				+ s.getHeight() + "," + v.getDirection() + "," + v.getSpeed();
 	}
+	
+	public void increaseSpeed( int increase )
+	{
+		v.setSpeed( v.getSpeed() + increase );
+	}
 
 	public void setSaveData(String data) {
 		String datum = data.substring(0, data.indexOf(","));

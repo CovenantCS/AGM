@@ -26,7 +26,9 @@ public class Paddle extends MovableSprite {
 
 	// implementation of how to behave in a collision
 	public void collideWith(GameSprite m) throws CollisionException {
-		if (m instanceof Puck) {
+		if (m instanceof Puck) 
+		{
+			((Puck) m).increaseSpeed( 1 );
 			((Puck) m).reverseY();
 			throw new CollisionException((MovableSprite) m, this);
 		}
