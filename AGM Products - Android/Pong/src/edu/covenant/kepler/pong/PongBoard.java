@@ -1,5 +1,6 @@
 package edu.covenant.kepler.pong;
 
+import android.graphics.Color;
 import coreAssets.CollisionException;
 import coreAssets.ContinuousActionBoard;
 import coreAssets.EndWall;
@@ -12,6 +13,7 @@ import coreAssets.Rectangle;
 import coreAssets.SideWall;
 import coreAssets.SimpleScore;
 import coreAssets.Size;
+import coreAssets.TextSprite;
 
 public class PongBoard extends ContinuousActionBoard
 {
@@ -24,14 +26,17 @@ public class PongBoard extends ContinuousActionBoard
     private int paddleColor;
     private int lineColor;
 
-    public PongBoard( int width, int height, PuckSupply pucksupply )
+    public PongBoard( int width, int height, PuckSupply pucksupply, SimpleScore score )
     {
         super( width, height );
-        buildGameBoard();
+        this.name = "pong";
+        this.pucksupply = pucksupply;
+        this.score = score;
+        topHitLast = false;
         init( pucksupply );
     }
     
-    public PongBoard( PuckSupply pucksupply )
+    public PongBoard( PuckSupply pucksupply, SimpleScore score )
     {
         super();
         init( pucksupply );
@@ -49,6 +54,7 @@ public class PongBoard extends ContinuousActionBoard
     {
         this.name = "pong";
         this.pucksupply = pucksupply;
+        this.score = new SimpleScore();
         topHitLast = false;
         userInterupt = false;
     }
@@ -108,6 +114,7 @@ public class PongBoard extends ContinuousActionBoard
                 new Size( 5, getHeight() + 10 ) ), false );
         addStationaryPiece( rightwall );
 
+		addText(new TextSprite( score.toString(), Color.YELLOW, 10, (float)getWidth() / 20, (float)getHeight() / 2 ));
     }
 
     public void ptrPressed( int x, int y )
@@ -214,6 +221,7 @@ public class PongBoard extends ContinuousActionBoard
             if ( ce.getSprite2().name.equals( "Paddle" ) )
             {
                 score.incScore( 1 );
+    			textComponents.elementAt(0).setValue(score.toString());
             }
         }
     }
