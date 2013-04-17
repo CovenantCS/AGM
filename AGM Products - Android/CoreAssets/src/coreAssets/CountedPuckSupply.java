@@ -24,6 +24,13 @@ public class CountedPuckSupply extends PuckSupply {
 		maxPucks = maxNumber;
 		usedPucks = 0;
 	}
+	
+	// maximum number of pucks
+    public CountedPuckSupply(int maxNumber, int puckColor) {
+        super(puckColor);
+        maxPucks = maxNumber;
+        usedPucks = 0;
+    }
 
 	// access number of pucks remaining
 	public int numberLeft() {

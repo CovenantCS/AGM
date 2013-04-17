@@ -32,45 +32,4 @@ public class BricklesProduct extends AndroidProduct
         intent.setAction( LOAD_GAME );
         startActivity( intent );
     }
-    
-    
-//	public BricklesProduct() {
-//		super();
-//		services = new J2MEServices(this, "brickles");
-//
-//		// Regular Brickles
-//		// game = new GenericGame(this, newBoard(), MainMenuTypes.Basic);
-//
-//		// Practice Brickles
-//		game = new GenericGame(this, newBoard(), boardViewer,
-//				MainMenuTypes.Practice);
-//	}
-//
-//	protected void startApp() throws MIDletStateChangeException {
-//		GenericStartMenu menu = new GenericStartMenu(platform, services);
-//		platform.getDisplay().setCurrent(menu.getMenu());
-//	}
-//
-//	public Board newBoard() {
-//		// Regular Brickles
-//		//PuckSupply ps = new CountedPuckSupply(3);
-//		//SimpleScore score = new SimpleScore();
-//        //GenericScoreBoard sb = new DigitalScoreBoard(
-//        //		new Rectangle(new Point(boardViewer.getWidth() / 2, 0), new Size(0, 0)),
-//        //		score);
-//        
-//		// Practice Brickles
-//		PuckSupply ps = new PracticePuckSupply();
-//		SimpleScore score = new PracticeScore();
-//        GenericScoreBoard sb = new PracticeScoreBoard(new DigitalScoreBoard(
-//        		new Rectangle(new Point(boardViewer.getWidth() / 2, 0), new Size(0, 0)),
-//        		score));
-//        
-//		BricklesBoard board = new BricklesBoard(boardViewer.getWidth(),
-//				boardViewer.getHeight(), ps, score);
-//		
-//		boardViewer.setBoard(board);
-//		boardViewer.setScoreBoard(sb);
-//		return board;
-//	}
 }

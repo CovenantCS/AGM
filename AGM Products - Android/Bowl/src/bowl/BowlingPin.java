@@ -17,7 +17,7 @@ import coreAssets.Size;
 import coreAssets.SpriteDesc;
 
 public class BowlingPin extends MovableSprite {
-	private static final int color = 255 << 24 | 255 << 16 | 255 << 8 | 255;
+	private int color = 255 << 24 | 255 << 16 | 255 << 8 | 255;
 
 	// the Pin has been hit
 	private boolean isBroken;
@@ -28,6 +28,16 @@ public class BowlingPin extends MovableSprite {
 		stopMoving();
 		isBroken = false;
 		name = "Pin";
+	}
+	
+	public BowlingPin( Rectangle r, int color )
+	{
+	    super(r, 0);
+        v.setSpeed(0);
+        stopMoving();
+        isBroken = false;
+        name = "Pin";
+        this.color = color;
 	}
 
 	public void buildSpriteDesc(Vector sdv) {

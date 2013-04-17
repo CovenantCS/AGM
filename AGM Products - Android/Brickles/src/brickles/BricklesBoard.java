@@ -19,28 +19,38 @@ public class BricklesBoard extends ContinuousActionBoard {
 	private Puck puck;
 	private BrickPile brickpile;
 	private PuckSupply pucksupply;
+	private int paddleColor;
+	private int brickColor;
 	private Context context;
 
-	public BricklesBoard(Context context, int width, int height, 
-			PuckSupply pucksupply,
-			SimpleScore score) {
-		super(width, height); 
-		this.context = context;
-		this.name = "brickles";
-		this.pucksupply = pucksupply;
-		//this.score = score;
+	public BricklesBoard(Context context, int width, int height, PuckSupply pucksupply) {
+		super(width, height);
+		init( context, pucksupply );
 		buildGameBoard();
-		userInterupt = false;
 	}
 	
 	public BricklesBoard(Context context, PuckSupply pucksupply) {
         super();
-        this.context = context;
+        
         this.name = "brickles";
-        this.pucksupply = pucksupply;
-        //this.score = score;
-        userInterupt = false;
+        init( context, pucksupply );
     }
+	
+	public BricklesBoard( Context context, PuckSupply pucksupply, int paddleColor, int brickColor )
+	{
+	    super();
+	    init( context, pucksupply );
+	    this.paddleColor = paddleColor;
+	    this.brickColor = brickColor;
+	}
+	
+	private void init( Context context, PuckSupply pucksupply )
+	{
+		this.context = context;
+	    this.name = "brickles";
+        this.pucksupply = pucksupply;
+        userInterupt = false;
+	}
 
 	public void buildGameBoard() {
 		EndWall ceiling;
@@ -52,7 +62,7 @@ public class BricklesBoard extends ContinuousActionBoard {
 		int paddleHeight = getHeight() /40;
 		paddle = new Paddle(new Rectangle(new Point((getWidth() / 2)
 				- (paddleWidth / 2) + 15, getHeight() - (getHeight() / 10)),
-				new Size(paddleWidth, paddleHeight)));
+				new Size(paddleWidth, paddleHeight)), this.paddleColor);
 		paddle.startMoving();
 		addMovablePiece(paddle);
 
@@ -82,7 +92,7 @@ public class BricklesBoard extends ContinuousActionBoard {
 
 		brickpile = new BrickPile(context, new Rectangle(new Point(getWidth() / 20,
 				getHeight() / 20), new Size(getWidth() - (getWidth() / 10),
-				getHeight() / 5)));
+				getHeight() / 5)), brickColor);
 		addStationaryPiece(brickpile);
 	}
 

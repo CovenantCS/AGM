@@ -8,6 +8,7 @@ package brickles;
 
 import java.util.Vector;
 import edu.covenant.kepler.coreassets.R;
+import android.R.integer;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -28,14 +29,15 @@ public class Brick extends StationarySprite
 	// the brick has been hit
 	private boolean isBroken;
 
-	private static final int color = 0 << 16 | 255 << 8 | 255;
+	private int color = 255 << 24 | 0 << 16 | 255 << 8 | 255;
 
-	public Brick(Context context, Rectangle r) 
+	public Brick(Context context, Rectangle r, int color) 
 	{
 		super(r,BitmapFactory.decodeResource(context.getResources(),edu.covenant.kepler.brickles.R.drawable.hunt));
 		//super(r,BitmapFactory.decodeFile("logo.jpg"));
 		isBroken = false;
 		name = "Brick";
+		this.color = color;
 	}
 
 

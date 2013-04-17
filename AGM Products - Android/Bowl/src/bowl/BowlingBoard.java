@@ -16,23 +16,35 @@ public class BowlingBoard extends StimulasActionBoard {
 	protected BowlingBall ball;
 	protected RackOfPins rack;
 	private Random rand;
+	private int ballColor;
+	private int pinColor;
 	protected int frame = 0; // for each game you get 10 frames
 	protected int ballNum = 1; // for each frame you get two balls
 
-	public BowlingBoard(int width, int height) {
-		super(width, height);
-		this.name = "bowl";
-		rand = new Random();
-		buildGameBoard();
-		gameOver = false;
-	}
+	//we're not using this currently
+	//also conflicts with color-based constructor
+	//public BowlingBoard(int width, int height) {
+	//	super(width, height);
+	//	init();
+	//}
 	
 	public BowlingBoard() {
         super();
-        this.name = "bowl";
+        init();
+    }
+	
+	public BowlingBoard( int ballColor, int pinColor )
+	{
+	    this.ballColor = ballColor;
+	    this.pinColor = pinColor;
+	}
+	
+	public void init()
+	{
+	    this.name = "bowl";
         rand = new Random();
         gameOver = false;
-    }
+	}
 
 	public void buildGameBoard() {
 		EndWall endOfAlley;
@@ -51,7 +63,7 @@ public class BowlingBoard extends StimulasActionBoard {
 		stationaryComponents.removeElement(rack);
 		rack = new RackOfPins(new Rectangle(new Point(((getWidth() - 30) / 6),
 				getHeight() / 20), new Size(((3 * getWidth() - 60) / 5)
-				- getWidth() / 10, getHeight() / 5)));
+				- getWidth() / 10, getHeight() / 5)), this.pinColor);
 		addStationaryPiece(rack);
 	}
 
@@ -66,7 +78,7 @@ public class BowlingBoard extends StimulasActionBoard {
 	}
 
 	public void bowl(int x, int y) {
-		ball = new BowlingBall(new Point(x, getHeight() - (getHeight() / 20)));
+		ball = new BowlingBall(new Point(x, getHeight() - (getHeight() / 20)), this.ballColor);
 		int i = rand.nextInt();
 		i = (i >= 0 ? i : -i);
 		ball.setDirection((i % 60) + 60);
