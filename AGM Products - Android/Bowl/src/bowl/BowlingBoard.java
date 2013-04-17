@@ -113,15 +113,14 @@ public class BowlingBoard extends StimulasActionBoard {
 
 	public String getSaveData() {		
 		if (ball == null) {
-			return "null:" + rack.getSaveData();
-			// add scores
+			return "null:" + rack.getSaveData() + ":" + score;
 		} else {
-			return ball.getSaveData() + ":" + rack.getSaveData();
-			// add scores
+			return ball.getSaveData() + ":" + rack.getSaveData() + ":" + score;
 		}
 	}
 
 	public void setSaveData(String data) {
+System.out.println(data);
 		if (!data.substring(0, 4).equals("null")) {
 			if (ball == null) {
 				bowl(getWidth() / 2 - 10, 10);
@@ -129,8 +128,10 @@ public class BowlingBoard extends StimulasActionBoard {
 			ball.setSaveData(data);
 		}
 		data = data.substring(data.indexOf(":") + 1);
-		data = data.substring(data.indexOf(":") + 1);
 		rack.setSaveData(data);
+		data = data.substring(data.indexOf(":") + 1);
+		score = new SimpleScore(data);
+		ball.startMoving();
 	}
 
 	protected void handleSpriteDeletedException() throws GameOverException {
