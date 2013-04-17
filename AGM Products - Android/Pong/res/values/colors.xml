@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="paddle">#FFFF0000</color>
+    <color name="puck">#FF0000FF</color>
+    <color name="line">#FF00FF00</color>
+</resources>

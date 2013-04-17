@@ -19,7 +19,7 @@ import coreAssets.StationarySprite;
 public class BrickPile extends StationarySprite {
 
 	private Brick[][] pile;
-
+	
 	// number of rows
 	private static final int numRows = 2;
 
@@ -32,7 +32,7 @@ public class BrickPile extends StationarySprite {
 	// aggregated sprites that havent been hit
 	private int numLeft;
 
-	public BrickPile(Rectangle r) {
+	public BrickPile(Rectangle r, int brickColor) {
 		super(r);
 		Point p = r.getLocation();
 		Size s = r.getSize();
@@ -47,12 +47,11 @@ public class BrickPile extends StationarySprite {
 			for (int j = 0; j < numberOfBricksPerRow; j++) {
 				pile[i][j] = new Brick(new Rectangle(new Point(x, y), new Size(
 						s.getWidth() / numberOfBricksPerRow, s.getHeight()
-								/ numRows)));
+								/ numRows)), brickColor);
 				x += s.getWidth() / numberOfBricksPerRow;
 			}
 			y += s.getHeight() / numRows;
 		}
-
 		name = "BrickPile";
 	}
 

@@ -2,7 +2,7 @@ package bowl;
 
 import android.os.Bundle;
 import coreAssets.AndroidBoardActivity;
-import coreAssets.SimpleScore;
+import edu.covenant.kepler.bowl.R;
 
 public class BowlingBoardActivity extends AndroidBoardActivity
 {
@@ -14,8 +14,9 @@ public class BowlingBoardActivity extends AndroidBoardActivity
     public void onCreate( Bundle savedInstanceState )
     {
         super.onCreate( savedInstanceState );
-        SimpleScore score = new SimpleScore();
-        this.boardViewer.setBoard( new BowlingBoard( score ) );
+        int ballColor = getResources().getColor( R.color.ball );
+        int pinColor = getResources().getColor( R.color.pin );
+        this.boardViewer.setBoard( new BowlingBoard( ballColor, pinColor ) );
         this.boardViewer.setActivity(this);
     }
 }

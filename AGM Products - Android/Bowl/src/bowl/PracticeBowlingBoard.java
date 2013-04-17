@@ -6,8 +6,8 @@ import coreAssets.SimpleScore;
 
 public class PracticeBowlingBoard extends BowlingBoard {
 
-	public PracticeBowlingBoard(int width, int height, SimpleScore score) {
-		super(width, height, score);
+	public PracticeBowlingBoard( int ballColor, int pinColor ) {
+		super(ballColor, pinColor);
 	}
 
 	protected void handleSpriteDeletedException() throws GameOverException {

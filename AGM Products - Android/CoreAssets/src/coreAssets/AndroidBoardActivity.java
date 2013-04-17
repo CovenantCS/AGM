@@ -4,6 +4,7 @@ import edu.covenant.kepler.coreassets.R;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.ViewTreeObserver;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
@@ -12,10 +13,12 @@ public abstract class AndroidBoardActivity extends Activity
 {
     protected AndroidBoardViewer boardViewer;
     protected Thread animationThread;
+    protected boolean running = true;
     
     protected void onCreate( Bundle savedInstanceState )
     {
         super.onCreate( savedInstanceState );
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView( R.layout.board_activity );
         
         this.boardViewer = ( AndroidBoardViewer ) findViewById( R.id.test );
@@ -47,7 +50,7 @@ public abstract class AndroidBoardActivity extends Activity
                             {
                                 boardViewer.getBoard().loadGame( AndroidBoardActivity.this );
                             }
-                            animationThread = new Thread( new AndroidAnimation( boardViewer ) );
+                            animationThread = new Thread( new AndroidAnimation( boardViewer, AndroidBoardActivity.this ) );
                             animationThread.start();
                         }
                     } );
@@ -58,5 +61,11 @@ public abstract class AndroidBoardActivity extends Activity
     {
         super.onPause();
         boardViewer.getBoard().saveGame( this );
+    }
+    
+    public void onDestroy()
+    {
+        super.onDestroy();
+        this.running = false;
     }
 }

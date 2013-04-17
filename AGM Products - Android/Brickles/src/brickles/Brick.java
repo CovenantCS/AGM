@@ -22,13 +22,20 @@ public class Brick extends StationarySprite {
 	// the brick has been hit
 	private boolean isBroken;
 
-	private static final int color = 0 << 16 | 255 << 8 | 255;
+	private int color = 255 << 24 | 0 << 16 | 0 << 8 | 255;
 
 	public Brick(Rectangle r) {
 		super(r);
 		isBroken = false;
 		name = "Brick";
 	}
+	
+	public Brick(Rectangle r, int color) {
+        super(r);
+        isBroken = false;
+        name = "Brick";
+        this.color = color;
+    }
 
 	public int getColor() {
 		return color;
@@ -47,6 +54,7 @@ public class Brick extends StationarySprite {
 	public void collideWith(GameSprite gs) throws CollisionException {
 		if (!isBroken && (gs instanceof Puck)) {
 			isBroken = true;
+			((Puck) gs).increaseSpeed( 1 );
 			((Puck) gs).reverseY();
 			throw new CollisionException(gs, this);
 		}

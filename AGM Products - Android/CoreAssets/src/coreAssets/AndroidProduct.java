@@ -35,8 +35,10 @@ public abstract class AndroidProduct extends Activity
 
     public void topScores( View view )
     {
-        TextView message = (TextView) findViewById( R.id.message );
-        message.setText( "topScores " + getResources().getString( R.string.not_implemented ) );
+        //TextView message = (TextView) findViewById( R.id.message );
+        //message.setText( "topScores " + getResources().getString( R.string.not_implemented ) );
+        Intent intent = new Intent( this, BasicScoreboardActivity.class );
+        startActivity( intent );
     }
 
     public void exitGame( View view )
