@@ -40,7 +40,7 @@ public class BowlingPin extends MovableSprite {
         this.color = color;
 	}
 
-	public void buildSpriteDesc(Vector sdv) {
+	public void buildSpriteDesc(Vector<SpriteDesc> sdv) {
 
 		if (!isBroken || moving()) {
 

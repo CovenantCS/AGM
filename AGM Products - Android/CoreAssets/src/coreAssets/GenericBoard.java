@@ -23,9 +23,9 @@ import coreAssets.UserInteruptException;
 import coreAssets.MovableSprite;
 
 public abstract class GenericBoard implements Board {
-	protected Vector movableComponents;
+	protected Vector<GameSprite> movableComponents;
 
-	protected Vector stationaryComponents;
+	protected Vector<GameSprite> stationaryComponents;
 	
 	protected Vector<TextSprite> textComponents;
 
@@ -48,8 +48,8 @@ public abstract class GenericBoard implements Board {
 	public GenericBoard(int width, int height) {
 		this.width = width;
 		this.height = height;
-		movableComponents = new Vector();
-		stationaryComponents = new Vector();
+		movableComponents = new Vector<GameSprite>();
+		stationaryComponents = new Vector<GameSprite>();
 		textComponents = new Vector<TextSprite>();
 		speed = 1;
 		moving = true;
@@ -58,8 +58,8 @@ public abstract class GenericBoard implements Board {
 	}
 	
 	public GenericBoard() {
-        movableComponents = new Vector();
-        stationaryComponents = new Vector();
+        movableComponents = new Vector<GameSprite>();
+        stationaryComponents = new Vector<GameSprite>();
 		textComponents = new Vector<TextSprite>();
         speed = 1;
         moving = true;
@@ -157,8 +157,8 @@ public abstract class GenericBoard implements Board {
 
 	public abstract void buildGameBoard();
 
-	public Vector getSpriteDesc() {
-		Vector sprites = new Vector();
+	public Vector<SpriteDesc> getSpriteDesc() {
+		Vector<SpriteDesc> sprites = new Vector<SpriteDesc>();
 
 		for (int i = 0; i < stationaryComponents.size(); i++) {
 			GameSprite gs = ((GameSprite) stationaryComponents.elementAt(i));

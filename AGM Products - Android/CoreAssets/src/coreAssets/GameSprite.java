@@ -39,7 +39,7 @@ public abstract class GameSprite {
 	/*
 	 * default code to build a sprite desc to send to the viewer
 	 */
-	public void buildSpriteDesc(Vector sdv) {
+	public void buildSpriteDesc(Vector<SpriteDesc> sdv) {
 		if (getColor() != -1) {
 			sdv.addElement(new SpriteDesc(getColor(), r.getLocation()
 					.getRealX(), r.getLocation().getRealY(), r.getSize()

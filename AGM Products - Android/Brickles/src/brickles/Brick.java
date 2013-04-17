@@ -41,7 +41,7 @@ public class Brick extends StationarySprite {
 		return color;
 	}
 
-	public void buildSpriteDesc(Vector sdv) {
+	public void buildSpriteDesc(Vector<SpriteDesc> sdv) {
 
 		if (!isBroken) {
 

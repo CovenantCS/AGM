@@ -33,7 +33,7 @@ public interface Board {
 
 	Score getScore();
 
-	Vector getSpriteDesc();
+	Vector<SpriteDesc> getSpriteDesc();
 	
 	Vector<TextSprite> getTextSprites();
 

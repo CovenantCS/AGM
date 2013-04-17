@@ -22,12 +22,6 @@ public class TextArea extends StationarySprite {
 	public void collideWith(GameSprite m) {
 	}
 
-	public void buildSpriteDesc(Vector sdv) {
-		sdv.addElement(new SpriteDesc(getColor(), r.getLocation().getRealX(), r
-				.getLocation().getRealY(), r.getSize().getWidth(), r.getSize()
-				.getHeight()));
-	}
-
 	public int getColor() {
 		return color;
 	}

@@ -58,7 +58,7 @@ public class AndroidBoardViewer extends View implements BoardViewer,
         canvas.drawBitmap(bm, viewWidth/2 - bm.getWidth()/2, viewHeight/2 - bm.getHeight()/2, null);
         
         // Draw sprites
-        Vector sprites = board.getSpriteDesc();
+        Vector<SpriteDesc> sprites = board.getSpriteDesc();
         
         for ( int i = 1; i <= sprites.size(); i++ )
         {
