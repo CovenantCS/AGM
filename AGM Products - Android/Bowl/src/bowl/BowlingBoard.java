@@ -53,18 +53,18 @@ public class BowlingBoard extends StimulasActionBoard {
 		endOfAlley = new EndWall(new Rectangle(new Point(-5, -5), new Size(
 				getWidth() + 10, 5)), true);
 		lane = new Lane(new Rectangle(new Point(0, 0), new Size(
-				getWidth() - 60, getHeight())));
-		textarea = new TextArea(new Rectangle(new Point(getWidth() - 61, 0), new Size(65, getHeight())));
+				(int)(getWidth() * 0.75), getHeight())));
+		textarea = new TextArea(new Rectangle(new Point((int)(getWidth() * 0.74), 0), new Size((int)(getWidth() * 0.3), getHeight())));
 		addStationaryPiece(endOfAlley);
 		addStationaryPiece(lane);
 		addStationaryPiece(textarea);
 		rackPins();
 
-		addText(new TextSprite( "Score: "+score, Color.YELLOW, 10, (float)getWidth() - 55, (float)getHeight() / 10 ));
-		addText(new TextSprite( "To start:", Color.YELLOW, 9, (float)getWidth() - 58, (float)getHeight() - (10*5) ));
-		addText(new TextSprite( "Tap screen or", Color.YELLOW, 9, (float)getWidth() - 58, (float)getHeight() - (10*4) ));
-		addText(new TextSprite( "press left", Color.YELLOW, 9, (float)getWidth() - 58, (float)getHeight() - (10*3) ));
-		addText(new TextSprite( "arrow key.", Color.YELLOW, 9, (float)getWidth() - 58, (float)getHeight() - (10*2) ));
+		addText(new TextSprite( "Score: "+score, Color.YELLOW, 10, (float)(getWidth() * 0.75), (float)getHeight() / 10 ));
+		addText(new TextSprite( "To start:", Color.YELLOW, 9, (float)(getWidth() * 0.75), (float)getHeight() - (10*5) ));
+		addText(new TextSprite( "Tap screen or", Color.YELLOW, 9, (float)(getWidth() * 0.75), (float)getHeight() - (10*4) ));
+		addText(new TextSprite( "press left", Color.YELLOW, 9, (float)(getWidth() * 0.75), (float)getHeight() - (10*3) ));
+		addText(new TextSprite( "arrow key.", Color.YELLOW, 9, (float)(getWidth() * 0.75), (float)getHeight() - (10*2) ));
 	}
 
 	public void rackPins() {

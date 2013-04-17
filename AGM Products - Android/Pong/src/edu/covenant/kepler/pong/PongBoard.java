@@ -114,7 +114,7 @@ public class PongBoard extends ContinuousActionBoard
                 new Size( 5, getHeight() + 10 ) ), false );
         addStationaryPiece( rightwall );
 
-		addText(new TextSprite( score.toString(), Color.YELLOW, 10, (float)getWidth() / 20, (float)getHeight() / 2 ));
+		addText(new TextSprite( score.toString(), Color.BLACK, 10, (float)getWidth() / 20, (float)getHeight() / 2 ));
     }
 
     public void ptrPressed( int x, int y )
@@ -177,7 +177,7 @@ public class PongBoard extends ContinuousActionBoard
     {
         score = new SimpleScore( Integer.parseInt( data.substring( 0,
                 data.indexOf( ":" ) ) ) );
-        // sb.setScore(score);
+		textComponents.elementAt(0).setValue(score.toString());
         data = data.substring( data.indexOf( ":" ) + 1 );
         if ( data.startsWith( "true" ) )
         {
