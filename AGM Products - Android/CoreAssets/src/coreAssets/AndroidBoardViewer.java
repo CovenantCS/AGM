@@ -57,6 +57,7 @@ public class AndroidBoardViewer extends View implements BoardViewer,
         super.onDraw( canvas );
         canvas.drawBitmap(bm, viewWidth/2 - bm.getWidth()/2, viewHeight/2 - bm.getHeight()/2, null);
         
+        // Draw sprites
         Vector sprites = board.getSpriteDesc();
         
         for ( int i = 1; i <= sprites.size(); i++ )
@@ -73,6 +74,20 @@ public class AndroidBoardViewer extends View implements BoardViewer,
 
             canvas.drawRect( left, top, right, bottom, paint );      	
         }
+        
+        // Draw text
+        Vector<TextSprite> textSprites = board.getTextSprites();
+        for ( int i = 0; i < textSprites.size(); i++ )
+        {
+            TextSprite text = (TextSprite) textSprites.elementAt( i );
+
+			paint.setStyle( Paint.Style.FILL );
+            paint.setColor( text.color );
+			paint.setAntiAlias( true );
+			paint.setTextSize( text.size );
+            canvas.drawText( text.label, text.x, text.y, paint );      	
+        }
+        paint.reset();
     }
     
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) 

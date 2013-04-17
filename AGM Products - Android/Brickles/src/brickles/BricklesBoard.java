@@ -1,5 +1,6 @@
 package brickles;
 
+import android.graphics.Color;
 import coreAssets.CollisionException;
 import coreAssets.ContinuousActionBoard;
 import coreAssets.EndWall;
@@ -12,6 +13,7 @@ import coreAssets.Rectangle;
 import coreAssets.SideWall;
 import coreAssets.SimpleScore;
 import coreAssets.Size;
+import coreAssets.TextSprite;
 
 public class BricklesBoard extends ContinuousActionBoard {
 	private Paddle paddle;
@@ -23,11 +25,12 @@ public class BricklesBoard extends ContinuousActionBoard {
 
 	public BricklesBoard(int width, int height, PuckSupply pucksupply) {
 		super(width, height);
+		this.name = "brickles";
+		this.pucksupply = pucksupply;
 		init( pucksupply );
-		buildGameBoard();
 	}
 	
-	public BricklesBoard(PuckSupply pucksupply) {
+	public BricklesBoard(PuckSupply pucksupply, SimpleScore score) {
         super();
         init( pucksupply );
     }
@@ -44,6 +47,7 @@ public class BricklesBoard extends ContinuousActionBoard {
 	{
 	    this.name = "brickles";
         this.pucksupply = pucksupply;
+        this.score = new SimpleScore();
         userInterupt = false;
 	}
 
@@ -89,6 +93,8 @@ public class BricklesBoard extends ContinuousActionBoard {
 				getHeight() / 20), new Size(getWidth() - (getWidth() / 10),
 				getHeight() / 5)), brickColor);
 		addStationaryPiece(brickpile);
+
+		addText(new TextSprite( score.toString(), Color.YELLOW, 10, (float)getWidth() / 2, (float)getHeight() / 10 ));
 	}
 
 	public String getSaveData() {
@@ -131,8 +137,10 @@ public class BricklesBoard extends ContinuousActionBoard {
 
 	protected void handleCollisionException(CollisionException ce) {
 		if (ce.getSprite1().name.equals("Puck")
-				&& ce.getSprite2().name.equals("Brick"))
+				&& ce.getSprite2().name.equals("Brick")) {
 			score.incScore(1);
+			textComponents.elementAt(0).setValue(score.toString());
+		}
 	}
 
 	public void ptrPressed(int x, int y) {

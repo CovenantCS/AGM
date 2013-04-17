@@ -34,6 +34,8 @@ public interface Board {
 	Score getScore();
 
 	Vector getSpriteDesc();
+	
+	Vector<TextSprite> getTextSprites();
 
 	void ptrPressed(int x, int y);
 

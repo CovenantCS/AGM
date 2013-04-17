@@ -2,6 +2,9 @@ package bowl;
 
 import java.util.Random;
 
+import android.R.color;
+import android.graphics.Color;
+
 import coreAssets.EndWall;
 
 import coreAssets.CollisionException;
@@ -11,6 +14,7 @@ import coreAssets.Rectangle;
 import coreAssets.SimpleScore;
 import coreAssets.Size;
 import coreAssets.StimulasActionBoard;
+import coreAssets.TextSprite;
 
 public class BowlingBoard extends StimulasActionBoard {
 	protected BowlingBall ball;
@@ -20,15 +24,8 @@ public class BowlingBoard extends StimulasActionBoard {
 	private int pinColor;
 	protected int frame = 0; // for each game you get 10 frames
 	protected int ballNum = 1; // for each frame you get two balls
-
-	//we're not using this currently
-	//also conflicts with color-based constructor
-	//public BowlingBoard(int width, int height) {
-	//	super(width, height);
-	//	init();
-	//}
 	
-	public BowlingBoard() {
+	public BowlingBoard( SimpleScore score ) {
         super();
         init();
     }
@@ -37,11 +34,13 @@ public class BowlingBoard extends StimulasActionBoard {
 	{
 	    this.ballColor = ballColor;
 	    this.pinColor = pinColor;
+	    init();
 	}
 	
 	public void init()
 	{
 	    this.name = "bowl";
+	    this.score = new SimpleScore();
         rand = new Random();
         gameOver = false;
 	}
@@ -49,14 +48,23 @@ public class BowlingBoard extends StimulasActionBoard {
 	public void buildGameBoard() {
 		EndWall endOfAlley;
 		Lane lane;
+		TextArea textarea;
 
 		endOfAlley = new EndWall(new Rectangle(new Point(-5, -5), new Size(
 				getWidth() + 10, 5)), true);
 		lane = new Lane(new Rectangle(new Point(0, 0), new Size(
 				getWidth() - 60, getHeight())));
+		textarea = new TextArea(new Rectangle(new Point(getWidth() - 61, 0), new Size(65, getHeight())));
 		addStationaryPiece(endOfAlley);
 		addStationaryPiece(lane);
+		addStationaryPiece(textarea);
 		rackPins();
+
+		addText(new TextSprite( "Score: "+score, Color.YELLOW, 10, (float)getWidth() - 55, (float)getHeight() / 10 ));
+		addText(new TextSprite( "To start:", Color.YELLOW, 9, (float)getWidth() - 58, (float)getHeight() - (10*5) ));
+		addText(new TextSprite( "Tap screen or", Color.YELLOW, 9, (float)getWidth() - 58, (float)getHeight() - (10*4) ));
+		addText(new TextSprite( "press left", Color.YELLOW, 9, (float)getWidth() - 58, (float)getHeight() - (10*3) ));
+		addText(new TextSprite( "arrow key.", Color.YELLOW, 9, (float)getWidth() - 58, (float)getHeight() - (10*2) ));
 	}
 
 	public void rackPins() {
@@ -133,6 +141,7 @@ public class BowlingBoard extends StimulasActionBoard {
 		if (ballNum > 2) {
 			if (frame <= 10) {
 				System.out.println("score: " + score + " frame: " + frame);
+				textComponents.elementAt(0).setValue("Score: "+score) ;
 				rackPins();
 				ballNum = 1;
 				frame++;
@@ -145,12 +154,14 @@ public class BowlingBoard extends StimulasActionBoard {
 	protected void handleCollisionException(CollisionException ce) {
 		if (ce.getSprite2().name.equals("Pin")) {
 			score.incScore(1);
+			textComponents.elementAt(0).setValue("Score: "+score);
 		}
 	}
 
 	protected void handleTickAction() {
 		rack.movePins();
 		score.incScore(rack.checkForCollision());
+		textComponents.elementAt(0).setValue("Score: "+score);
 	}
 
 }
