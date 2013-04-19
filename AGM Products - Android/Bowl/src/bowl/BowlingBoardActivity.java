@@ -16,7 +16,7 @@ public class BowlingBoardActivity extends AndroidBoardActivity
         super.onCreate( savedInstanceState );
         int ballColor = getResources().getColor( R.color.ball );
         int pinColor = getResources().getColor( R.color.pin );
-        this.boardViewer.setBoard( new BowlingBoard( ballColor, pinColor ) );
+        this.boardViewer.setBoard( new BowlingBoard(this, ballColor, pinColor ) );
         this.boardViewer.setActivity(this);
     }
 }

@@ -1,17 +1,25 @@
 package coreAssets;
 
+import android.graphics.Bitmap;
 import coreAssets.GameSprite;
 import coreAssets.Point;
 import coreAssets.Rectangle;
 import coreAssets.SpriteDeletedException;
 import coreAssets.Velocity;
 
-public abstract class MovableSprite extends GameSprite {
+public abstract class MovableSprite extends ImageSprite {
 	protected Velocity v;
 
 	private boolean moving;
 
-	public MovableSprite(Rectangle r, int d) {
+	public MovableSprite(Rectangle r, int d, Bitmap bm) {
+		super(r, bm);
+		v = new Velocity(1, d);
+		name = "MovableSprite";
+	}
+
+	public MovableSprite(Rectangle r, int d)
+	{
 		super(r);
 		v = new Velocity(1, d);
 		name = "MovableSprite";

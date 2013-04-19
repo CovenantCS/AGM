@@ -161,12 +161,12 @@ public abstract class GenericBoard implements Board {
 		Vector<SpriteDesc> sprites = new Vector<SpriteDesc>();
 
 		for (int i = 0; i < stationaryComponents.size(); i++) {
-			GameSprite gs = ((GameSprite) stationaryComponents.elementAt(i));
-			gs.buildSpriteDesc(sprites);
+			ImageSprite is = ((ImageSprite) stationaryComponents.elementAt(i));
+			is.buildSpriteDesc(sprites);
 		}
 		for (int i = 0; i < movableComponents.size(); i++) {
-			GameSprite gs = ((GameSprite) movableComponents.elementAt(i));
-			gs.buildSpriteDesc(sprites);
+			ImageSprite is = ((ImageSprite) movableComponents.elementAt(i));
+			is.buildSpriteDesc(sprites);
 		}
 		return sprites;
 	}

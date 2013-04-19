@@ -1,5 +1,6 @@
 package brickles;
 
+import android.content.Context;
 import android.graphics.Color;
 import coreAssets.CollisionException;
 import coreAssets.ContinuousActionBoard;
@@ -22,29 +23,34 @@ public class BricklesBoard extends ContinuousActionBoard {
 	private PuckSupply pucksupply;
 	private int paddleColor;
 	private int brickColor;
+	private Context context;
 
-	public BricklesBoard(int width, int height, PuckSupply pucksupply) {
+	public BricklesBoard(Context context, int width, int height, PuckSupply pucksupply) {
 		super(width, height);
 		this.name = "brickles";
 		this.pucksupply = pucksupply;
-		init( pucksupply );
+		init( context, pucksupply );
+		buildGameBoard();
 	}
 	
-	public BricklesBoard(PuckSupply pucksupply, SimpleScore score) {
+	public BricklesBoard(Context context, PuckSupply pucksupply, SimpleScore score) {
         super();
-        init( pucksupply );
-    }
+		this.pucksupply = pucksupply;
+        this.name = "brickles";
+        init( context, pucksupply );
+	}
 	
-	public BricklesBoard( PuckSupply pucksupply, int paddleColor, int brickColor )
+	public BricklesBoard( Context context, PuckSupply pucksupply, int paddleColor, int brickColor )
 	{
 	    super();
-	    init( pucksupply );
+	    init( context, pucksupply );
 	    this.paddleColor = paddleColor;
 	    this.brickColor = brickColor;
 	}
 	
-	private void init( PuckSupply pucksupply )
+	private void init( Context context, PuckSupply pucksupply )
 	{
+		this.context = context;
 	    this.name = "brickles";
         this.pucksupply = pucksupply;
         this.score = new SimpleScore();
@@ -57,8 +63,8 @@ public class BricklesBoard extends ContinuousActionBoard {
 		SideWall leftwall;
 		SideWall rightwall;
 
-		int paddleWidth = getWidth() / 10;
-		int paddleHeight = 2;
+		int paddleWidth = getWidth() / 8;
+		int paddleHeight = getHeight() /40;
 		paddle = new Paddle(new Rectangle(new Point((getWidth() / 2)
 				- (paddleWidth / 2) + 15, getHeight() - (getHeight() / 10)),
 				new Size(paddleWidth, paddleHeight)), this.paddleColor);
@@ -67,7 +73,7 @@ public class BricklesBoard extends ContinuousActionBoard {
 
 		try {
 			puck = pucksupply.getPuck(new Point((getWidth() / 2),
-					(getHeight() / 2)), 10);
+					(getHeight() / 2)), 30);
 			addMovablePiece(puck);
 		} catch (GameOverException e) {
 			// this is the first puck. It should always succeed
@@ -89,7 +95,7 @@ public class BricklesBoard extends ContinuousActionBoard {
 				new Size(5, getHeight() + 10)), false);
 		addStationaryPiece(rightwall);
 
-		brickpile = new BrickPile(new Rectangle(new Point(getWidth() / 20,
+		brickpile = new BrickPile(context, new Rectangle(new Point(getWidth() / 20,
 				getHeight() / 20), new Size(getWidth() - (getWidth() / 10),
 				getHeight() / 5)), brickColor);
 		addStationaryPiece(brickpile);
@@ -167,16 +173,6 @@ public class BricklesBoard extends ContinuousActionBoard {
 
 	public void keyUp(boolean down) {
 		userInterupt = true;
-	}
-
-	public void loadGame() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void saveGame() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

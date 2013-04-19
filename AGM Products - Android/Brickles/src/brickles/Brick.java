@@ -7,6 +7,13 @@ package brickles;
  */
 
 import java.util.Vector;
+import edu.covenant.kepler.coreassets.R;
+import android.R.integer;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.widget.ImageView;
+
 
 import coreAssets.CollisionException;
 import coreAssets.GameSprite;
@@ -17,45 +24,43 @@ import coreAssets.Size;
 import coreAssets.SpriteDesc;
 import coreAssets.StationarySprite;
 
-public class Brick extends StationarySprite {
-
+public class Brick extends StationarySprite 
+{
 	// the brick has been hit
 	private boolean isBroken;
 
 	private int color = 255 << 24 | 0 << 16 | 0 << 8 | 255;
 
-	public Brick(Rectangle r) {
-		super(r);
+	public Brick(Context context, Rectangle r, int color) 
+	{
+		super(r,BitmapFactory.decodeResource(context.getResources(),edu.covenant.kepler.brickles.R.drawable.brick));
 		isBroken = false;
 		name = "Brick";
+		this.color = color;
 	}
-	
-	public Brick(Rectangle r, int color) {
-        super(r);
-        isBroken = false;
-        name = "Brick";
-        this.color = color;
-    }
 
-	public int getColor() {
+	public int getColor(){
 		return color;
 	}
 
-	public void buildSpriteDesc(Vector<SpriteDesc> sdv) {
+	public void buildSpriteDesc(Vector sdv) {
 
 		if (!isBroken) {
 
-			sdv.addElement(new SpriteDesc(getColor(), r.getLocation()
-					.getRealX() + 1, r.getLocation().getRealY() + 1, r
-					.getSize().getWidth() - 1, r.getSize().getHeight() - 1));
+			sdv.addElement(new SpriteDesc(getBm(), 
+					getColor(),
+					r.getLocation().getRealX() + 1,
+					r.getLocation().getRealY() + 1,
+					r.getSize().getWidth() - 1,
+					r.getSize().getHeight() - 1));
 		}
 	}
 
 	public void collideWith(GameSprite gs) throws CollisionException {
 		if (!isBroken && (gs instanceof Puck)) {
 			isBroken = true;
-			((Puck) gs).increaseSpeed( 1 );
 			((Puck) gs).reverseY();
+			((Puck) gs).increaseSpeed( 1 );
 			throw new CollisionException(gs, this);
 		}
 	}

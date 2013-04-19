@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="edu.covenant.kepler.brickles"
+    package="edu.covenant.kepler.match3"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -11,17 +11,14 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
-        <activity android:name="brickles.BricklesProduct"
-            android:label="@string/app_name">
+        android:theme="@style/AppTheme">
+        <activity android:label="Match3" android:name="Match3Product">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN"/>
             </intent-filter>
         </activity>
-        <activity android:name="brickles.BricklesBoardActivity" >
-        </activity>
+        <activity android:name="m3BoardActivity"></activity>
     </application>
 
 </manifest>
