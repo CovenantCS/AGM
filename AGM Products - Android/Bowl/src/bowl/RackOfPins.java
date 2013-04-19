@@ -3,12 +3,12 @@ package bowl;
 import java.util.Vector;
 
 import android.content.Context;
-
 import coreAssets.CollisionException;
 import coreAssets.GameSprite;
 import coreAssets.Point;
 import coreAssets.Rectangle;
 import coreAssets.Size;
+import coreAssets.SpriteDesc;
 import coreAssets.StationarySprite;
 
 public class RackOfPins extends StationarySprite {
@@ -27,6 +27,7 @@ public class RackOfPins extends StationarySprite {
 
 	// aggregated sprites that havent been hit
 	private int numLeft;
+
 
 	public RackOfPins(Context context, Rectangle r, int pinColor) {
 		super(r);
@@ -55,7 +56,7 @@ public class RackOfPins extends StationarySprite {
 		}
 		name = "RackOfPins";
 	}
-	public void buildSpriteDesc(Vector sdv) {
+	public void buildSpriteDesc(Vector<SpriteDesc> sdv) {
 		for (int i = 0; i < rack.length; i++) {
 			for (int j = 0; j < rack[i].length; j++) {
 				rack[i][j].buildSpriteDesc(sdv);

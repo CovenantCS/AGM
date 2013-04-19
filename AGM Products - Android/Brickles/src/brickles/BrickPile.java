@@ -17,6 +17,7 @@ import coreAssets.Point;
 import coreAssets.Rectangle;
 import coreAssets.Size;
 import coreAssets.StationarySprite;
+import coreAssets.SpriteDesc;
 
 public class BrickPile extends StationarySprite {
 
@@ -89,7 +90,7 @@ public class BrickPile extends StationarySprite {
 		}
 	}
 
-	public void buildSpriteDesc(Vector sdv) {
+	public void buildSpriteDesc(Vector<SpriteDesc> sdv) {
 		for (int i = 0; i < numRows; i++) {
 			for (int j = 0; j < numberOfBricksPerRow; j++) {
 				pile[i][j].buildSpriteDesc(sdv);
@@ -138,5 +139,8 @@ public class BrickPile extends StationarySprite {
 					data = data.substring(data.indexOf(";") + 1);
 			}
 		}
+	}
+	public int getColor() {
+		return -1;
 	}
 }

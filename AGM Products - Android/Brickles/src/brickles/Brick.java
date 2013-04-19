@@ -29,7 +29,7 @@ public class Brick extends StationarySprite
 	// the brick has been hit
 	private boolean isBroken;
 
-	private int color = 255 << 24 | 0 << 16 | 255 << 8 | 255;
+	private int color = 255 << 24 | 0 << 16 | 0 << 8 | 255;
 
 	public Brick(Context context, Rectangle r, int color) 
 	{
@@ -39,6 +39,9 @@ public class Brick extends StationarySprite
 		this.color = color;
 	}
 
+	public int getColor(){
+		return color;
+	}
 
 	public void buildSpriteDesc(Vector sdv) {
 
@@ -57,6 +60,7 @@ public class Brick extends StationarySprite
 		if (!isBroken && (gs instanceof Puck)) {
 			isBroken = true;
 			((Puck) gs).reverseY();
+			((Puck) gs).increaseSpeed( 1 );
 			throw new CollisionException(gs, this);
 		}
 	}

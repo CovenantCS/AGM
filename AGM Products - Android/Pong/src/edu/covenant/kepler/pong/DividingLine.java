@@ -22,7 +22,7 @@ public class DividingLine extends StationarySprite {
 	public void collideWith(GameSprite m) {
 	}
 
-	public void buildSpriteDesc(Vector sdv) {
+	public void buildSpriteDesc(Vector<SpriteDesc> sdv) {
 		sdv.addElement(new SpriteDesc(getColor(), 0,
 				r.getLocation().getRealY() / 2, r.getSize().getWidth(), 2));
 	}

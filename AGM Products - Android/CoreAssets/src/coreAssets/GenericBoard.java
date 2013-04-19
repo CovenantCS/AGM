@@ -23,9 +23,11 @@ import coreAssets.UserInteruptException;
 import coreAssets.MovableSprite;
 
 public abstract class GenericBoard implements Board {
-	protected Vector movableComponents;
+	protected Vector<GameSprite> movableComponents;
 
-	protected Vector stationaryComponents;
+	protected Vector<GameSprite> stationaryComponents;
+	
+	protected Vector<TextSprite> textComponents;
 
 	protected int speed;
 	
@@ -46,8 +48,9 @@ public abstract class GenericBoard implements Board {
 	public GenericBoard(int width, int height) {
 		this.width = width;
 		this.height = height;
-		movableComponents = new Vector();
-		stationaryComponents = new Vector();
+		movableComponents = new Vector<GameSprite>();
+		stationaryComponents = new Vector<GameSprite>();
+		textComponents = new Vector<TextSprite>();
 		speed = 1;
 		moving = true;
 		score = new SimpleScore();
@@ -55,8 +58,9 @@ public abstract class GenericBoard implements Board {
 	}
 	
 	public GenericBoard() {
-        movableComponents = new Vector();
-        stationaryComponents = new Vector();
+        movableComponents = new Vector<GameSprite>();
+        stationaryComponents = new Vector<GameSprite>();
+		textComponents = new Vector<TextSprite>();
         speed = 1;
         moving = true;
         score = new SimpleScore();
@@ -111,6 +115,15 @@ public abstract class GenericBoard implements Board {
 		stationaryComponents.removeElement(sp);
 	}
 
+	public void addText(TextSprite tsp) {
+		if (tsp != null) // skip optional pieces without comment
+			textComponents.addElement(tsp);
+	}
+
+	public void removeText(TextSprite tsp) {
+		textComponents.removeElement(tsp);
+	}
+
 	public void resetList() {
 		movableComponents.removeAllElements();
 	}
@@ -144,8 +157,8 @@ public abstract class GenericBoard implements Board {
 
 	public abstract void buildGameBoard();
 
-	public Vector getSpriteDesc() {
-		Vector sprites = new Vector();
+	public Vector<SpriteDesc> getSpriteDesc() {
+		Vector<SpriteDesc> sprites = new Vector<SpriteDesc>();
 
 		for (int i = 0; i < stationaryComponents.size(); i++) {
 			ImageSprite is = ((ImageSprite) stationaryComponents.elementAt(i));
@@ -156,6 +169,10 @@ public abstract class GenericBoard implements Board {
 			is.buildSpriteDesc(sprites);
 		}
 		return sprites;
+	}
+	
+	public Vector<TextSprite> getTextSprites() {
+		return textComponents;
 	}
 
 	public boolean gameOver() {

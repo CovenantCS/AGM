@@ -8,9 +8,9 @@ package bowl;
 
 import java.util.Vector;
 
+
 import android.content.Context;
 import android.graphics.BitmapFactory;
-
 import coreAssets.CollisionException;
 import coreAssets.GameSprite;
 import coreAssets.MovableSprite;
@@ -89,6 +89,11 @@ public class BowlingPin extends MovableSprite {
 		int height = Integer.parseInt(datum);
 		int index = data.indexOf(";");
 		if (index != -1) {
+			datum = data.substring(0, index);
+			data = data.substring(index + 1);
+
+		} else if (data.indexOf(":") != -1) {
+			index = data.indexOf(":");
 			datum = data.substring(0, index);
 			data = data.substring(index + 1);
 		} else {

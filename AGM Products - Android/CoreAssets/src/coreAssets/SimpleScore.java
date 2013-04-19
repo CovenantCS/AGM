@@ -20,6 +20,10 @@ public class SimpleScore implements Score {
 		this.score = score;
 	}
 
+	public SimpleScore(String score) {
+		this.score = Integer.parseInt(score);
+	}
+
 	public void incScore(int points) {
 		score += points;
 	}

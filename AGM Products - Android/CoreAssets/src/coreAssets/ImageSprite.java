@@ -23,7 +23,7 @@ public class ImageSprite extends GameSprite
 		return bm;
 	}
 	
-	public void buildSpriteDesc(Vector sdv) {
+	public void buildSpriteDesc(Vector<SpriteDesc> sdv) {
 		if (getColor() != -1) {
 			sdv.addElement(new SpriteDesc(getBm(), getColor(), r.getLocation()
 					.getRealX(), r.getLocation().getRealY(), r.getSize()
