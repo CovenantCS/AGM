@@ -1,6 +1,8 @@
 package edu.covenant.kepler.minesweeper;
 
 
+import java.util.Vector;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.util.Log;
@@ -98,6 +100,11 @@ public class MinesweeperBoard extends ContinuousActionBoard {
 		//}
 	
 	}
+	
+	public void updateScore() {
+		score.incScore(1);
+		textComponents.elementAt(0).setValue("Score: "+score);
+	}
 
 	protected void handleCollisionException(CollisionException ce) {
 		//if (ce.getSprite1().name.equals("Puck")
@@ -152,7 +159,11 @@ public class MinesweeperBoard extends ContinuousActionBoard {
 		}
 		if(selected != null) {
 			try {
-				selected.reveal();
+				if(selected.getNum() == 0) {
+					selected.expand(selected);
+				} else {
+					selected.reveal();
+				}
 			} catch (CollisionException e) {
 				handleCollisionException(e);
 			}
@@ -201,6 +212,11 @@ public class MinesweeperBoard extends ContinuousActionBoard {
 	
 	public void keyUp(boolean down) {
 		userInterupt = true;
+	}
+
+	public Vector getTextComponents() {
+		// TODO Auto-generated method stub
+		return textComponents;
 	}
 
 }

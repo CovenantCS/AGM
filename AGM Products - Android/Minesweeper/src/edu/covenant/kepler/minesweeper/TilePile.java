@@ -20,11 +20,14 @@ public class TilePile extends StationarySprite {
 	
 	private MinesweeperBoard board;
 
+	// The number of rows should be twice the number of columns
+	//  so that it looks good on the phone
+	
 	// number of rows
-	private int numRows = 10;
+	private int numRows = 20;
 
 	// bricks per row
-	private int numColumns = 5;
+	private int numColumns = 10;
 
 	
 	// bricks in the pile
@@ -39,7 +42,7 @@ public class TilePile extends StationarySprite {
 		super(r);
 		this.board = board;
 		
-		minePercentage = 0.2;
+		minePercentage = 0.05;
 		numberOfTiles = numRows * numColumns;
 		name = "TilePile";
 		
@@ -82,7 +85,7 @@ public class TilePile extends StationarySprite {
 					}
 				}
 				pile[i][j] = new Tile(new Rectangle(new Point(x, y), new Size(
-						s.getWidth() / numColumns, s.getHeight() / numRows)), isMine, pile, board, tileColor);
+						s.getWidth() / numColumns, s.getHeight() / numRows)), isMine, pile, board, tileColor, i, j);
 				x += s.getWidth() / numColumns;
 			}
 			y += s.getHeight() / numRows;
@@ -137,36 +140,6 @@ public class TilePile extends StationarySprite {
 
 	public void setPile(Tile[][] pile) {
 		this.pile = pile;
-	}
-
-	private void createMines() {
-		Random rand = new Random();
-		int mineCount = (int) (numberOfTiles * minePercentage);
-		int[] mines = new int[mineCount];
-		boolean tryAgain = true;
-		for(int i = 0; i < mines.length; i++) {
-			while(tryAgain) {
-				tryAgain = false;
-				int r = rand.nextInt(numberOfTiles);
-				for(int j = 0; j < i; j++) {
-					if(r == mines[j]) {
-						tryAgain = true;
-					}
-				}
-				if(!tryAgain) {
-					mines[i] = r;
-				}
-			}
-		}
-		
-		for(int i = 0; i < mines.length; i++) {
-			int index = mines[i];
-			int row = index / numRows;
-			int col = index % numRows;
-			Tile cur = pile[row][col];
-			cur.setMine(true);
-			cur.setColor(255 << 1 | 1 << 16 | 40 << 8 | 25);
-		}
 	}
 	
 	// Checks the aggregated sprites for an overlap with the provided sprite

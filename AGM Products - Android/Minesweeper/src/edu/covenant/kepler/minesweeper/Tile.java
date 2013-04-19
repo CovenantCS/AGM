@@ -37,6 +37,8 @@ public class Tile extends StationarySprite {
 	private boolean isSelected;
 	private boolean isRevealed;
 	private boolean isFlagged;
+	private int xIndex;
+	private int yIndex;
 	private int num = -1;
 	
 	private Rectangle rectangle;
@@ -44,7 +46,7 @@ public class Tile extends StationarySprite {
 	private int color;
 	private MinesweeperBoard board;
 	
-	public Tile(Rectangle r, boolean isMine, Tile[][] pile, MinesweeperBoard board, int tileColor) {
+	public Tile(Rectangle r, boolean isMine, Tile[][] pile, MinesweeperBoard board, int tileColor, int xIndex, int yIndex) {
 		super(r);
 		this.pile = pile;
 		rectangle = r;
@@ -53,6 +55,8 @@ public class Tile extends StationarySprite {
 		this.isMine = isMine;
 		isFlagged = false;
 		isSelected = false;
+		this.xIndex = xIndex;
+		this.yIndex = yIndex;
 		color = defaultColor = tileColor;
 		this.board = board;
 	}
@@ -107,10 +111,58 @@ public class Tile extends StationarySprite {
 			if(win) {
 				throw new GameOverException(true, "YOU WIN!!!!");
 			}
-			throw new CollisionException(this);
+//			throw new CollisionException(this);
+			board.updateScore();
 		}
 	}
 	
+	public void expand(Tile cur) throws CollisionException, GameOverException {
+		
+		int row = cur.getXIndex();
+		int col = cur.getYIndex();
+		// reveal tile left
+		if (row != 0) {
+			Tile t = pile[row - 1][col];
+			if (t.getNum() == 0) {
+//				expand(t);
+				t.reveal();
+			}
+		}
+		// reveal tile right
+		if (row != pile.length - 1) {
+			Tile t = pile[row + 1][col];
+			if (t.getNum() == 0) {
+//				expand(t);
+				t.reveal();
+			}
+		}
+		// reveal tile top
+		if (col != 0) {
+			Tile t = pile[row][col - 1];
+			if (t.getNum() == 0) {
+				expand(t);
+				t.reveal();
+			}
+		}
+		// reveal tile bottom
+		if (col != pile[0].length - 1) {
+			Tile t = pile[row][col + 1];
+			if (t.getNum() == 0) {
+//				expand(t);
+				t.reveal();
+			}
+		}
+		cur.reveal();
+	}
+	
+	public int getXIndex() {
+		return xIndex;
+	}
+
+	public int getYIndex() {
+		return yIndex;
+	}
+
 	public void click() {
 		if(!isSelected) {
 			for(int i = 0; i < pile.length; i++) {
