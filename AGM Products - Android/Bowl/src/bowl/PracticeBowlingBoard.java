@@ -18,11 +18,11 @@ public class PracticeBowlingBoard extends BowlingBoard {
 		if (ballNum > 2) {
 			if (ActivationManager.getInstance().isPracticeMode()) {
 				System.out.println("in practice mode");
-				rackPins();
+				rackPins(context);
 				ballNum = 1;
 			} else {
 				if (frame <= 10) {
-					rackPins();
+					rackPins(context);
 					ballNum = 1;
 					frame++;
 				} else {

@@ -2,6 +2,8 @@ package bowl;
 
 import java.util.Random;
 
+import android.content.Context;
+
 import coreAssets.EndWall;
 
 import coreAssets.CollisionException;
@@ -20,6 +22,7 @@ public class BowlingBoard extends StimulasActionBoard {
 	private int pinColor;
 	protected int frame = 0; // for each game you get 10 frames
 	protected int ballNum = 1; // for each frame you get two balls
+	Context context;
 
 	//we're not using this currently
 	//also conflicts with color-based constructor
@@ -28,9 +31,9 @@ public class BowlingBoard extends StimulasActionBoard {
 	//	init();
 	//}
 	
-	public BowlingBoard() {
+	public BowlingBoard(Context context) {
         super();
-        init();
+        init(context); 
     }
 	
 	public BowlingBoard( int ballColor, int pinColor )
@@ -39,14 +42,15 @@ public class BowlingBoard extends StimulasActionBoard {
 	    this.pinColor = pinColor;
 	}
 	
-	public void init()
+	public void init(Context context)
 	{
+		this.context = context;
 	    this.name = "bowl";
         rand = new Random();
         gameOver = false;
 	}
 
-	public void buildGameBoard() {
+	public void buildGameBoard(Context context) {
 		EndWall endOfAlley;
 		Lane lane;
 
@@ -56,12 +60,12 @@ public class BowlingBoard extends StimulasActionBoard {
 				getWidth() - 60, getHeight())));
 		addStationaryPiece(endOfAlley);
 		addStationaryPiece(lane);
-		rackPins();
+		rackPins(context);
 	}
 
-	public void rackPins() {
+	public void rackPins(Context context) {
 		stationaryComponents.removeElement(rack);
-		rack = new RackOfPins(new Rectangle(new Point(((getWidth() - 30) / 6),
+		rack = new RackOfPins( context, new Rectangle(new Point(((getWidth() - 30) / 6),
 				getHeight() / 20), new Size(((3 * getWidth() - 60) / 5)
 				- getWidth() / 10, getHeight() / 5)), this.pinColor);
 		addStationaryPiece(rack);
@@ -125,7 +129,7 @@ public class BowlingBoard extends StimulasActionBoard {
 		rack.setSaveData(data);
 	}
 
-	protected void handleSpriteDeletedException() throws GameOverException {
+	protected void handleSpriteDeletedException(Context context) throws GameOverException {
 		movableComponents.removeElement(ball);
 		rack.stopPins();
 		ball = null;
@@ -133,7 +137,7 @@ public class BowlingBoard extends StimulasActionBoard {
 		if (ballNum > 2) {
 			if (frame <= 10) {
 				System.out.println("score: " + score + " frame: " + frame);
-				rackPins();
+				rackPins(context);
 				ballNum = 1;
 				frame++;
 			} else {
@@ -151,6 +155,13 @@ public class BowlingBoard extends StimulasActionBoard {
 	protected void handleTickAction() {
 		rack.movePins();
 		score.incScore(rack.checkForCollision());
+	}
+
+	@Override
+	public void buildGameBoard()
+	{
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -33,8 +33,7 @@ public class Brick extends StationarySprite
 
 	public Brick(Context context, Rectangle r, int color) 
 	{
-		super(r,BitmapFactory.decodeResource(context.getResources(),edu.covenant.kepler.brickles.R.drawable.hunt));
-		//super(r,BitmapFactory.decodeFile("logo.jpg"));
+		super(r,BitmapFactory.decodeResource(context.getResources(),edu.covenant.kepler.brickles.R.drawable.brick));
 		isBroken = false;
 		name = "Brick";
 		this.color = color;

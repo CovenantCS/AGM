@@ -8,6 +8,9 @@ package bowl;
 
 import java.util.Vector;
 
+import android.content.Context;
+import android.graphics.BitmapFactory;
+
 import coreAssets.CollisionException;
 import coreAssets.GameSprite;
 import coreAssets.MovableSprite;
@@ -30,9 +33,9 @@ public class BowlingPin extends MovableSprite {
 		name = "Pin";
 	}
 	
-	public BowlingPin( Rectangle r, int color )
+	public BowlingPin(Context context, Rectangle r, int color )
 	{
-	    super(r, 0);
+	    super(r, color, BitmapFactory.decodeResource(context.getResources(), edu.covenant.kepler.bowl.R.drawable.bowling_pin));
         v.setSpeed(0);
         stopMoving();
         isBroken = false;
