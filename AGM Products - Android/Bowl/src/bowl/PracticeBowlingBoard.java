@@ -1,13 +1,14 @@
 package bowl;
 
+import android.content.Context;
 import coreAssets.ActivationManager;
 import coreAssets.GameOverException;
 import coreAssets.SimpleScore;
 
 public class PracticeBowlingBoard extends BowlingBoard {
 
-	public PracticeBowlingBoard(int width, int height, SimpleScore score) {
-		super(width, height);
+	public PracticeBowlingBoard(Context context, int ballColor, int pinColor ) {
+		super(context, ballColor, pinColor);
 	}
 
 	protected void handleSpriteDeletedException() throws GameOverException {
@@ -18,11 +19,11 @@ public class PracticeBowlingBoard extends BowlingBoard {
 		if (ballNum > 2) {
 			if (ActivationManager.getInstance().isPracticeMode()) {
 				System.out.println("in practice mode");
-				rackPins();
+				rackPins(context);
 				ballNum = 1;
 			} else {
 				if (frame <= 10) {
-					rackPins();
+					rackPins(context);
 					ballNum = 1;
 					frame++;
 				} else {

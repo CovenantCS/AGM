@@ -33,6 +33,15 @@ public class SpriteDesc {
 		this.height = height;
 	}
 	
+	public SpriteDesc(Bitmap bm, int color, int x, int y, int width, int height) {
+		this.color = color;
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		this.bitmap = bm;
+	}
+	
 	public SpriteDesc(string path, Context context, int x, int y, int width, int height) {
 		this.path = path;
 		this.x = x;

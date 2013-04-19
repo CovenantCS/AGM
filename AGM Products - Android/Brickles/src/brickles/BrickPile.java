@@ -8,6 +8,8 @@ package brickles;
 
 import java.util.Vector;
 
+import android.content.Context;
+
 import coreAssets.CollisionException;
 import coreAssets.GameOverException;
 import coreAssets.GameSprite;
@@ -15,11 +17,12 @@ import coreAssets.Point;
 import coreAssets.Rectangle;
 import coreAssets.Size;
 import coreAssets.StationarySprite;
+import coreAssets.SpriteDesc;
 
 public class BrickPile extends StationarySprite {
 
 	private Brick[][] pile;
-
+	
 	// number of rows
 	private static final int numRows = 2;
 
@@ -31,8 +34,9 @@ public class BrickPile extends StationarySprite {
 
 	// aggregated sprites that havent been hit
 	private int numLeft;
-
-	public BrickPile(Rectangle r) {
+	
+	public BrickPile(Context context, Rectangle r, int brickColor) 
+	{
 		super(r);
 		Point p = r.getLocation();
 		Size s = r.getSize();
@@ -45,14 +49,13 @@ public class BrickPile extends StationarySprite {
 		for (int i = 0; i < numRows; i++) {
 			x = initialX;
 			for (int j = 0; j < numberOfBricksPerRow; j++) {
-				pile[i][j] = new Brick(new Rectangle(new Point(x, y), new Size(
+				pile[i][j] = new Brick(context, new Rectangle(new Point(x, y), new Size(
 						s.getWidth() / numberOfBricksPerRow, s.getHeight()
-								/ numRows)));
+								/ numRows)), brickColor);
 				x += s.getWidth() / numberOfBricksPerRow;
 			}
 			y += s.getHeight() / numRows;
 		}
-
 		name = "BrickPile";
 	}
 
@@ -87,7 +90,7 @@ public class BrickPile extends StationarySprite {
 		}
 	}
 
-	public void buildSpriteDesc(Vector sdv) {
+	public void buildSpriteDesc(Vector<SpriteDesc> sdv) {
 		for (int i = 0; i < numRows; i++) {
 			for (int j = 0; j < numberOfBricksPerRow; j++) {
 				pile[i][j].buildSpriteDesc(sdv);
@@ -137,7 +140,6 @@ public class BrickPile extends StationarySprite {
 			}
 		}
 	}
-
 	public int getColor() {
 		return -1;
 	}

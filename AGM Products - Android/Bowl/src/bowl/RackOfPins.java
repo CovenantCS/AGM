@@ -2,11 +2,13 @@ package bowl;
 
 import java.util.Vector;
 
+import android.content.Context;
 import coreAssets.CollisionException;
 import coreAssets.GameSprite;
 import coreAssets.Point;
 import coreAssets.Rectangle;
 import coreAssets.Size;
+import coreAssets.SpriteDesc;
 import coreAssets.StationarySprite;
 
 public class RackOfPins extends StationarySprite {
@@ -26,7 +28,8 @@ public class RackOfPins extends StationarySprite {
 	// aggregated sprites that havent been hit
 	private int numLeft;
 
-	public RackOfPins(Rectangle r) {
+
+	public RackOfPins(Context context, Rectangle r, int pinColor) {
 		super(r);
 		Point p = r.getLocation();
 		Size s = r.getSize();
@@ -45,16 +48,15 @@ public class RackOfPins extends StationarySprite {
 		for (int row = 0; row < rack.length; row++) {
 			x = initialX + (4 - rack[row].length) * (s.getWidth() / 8);
 			for (int col = 0; col < rack[row].length; col++) {
-				rack[row][col] = new BowlingPin(new Rectangle(new Point(x, y),
-						new Size((s.getWidth() / 7), s.getHeight() / numRows)));
+				rack[row][col] = new BowlingPin(context, new Rectangle(new Point(x, y),
+						new Size((s.getWidth() / 7), s.getHeight() / numRows)), pinColor);
 				x += s.getWidth() / 4;
 			}
 			y += s.getHeight() / 4;
 		}
 		name = "RackOfPins";
 	}
-
-	public void buildSpriteDesc(Vector sdv) {
+	public void buildSpriteDesc(Vector<SpriteDesc> sdv) {
 		for (int i = 0; i < rack.length; i++) {
 			for (int j = 0; j < rack[i].length; j++) {
 				rack[i][j].buildSpriteDesc(sdv);

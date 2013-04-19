@@ -2,6 +2,11 @@ package bowl;
 
 import java.util.Random;
 
+import android.content.Context;
+import android.R.color;
+import android.graphics.Color;
+
+
 import coreAssets.EndWall;
 
 import coreAssets.CollisionException;
@@ -11,32 +16,44 @@ import coreAssets.Rectangle;
 import coreAssets.SimpleScore;
 import coreAssets.Size;
 import coreAssets.StimulasActionBoard;
+import coreAssets.TextSprite;
 
 public class BowlingBoard extends StimulasActionBoard {
 	protected BowlingBall ball;
 	protected RackOfPins rack;
 	private Random rand;
+	private int ballColor;
+	private int pinColor;
 	protected int frame = 0; // for each game you get 10 frames
 	protected int ballNum = 1; // for each frame you get two balls
+	Context context;
 
-	public BowlingBoard(int width, int height) {
-		super(width, height);
-		this.name = "bowl";
-		rand = new Random();
-		buildGameBoard();
-		gameOver = false;
+	public BowlingBoard(Context context, SimpleScore score ) {
+        super();
+        init(context);
+    }
+	
+	public BowlingBoard(Context context, int ballColor, int pinColor )
+	{
+		init(context);
+	    this.ballColor = ballColor;
+	    this.pinColor = pinColor;
 	}
 	
-	public BowlingBoard() {
-        super();
-        this.name = "bowl";
+	public void init(Context context)
+	{
+		this.context = context;
+	    this.name = "bowl";
+	    this.score = new SimpleScore();
         rand = new Random();
         gameOver = false;
-    }
+	}
 
 	public void buildGameBoard() {
 		EndWall endOfAlley;
 		Lane lane;
+
+		TextArea textarea;
 
 		endOfAlley = new EndWall(new Rectangle(new Point(-5, -5), new Size(
 				getWidth() + 10, 5)), true);
@@ -44,14 +61,20 @@ public class BowlingBoard extends StimulasActionBoard {
 				getWidth() - 60, getHeight())));
 		addStationaryPiece(endOfAlley);
 		addStationaryPiece(lane);
-		rackPins();
+		rackPins(this.context);
+		
+		addText(new TextSprite( "Score: "+score, Color.YELLOW, 10, (float)(getWidth() * 0.75), (float)getHeight() / 10 ));
+		addText(new TextSprite( "To start:", Color.YELLOW, 9, (float)(getWidth() * 0.75), (float)getHeight() - (10*5) ));
+		addText(new TextSprite( "Tap screen or", Color.YELLOW, 9, (float)(getWidth() * 0.75), (float)getHeight() - (10*4) ));
+		addText(new TextSprite( "press left", Color.YELLOW, 9, (float)(getWidth() * 0.75), (float)getHeight() - (10*3) ));
+		addText(new TextSprite( "arrow key.", Color.YELLOW, 9, (float)(getWidth() * 0.75), (float)getHeight() - (10*2) ));
 	}
 
-	public void rackPins() {
+	public void rackPins(Context context) {
 		stationaryComponents.removeElement(rack);
-		rack = new RackOfPins(new Rectangle(new Point(((getWidth() - 30) / 6),
+		rack = new RackOfPins( context, new Rectangle(new Point(((getWidth() - 30) / 6),
 				getHeight() / 20), new Size(((3 * getWidth() - 60) / 5)
-				- getWidth() / 10, getHeight() / 5)));
+				- getWidth() / 10, getHeight() / 5)), this.pinColor);
 		addStationaryPiece(rack);
 	}
 
@@ -66,7 +89,7 @@ public class BowlingBoard extends StimulasActionBoard {
 	}
 
 	public void bowl(int x, int y) {
-		ball = new BowlingBall(new Point(x, getHeight() - (getHeight() / 20)));
+		ball = new BowlingBall(new Point(x, getHeight() - (getHeight() / 20)), this.ballColor);
 		int i = rand.nextInt();
 		i = (i >= 0 ? i : -i);
 		ball.setDirection((i % 60) + 60);
@@ -93,27 +116,32 @@ public class BowlingBoard extends StimulasActionBoard {
 
 	public String getSaveData() {		
 		if (ball == null) {
-			return "null:" + rack.getSaveData();
-			// add scores
+			return "null:" + rack.getSaveData() + ":" + score;
 		} else {
-			return ball.getSaveData() + ":" + rack.getSaveData();
-			// add scores
+			return ball.getSaveData() + ":" + rack.getSaveData() + ":" + score;
 		}
 	}
 
 	public void setSaveData(String data) {
-		if (!data.substring(0, 4).equals("null")) {
-			if (ball == null) {
+
+		System.out.println(data);
+		if (!data.substring(0, 4).equals("null"))
+		{
+			if (ball == null)
+			{
 				bowl(getWidth() / 2 - 10, 10);
 			}
 			ball.setSaveData(data);
 		}
-		data = data.substring(data.indexOf(":") + 1);
-		data = data.substring(data.indexOf(":") + 1);
+
 		rack.setSaveData(data);
+		data = data.substring(data.indexOf(":") + 1);
+		score = new SimpleScore(data);
+		ball.startMoving();
 	}
 
-	protected void handleSpriteDeletedException() throws GameOverException {
+	protected void handleSpriteDeletedException(Context context) throws GameOverException {
+
 		movableComponents.removeElement(ball);
 		rack.stopPins();
 		ball = null;
@@ -121,7 +149,9 @@ public class BowlingBoard extends StimulasActionBoard {
 		if (ballNum > 2) {
 			if (frame <= 10) {
 				System.out.println("score: " + score + " frame: " + frame);
-				rackPins();
+
+				textComponents.elementAt(0).setValue("Score: "+score) ;
+				rackPins(context);
 				ballNum = 1;
 				frame++;
 			} else {
@@ -133,6 +163,8 @@ public class BowlingBoard extends StimulasActionBoard {
 	protected void handleCollisionException(CollisionException ce) {
 		if (ce.getSprite2().name.equals("Pin")) {
 			score.incScore(1);
+			textComponents.elementAt(0).setValue("Score: "+score);
+
 		}
 	}
 

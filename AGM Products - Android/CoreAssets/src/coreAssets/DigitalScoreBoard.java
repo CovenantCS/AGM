@@ -2,7 +2,9 @@ package coreAssets;
 
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -10,13 +12,15 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import coreAssets.Rectangle;
 import coreAssets.SimpleScore;
 
 public class DigitalScoreBoard extends GenericScoreBoard 
 {
-	private static final int color = 255 << 24 | 255 << 16 | 255 << 8 | 0;
+	private final int defaultTextColor = 255 << 24 | 0 << 16 | 255 << 8 | 0;
+	private final int defaultBackgroundColor = 255 << 24 | 0 << 16 | 0 << 8 | 0;
 	private Paint textPaint;
 	private Paint backgroundPaint;
 	private Rect bounds;
@@ -47,35 +51,37 @@ public class DigitalScoreBoard extends GenericScoreBoard
         bounds = new Rect();
         this.textPaint = new Paint();
         this.backgroundPaint = new Paint();
-        this.scores = new SimpleScore().getScores( getContext() );
-        this.textPaint.setColor( Color.GREEN );
-        this.backgroundPaint.setColor( Color.BLACK );
+        this.scores = new SimpleScore().getScores( context );
+        this.textPaint.setColor( intent.getIntExtra( "text_color", this.defaultTextColor ) );
+        this.textPaint.setTypeface( Typeface.SERIF );
+        this.backgroundPaint.setColor( this.defaultBackgroundColor );
 	}
 	
-	public void onDraw( Canvas canvas )
-	{
-	    String scoreString = label + score;
-	    
-	    int offset = this.bounds.width() / 2;
-	    float x = getWidth() / 2 - offset;
-	    float y = getHeight() / 2;
+	@SuppressLint( "NewApi" )
+    public void onDraw( Canvas canvas )
+	{   
 	    canvas.drawRect( 0, 0, getWidth(), getHeight(), this.backgroundPaint );
-	    Iterator<Integer> iterator = scores.iterator();
-	    while( iterator.hasNext() )
+	    //init value means nothing; just need spacer
+	    String toDraw = "1.0";
+	    int textSize = getHeight() / ( 2 * this.numScoresToKeep );
+	    this.textPaint.setTextSize( textSize );
+	    this.textPaint.getTextBounds( toDraw.toString(), 0, toDraw.toString().length(), this.bounds );
+	    float x = ( getWidth() / 2 ) - ( ( ( this.bounds.width() ) ) / 2 );
+	    float y = ( getHeight() / 2 ) - ( ( ( this.bounds.height() + 4 ) * this.numScoresToKeep ) / 2 );
+	    for( int i = 1; i <= this.numScoresToKeep; i++ )
 	    {
-	        Integer score = iterator.next();
-	        this.textPaint.getTextBounds( score.toString(), 0, score.toString().length(), this.bounds );
-	        canvas.drawText( score.toString(), x, y, this.textPaint );
-	        y += this.bounds.height();
+	        try
+	        {
+	            Integer scoreVal = this.scores.removeFirst();
+	            toDraw = i + ". " + scoreVal.toString();
+	        }
+	        catch( NoSuchElementException e )
+	        {
+	            toDraw = i + ". ";
+	        }
+	        canvas.drawText( toDraw, x, y, this.textPaint );
+	        this.textPaint.getTextBounds( toDraw, 0, toDraw.length(), this.bounds );
+            y += this.bounds.height() + 4;
 	    }
 	}
-	
-
-	/*public void paint(Graphics g) {
-		g.setColor(color);
-		String scoreStr = label + score;
-		int offset = (g.getFont().stringWidth(scoreStr)) / 2;
-		g.drawString(scoreStr, r.getLocation().getRealX() - offset, r
-				.getLocation().getRealY(), Graphics.TOP | Graphics.LEFT);
-	}*/
 }

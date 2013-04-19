@@ -15,7 +15,7 @@ import coreAssets.SpriteDeletedException;
 import coreAssets.Velocity;
 
 public class BowlingBall extends MovableSprite {
-	private static final int color = 255 << 24 | 255 << 16 | 255 << 8 | 0;
+	private int color = 255 << 24 | 255 << 16 | 255 << 8 | 0;
 
 	// the height and width of the ball sprite
 	private static final int ballDim = 5;
@@ -28,6 +28,13 @@ public class BowlingBall extends MovableSprite {
 		v.setSpeed(2);
 		name = "Ball";
 	}
+	
+	public BowlingBall(Point p, int color) {
+        super(new Rectangle(p, new Size(ballDim, ballDim)), 90);
+        v.setSpeed(2);
+        name = "Ball";
+        this.color = color;
+    }
 
 	// delete the ball
 	public void delete() throws SpriteDeletedException {

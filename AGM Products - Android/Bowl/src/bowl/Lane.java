@@ -36,7 +36,7 @@ public class Lane extends StationarySprite {
 		}
 	}
 
-	public void buildSpriteDesc(Vector sdv) {
+	public void buildSpriteDesc(Vector<SpriteDesc> sdv) {
 		sdv.addElement(new SpriteDesc(getColor(), r.getLocation().getRealX(), r
 				.getLocation().getRealY(), r.getSize().getWidth(), r.getSize()
 				.getHeight()));
