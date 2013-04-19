@@ -8,6 +8,8 @@ package edu.covenant.kepler.minesweeper;
 
 import java.util.Vector;
 
+import android.graphics.Color;
+
 import coreAssets.CollisionException;
 import coreAssets.GameOverException;
 import coreAssets.GameSprite;
@@ -18,6 +20,7 @@ import coreAssets.Size;
 import coreAssets.SpriteDeletedException;
 import coreAssets.SpriteDesc;
 import coreAssets.StationarySprite;
+import coreAssets.TextSprite;
 
 public class Tile extends StationarySprite {
 	
@@ -39,8 +42,9 @@ public class Tile extends StationarySprite {
 	private Rectangle rectangle;
 	private Tile[][] pile;
 	private int color;
+	private MinesweeperBoard board;
 	
-	public Tile(Rectangle r, boolean isMine, Tile[][] pile) {
+	public Tile(Rectangle r, boolean isMine, Tile[][] pile, MinesweeperBoard board) {
 		super(r);
 		this.pile = pile;
 		rectangle = r;
@@ -50,6 +54,7 @@ public class Tile extends StationarySprite {
 		isFlagged = false;
 		isSelected = false;
 		color = BLUE;
+		this.board = board;
 	}
 
 	public Rectangle getRectangle() {
@@ -89,6 +94,7 @@ public class Tile extends StationarySprite {
 //			TilePile.curSelected.setSelected(false);
 			TilePile.curSelected = null;
 			color = LIGHT_BLUE;
+			board.addText( new TextSprite( ""+num, Color.BLACK, 10, r.getLocation().getRealX()+10, r.getLocation().getRealY()+10 ) );
 		}
 	}
 	

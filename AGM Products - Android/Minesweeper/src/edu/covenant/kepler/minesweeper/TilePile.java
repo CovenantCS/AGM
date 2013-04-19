@@ -17,6 +17,8 @@ public class TilePile extends StationarySprite {
 	public static Tile curSelected;
 
 	private Tile[][] pile;
+	
+	private MinesweeperBoard board;
 
 	// number of rows
 	private int numRows = 32;
@@ -33,8 +35,9 @@ public class TilePile extends StationarySprite {
 
 	private double minePercentage;
 
-	public TilePile(Rectangle r) {
+	public TilePile(Rectangle r, MinesweeperBoard board) {
 		super(r);
+		this.board = board;
 		
 		minePercentage = 0.2;
 		numberOfTiles = numRows * numColumns;
@@ -79,7 +82,7 @@ public class TilePile extends StationarySprite {
 					}
 				}
 				pile[i][j] = new Tile(new Rectangle(new Point(x, y), new Size(
-						s.getWidth() / numColumns, s.getHeight() / numRows)), isMine, pile);
+						s.getWidth() / numColumns, s.getHeight() / numRows)), isMine, pile, board);
 				x += s.getWidth() / numColumns;
 			}
 			y += s.getHeight() / numRows;

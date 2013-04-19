@@ -44,7 +44,7 @@ public class MinesweeperBoard extends ContinuousActionBoard {
 //		Button right = new Button(context);
 //		right.setOnClickListener(rightListener);
 
-		tilePile = new TilePile(new Rectangle(new Point(0, getHeight() / 10), new Size(getWidth(), getHeight() - (getHeight() / 10))));
+		tilePile = new TilePile(new Rectangle(new Point(0, getHeight() / 10), new Size(getWidth(), getHeight() - (getHeight() / 10))), this);
 		addStationaryPiece(tilePile);
 	}
 
@@ -140,7 +140,7 @@ public class MinesweeperBoard extends ContinuousActionBoard {
 			}
 		}
 		if(selected != null) {
-			selected.click();
+			selected.reveal();
 		}
 	}
 	
