@@ -69,6 +69,7 @@ public class MinesweeperBoard extends ContinuousActionBoard {
 	}
 
 	public void setSaveData(String data) {
+		//System.out.println(data);
 		/*pucksupply.setSaveData(data);
 		data = data.substring(data.indexOf(":") + 1);
 		puck.setSaveData(data);
@@ -77,8 +78,11 @@ public class MinesweeperBoard extends ContinuousActionBoard {
 		data = data.substring(data.indexOf(":") + 1);
 		brickpile.setSaveData(data.substring(0, data.indexOf(":")));*/
 		gameOver = false;
+		tilePile.setSaveData(data);
 		data = data.substring(data.indexOf(":") + 1);
+		System.out.println(data);
 		score = new SimpleScore(Integer.parseInt(data));
+		textComponents.elementAt(0).setValue("Score: "+score);
 	}
 
 	protected void handleGameOverException(boolean won) {
@@ -111,7 +115,6 @@ public class MinesweeperBoard extends ContinuousActionBoard {
 		//		&& ce.getSprite2().name.equals("Brick")) {
 			score.incScore(1);
 			textComponents.elementAt(0).setValue("Score: "+score);
-			System.out.println(score);
 		//}
 	}
 /*
