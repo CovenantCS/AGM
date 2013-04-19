@@ -33,8 +33,9 @@ public class BowlingBoard extends StimulasActionBoard {
         init(context);
     }
 	
-	public BowlingBoard( int ballColor, int pinColor )
+	public BowlingBoard(Context context, int ballColor, int pinColor )
 	{
+		init(context);
 	    this.ballColor = ballColor;
 	    this.pinColor = pinColor;
 	}
@@ -43,13 +44,12 @@ public class BowlingBoard extends StimulasActionBoard {
 	{
 		this.context = context;
 	    this.name = "bowl";
-	    init(context);
 	    this.score = new SimpleScore();
         rand = new Random();
         gameOver = false;
 	}
 
-	public void buildGameBoard(Context context) {
+	public void buildGameBoard() {
 		EndWall endOfAlley;
 		Lane lane;
 
@@ -61,7 +61,7 @@ public class BowlingBoard extends StimulasActionBoard {
 				getWidth() - 60, getHeight())));
 		addStationaryPiece(endOfAlley);
 		addStationaryPiece(lane);
-		rackPins(context);
+		rackPins(this.context);
 		
 		addText(new TextSprite( "Score: "+score, Color.YELLOW, 10, (float)(getWidth() * 0.75), (float)getHeight() / 10 ));
 		addText(new TextSprite( "To start:", Color.YELLOW, 9, (float)(getWidth() * 0.75), (float)getHeight() - (10*5) ));
@@ -73,13 +73,6 @@ public class BowlingBoard extends StimulasActionBoard {
 	public void rackPins(Context context) {
 		stationaryComponents.removeElement(rack);
 		rack = new RackOfPins( context, new Rectangle(new Point(((getWidth() - 30) / 6),
-				getHeight() / 20), new Size(((3 * getWidth() - 60) / 5)
-				- getWidth() / 10, getHeight() / 5)), this.pinColor);
-	}
-
-	public void rackPins() {
-		stationaryComponents.removeElement(rack);
-		rack = new RackOfPins(context, new Rectangle(new Point(((getWidth() - 30) / 6),
 				getHeight() / 20), new Size(((3 * getWidth() - 60) / 5)
 				- getWidth() / 10, getHeight() / 5)), this.pinColor);
 		addStationaryPiece(rack);
@@ -178,12 +171,6 @@ public class BowlingBoard extends StimulasActionBoard {
 	protected void handleTickAction() {
 		rack.movePins();
 		score.incScore(rack.checkForCollision());
-	}
-
-	@Override
-	public void buildGameBoard()
-	{
-
 	}
 
 }

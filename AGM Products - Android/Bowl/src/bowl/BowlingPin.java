@@ -35,7 +35,7 @@ public class BowlingPin extends MovableSprite {
 	
 	public BowlingPin(Context context, Rectangle r, int color )
 	{
-	    super(r, color, BitmapFactory.decodeResource(context.getResources(), edu.covenant.kepler.bowl.R.drawable.bowling_pin));
+	    super(r, 0, BitmapFactory.decodeResource(context.getResources(), edu.covenant.kepler.bowl.R.drawable.bowling_pin));
         v.setSpeed(0);
         stopMoving();
         isBroken = false;

@@ -1,13 +1,14 @@
 package bowl;
 
+import android.content.Context;
 import coreAssets.ActivationManager;
 import coreAssets.GameOverException;
 import coreAssets.SimpleScore;
 
 public class PracticeBowlingBoard extends BowlingBoard {
 
-	public PracticeBowlingBoard( int ballColor, int pinColor ) {
-		super(ballColor, pinColor);
+	public PracticeBowlingBoard(Context context, int ballColor, int pinColor ) {
+		super(context, ballColor, pinColor);
 	}
 
 	protected void handleSpriteDeletedException() throws GameOverException {
