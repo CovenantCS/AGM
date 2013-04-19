@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name="m3BoardActivity"></activity>
+        <activity android:name="coreAssets.BasicScoreboardActivity"></activity>
     </application>
 
 </manifest>
