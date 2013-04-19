@@ -24,10 +24,10 @@ public class TilePile extends StationarySprite {
 	//  so that it looks good on the phone
 	
 	// number of rows
-	private int numRows = 20;
+	private int numRows;
 
 	// bricks per row
-	private int numColumns = 10;
+	private int numColumns;
 
 	
 	// bricks in the pile
@@ -41,8 +41,9 @@ public class TilePile extends StationarySprite {
 	public TilePile(Rectangle r, MinesweeperBoard board, int tileColor) {
 		super(r);
 		this.board = board;
-		
-		minePercentage = 0.05;
+		this.numRows = 10;
+		this.numColumns = 5;
+		minePercentage = 0.2;
 		numberOfTiles = numRows * numColumns;
 		name = "TilePile";
 		

@@ -118,43 +118,52 @@ public class Tile extends StationarySprite {
 	
 	public void expand(Tile cur) throws CollisionException, GameOverException {
 		
+		cur.reveal();
 		int row = cur.getXIndex();
 		int col = cur.getYIndex();
-		// reveal tile left
+		// reveal tile top
 		if (row != 0) {
 			Tile t = pile[row - 1][col];
-			if (t.getNum() == 0) {
-//				expand(t);
-				t.reveal();
-			}
-		}
-		// reveal tile right
-		if (row != pile.length - 1) {
-			Tile t = pile[row + 1][col];
-			if (t.getNum() == 0) {
-//				expand(t);
-				t.reveal();
-			}
-		}
-		// reveal tile top
-		if (col != 0) {
-			Tile t = pile[row][col - 1];
-			if (t.getNum() == 0) {
+			if (t.getNum() == 0 && !t.isRevealed()) {
 				expand(t);
-				t.reveal();
+//				t.reveal();
 			}
 		}
 		// reveal tile bottom
-		if (col != pile[0].length - 1) {
-			Tile t = pile[row][col + 1];
-			if (t.getNum() == 0) {
-//				expand(t);
-				t.reveal();
+		if (row != pile.length - 1) {
+			Tile t = pile[row + 1][col];
+			if (t.getNum() == 0 && !t.isRevealed()) {
+				expand(t);
+//				t.reveal();
 			}
 		}
-		cur.reveal();
+		// reveal tile left
+		if (col != 0) {
+			Tile t = pile[row][col - 1];
+			if (t.getNum() == 0 && !t.isRevealed()) {
+				expand(t);
+//				t.reveal();
+			}
+		}
+		// reveal tile right
+		if (col != pile[0].length - 1) {
+			Tile t = pile[row][col + 1];
+			if (t.getNum() == 0 && !t.isRevealed()) {
+				expand(t);
+//				t.reveal();
+			}
+		}
+		
 	}
 	
+	public boolean isRevealed() {
+		return isRevealed;
+	}
+
+	public void setRevealed(boolean isRevealed) {
+		this.isRevealed = isRevealed;
+	}
+
 	public int getXIndex() {
 		return xIndex;
 	}
