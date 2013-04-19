@@ -35,7 +35,7 @@ public class TilePile extends StationarySprite {
 
 	private double minePercentage;
 
-	public TilePile(Rectangle r, MinesweeperBoard board) {
+	public TilePile(Rectangle r, MinesweeperBoard board, int tileColor) {
 		super(r);
 		this.board = board;
 		
@@ -82,7 +82,7 @@ public class TilePile extends StationarySprite {
 					}
 				}
 				pile[i][j] = new Tile(new Rectangle(new Point(x, y), new Size(
-						s.getWidth() / numColumns, s.getHeight() / numRows)), isMine, pile, board);
+						s.getWidth() / numColumns, s.getHeight() / numRows)), isMine, pile, board, tileColor);
 				x += s.getWidth() / numColumns;
 			}
 			y += s.getHeight() / numRows;

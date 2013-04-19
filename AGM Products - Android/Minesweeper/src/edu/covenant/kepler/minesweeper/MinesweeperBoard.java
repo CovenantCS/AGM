@@ -53,7 +53,7 @@ public class MinesweeperBoard extends ContinuousActionBoard {
 //		Button right = new Button(context);
 //		right.setOnClickListener(rightListener);
 
-		tilePile = new TilePile(new Rectangle(new Point(0, getHeight() / 10), new Size(getWidth(), getHeight() - (getHeight() / 10))), this);
+		tilePile = new TilePile(new Rectangle(new Point(0, getHeight() / 10), new Size(getWidth(), getHeight() - (getHeight() / 10))), this, tileColor);
 		addStationaryPiece(tilePile);
 		
 		addText( new TextSprite( "Score: " + score, Color.BLACK, 10, (float)(getWidth() / 10), (float)(getHeight() / 20) ) );

@@ -24,11 +24,13 @@ import coreAssets.TextSprite;
 
 public class Tile extends StationarySprite {
 	
-	public static final int BLUE = 175 << 24 | 0 << 16 | 0 << 8 | 255;
+//	public static final int BLUE = 175 << 24 | 0 << 16 | 0 << 8 | 255;
 	public static final int RED  = 175 << 24 | 255 << 16 | 0 << 8 | 0;
 	public static final int YELLOW = 175 << 24 | 0 << 16 | 0 << 8 | 255;
 	public static final int LIGHT_BLUE = 175 << 24 | 109 << 16 | 176 << 8 | 243;
 	public static final int GREEN = 175 << 24 | 80 << 16 | 250 << 8 | 92;
+	
+	public int defaultColor;
 	
 	// the tile is a mine
 	private boolean isMine;
@@ -42,7 +44,7 @@ public class Tile extends StationarySprite {
 	private int color;
 	private MinesweeperBoard board;
 	
-	public Tile(Rectangle r, boolean isMine, Tile[][] pile, MinesweeperBoard board) {
+	public Tile(Rectangle r, boolean isMine, Tile[][] pile, MinesweeperBoard board, int tileColor) {
 		super(r);
 		this.pile = pile;
 		rectangle = r;
@@ -51,7 +53,7 @@ public class Tile extends StationarySprite {
 		this.isMine = isMine;
 		isFlagged = false;
 		isSelected = false;
-		color = BLUE;
+		color = defaultColor = tileColor;
 		this.board = board;
 	}
 
@@ -134,7 +136,7 @@ public class Tile extends StationarySprite {
 		} else if(isRevealed) {
 			color = LIGHT_BLUE;
 		} else {
-			color = BLUE;
+			color = defaultColor;
 		}
 	}
 	
