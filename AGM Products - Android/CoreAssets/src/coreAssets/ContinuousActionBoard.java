@@ -61,6 +61,8 @@ public abstract class ContinuousActionBoard extends GenericBoard {
 		}
 		if(gameOver)
 		{
+			stopMovement();
+			handleGameOverException(true);
 		    throw new GameOverException( false, "" );
 		}
 	}
