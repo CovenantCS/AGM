@@ -53,14 +53,14 @@ public class MinesweeperBoard extends ContinuousActionBoard {
 		tilePile = new TilePile(new Rectangle(new Point(0, getHeight() / 10), new Size(getWidth(), getHeight() - (getHeight() / 10))), this);
 		addStationaryPiece(tilePile);
 		
-		addText( new TextSprite( "Score: " + score, Color.BLACK, 10, (float)(getHeight() / 20), (float)(getWidth() / 2)) );
+		addText( new TextSprite( "Score: " + score, Color.BLACK, 10, (float)(getWidth() / 10), (float)(getHeight() / 20) ) );
 	}
 
 	public String getSaveData() {
 		/*return pucksupply.getSaveData() + ":" + puck.getSaveData() + ":"
 				+ paddle.getSaveData() + ":" + brickpile.getSaveData() + ":"
 				+ score;*/
-		return "";
+		return tilePile.getSaveData() + ":" + score;
 	}
 
 	public void setSaveData(String data) {
@@ -70,10 +70,7 @@ public class MinesweeperBoard extends ContinuousActionBoard {
 		data = data.substring(data.indexOf(":") + 1);
 		paddle.setSaveData(data);
 		data = data.substring(data.indexOf(":") + 1);
-//		brickpile.setSaveData(data.substring(0, data.indexOf(":")));
-		gameOver = false;
-		data = data.substring(data.indexOf(":") + 1);
-		score = new SimpleScore(Integer.parseInt(data));*/
+		brickpile.setSaveData(data.substring(0, data.indexOf(":")));*/
 		gameOver = false;
 		data = data.substring(data.indexOf(":") + 1);
 		score = new SimpleScore(Integer.parseInt(data));
@@ -100,9 +97,12 @@ public class MinesweeperBoard extends ContinuousActionBoard {
 	}
 
 	protected void handleCollisionException(CollisionException ce) {
-		if (ce.getSprite1().name.equals("Puck")
-				&& ce.getSprite2().name.equals("Brick"))
+		//if (ce.getSprite1().name.equals("Puck")
+		//		&& ce.getSprite2().name.equals("Brick")) {
 			score.incScore(1);
+			textComponents.elementAt(0).setValue("Score: "+score);
+			System.out.println(score);
+		//}
 	}
 /*
 	public void ptrPressed(int x, int y) {
@@ -148,7 +148,11 @@ public class MinesweeperBoard extends ContinuousActionBoard {
 			}
 		}
 		if(selected != null) {
-			selected.reveal();
+			try {
+				selected.reveal();
+			} catch (CollisionException e) {
+				handleCollisionException(e);
+			}
 		}
 	}
 	
@@ -175,24 +179,17 @@ public class MinesweeperBoard extends ContinuousActionBoard {
 
 	public void keyRight(boolean down) {
 		if(TilePile.curSelected != null) {
-			TilePile.curSelected.reveal();
+			try {
+				TilePile.curSelected.reveal();
+			} catch (CollisionException e) {
+				handleCollisionException(e);
+			}
 		}
 	}
 
 	
 	public void keyUp(boolean down) {
-		userInterupt = true;	}
-
-	@Override
-	public void loadGame(Context context) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void saveGame(Context context) {
-		// TODO Auto-generated method stub
-		
+		userInterupt = true;
 	}
 
 }

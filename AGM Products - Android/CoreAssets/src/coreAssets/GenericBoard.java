@@ -224,6 +224,7 @@ public abstract class GenericBoard implements Board {
     {
         String data = "";
         String fileName = this.name;
+        System.out.println("in load game");
 
         try
         {

@@ -30,8 +30,6 @@ public class Tile extends StationarySprite {
 	public static final int LIGHT_BLUE = 175 << 24 | 109 << 16 | 176 << 8 | 243;
 	public static final int GREEN = 175 << 24 | 80 << 16 | 250 << 8 | 92;
 	
-
-
 	// the tile is a mine
 	private boolean isMine;
 	private boolean isSelected;
@@ -85,7 +83,7 @@ public class Tile extends StationarySprite {
 		}
 	}
 	
-	public void reveal() {
+	public void reveal() throws CollisionException {
 		if(isMine) {
 			//End Game
 			color = RED;
@@ -95,6 +93,7 @@ public class Tile extends StationarySprite {
 			TilePile.curSelected = null;
 			color = LIGHT_BLUE;
 			board.addText( new TextSprite( ""+num, Color.BLACK, 10, r.getLocation().getRealX()+10, r.getLocation().getRealY()+10 ) );
+			throw new CollisionException(this);
 		}
 	}
 	

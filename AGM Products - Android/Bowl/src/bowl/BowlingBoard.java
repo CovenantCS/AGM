@@ -120,7 +120,6 @@ public class BowlingBoard extends StimulasActionBoard {
 	}
 
 	public void setSaveData(String data) {
-System.out.println(data);
 		if (!data.substring(0, 4).equals("null")) {
 			if (ball == null) {
 				bowl(getWidth() / 2 - 10, 10);
