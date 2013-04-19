@@ -12,6 +12,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import coreAssets.Rectangle;
 import coreAssets.SimpleScore;
@@ -52,6 +53,7 @@ public class DigitalScoreBoard extends GenericScoreBoard
         this.backgroundPaint = new Paint();
         this.scores = new SimpleScore().getScores( context );
         this.textPaint.setColor( intent.getIntExtra( "text_color", this.defaultTextColor ) );
+        this.textPaint.setTypeface( Typeface.SERIF );
         this.backgroundPaint.setColor( this.defaultBackgroundColor );
 	}
 	
@@ -59,10 +61,13 @@ public class DigitalScoreBoard extends GenericScoreBoard
     public void onDraw( Canvas canvas )
 	{   
 	    canvas.drawRect( 0, 0, getWidth(), getHeight(), this.backgroundPaint );
-	    String toDraw = "1";
+	    //init value means nothing; just need spacer
+	    String toDraw = "1.0";
+	    int textSize = getHeight() / ( 2 * this.numScoresToKeep );
+	    this.textPaint.setTextSize( textSize );
 	    this.textPaint.getTextBounds( toDraw.toString(), 0, toDraw.toString().length(), this.bounds );
-	    float x = getWidth() / 2;
-	    float y = getHeight() / 2 - this.bounds.height() * this.numScoresToKeep;
+	    float x = ( getWidth() / 2 ) - ( ( ( this.bounds.width() ) ) / 2 );
+	    float y = ( getHeight() / 2 ) - ( ( ( this.bounds.height() + 4 ) * this.numScoresToKeep ) / 2 );
 	    for( int i = 1; i <= this.numScoresToKeep; i++ )
 	    {
 	        try

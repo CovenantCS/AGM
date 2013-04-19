@@ -3,6 +3,7 @@ package edu.covenant.kepler.pong;
 import android.os.Bundle;
 import coreAssets.AndroidBoardActivity;
 import coreAssets.CountedPuckSupply;
+import coreAssets.SimpleScore;
 
 public class PongBoardActivity extends AndroidBoardActivity
 {

@@ -6,3 +6,13 @@
 *.apk
 *.cache
 bin/
+Bowl/bin/
+Bowl/gen/
+Brickles/bin/
+Brickles/gen/
+CoreAssets/bin/
+CoreAssets/gen/
+Pong/bin/
+Pong/gen/
+Minesweeper/bin/
+Minesweeer/gen/

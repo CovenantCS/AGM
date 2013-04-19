@@ -40,7 +40,7 @@ public class BowlingPin extends MovableSprite {
         this.color = color;
 	}
 
-	public void buildSpriteDesc(Vector sdv) {
+	public void buildSpriteDesc(Vector<SpriteDesc> sdv) {
 
 		if (!isBroken || moving()) {
 
@@ -85,6 +85,10 @@ public class BowlingPin extends MovableSprite {
 		if (index != -1) {
 			datum = data.substring(0, index);
 			data = data.substring(index + 1);
+		} else if (data.indexOf(":") != -1) {
+			index = data.indexOf(":");
+			datum = data.substring(0, index);
+			data = data.substring(index + 1);			
 		} else {
 			datum = data;
 		}

@@ -12,6 +12,7 @@ public class msBoardActivity extends AndroidBoardActivity
         // TODO Auto-generated constructor stub
     }
 
+    @Override
     public void onCreate( Bundle savedInstanceState )
     {
         super.onCreate( savedInstanceState );
