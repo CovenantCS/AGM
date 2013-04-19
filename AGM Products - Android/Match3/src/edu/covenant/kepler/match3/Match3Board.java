@@ -182,7 +182,7 @@ public class Match3Board extends ContinuousActionBoard {
 			
 			
        }
-    	   boolean gover=true;;
+    	   boolean gover=true;
     	  
     	   for (int q=0; q<tilePile.pile.length; q++){
     		   for (int r=0; r<tilePile.pile.length-2; r++){
@@ -263,6 +263,10 @@ public class Match3Board extends ContinuousActionBoard {
     			  
     				
     		   }
+    			if( gover )
+    			{
+    				this.gameOver = true;
+    			}
     				
     				
     				tmp2=tilePile.pile[q][r].getColor();
