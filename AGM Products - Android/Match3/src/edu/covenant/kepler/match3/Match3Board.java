@@ -3,6 +3,7 @@ package edu.covenant.kepler.match3;
 import java.util.Random;
 
 import android.content.Context;
+import android.graphics.Color;
 import coreAssets.CollisionException;
 import coreAssets.ContinuousActionBoard;
 import coreAssets.GameOverException;
@@ -10,6 +11,7 @@ import coreAssets.Point;
 import coreAssets.Rectangle;
 import coreAssets.SimpleScore;
 import coreAssets.Size;
+import coreAssets.TextSprite;
 
 public class Match3Board extends ContinuousActionBoard {
 	
@@ -27,27 +29,34 @@ public class Match3Board extends ContinuousActionBoard {
 		255 << 24 | 255 << 16 | 50 << 8 | 255,
 		255 << 24 | 50 << 16 | 255 << 8 | 255,
 		50 << 24 | 255 << 16 | 255 << 8 | 255};
+	
 	public Match3Board(int width, int height) {
 		super(width, height);
-		
-		//buildGameBoard();
 		this.name = "Match3";
+	    this.score = new SimpleScore();
 		userInterupt = false;
 	}
 	
 	public Match3Board() {
 		super();
-		//buildGameBoard();
 		this.name = "Match3";
+	    this.score = new SimpleScore();
 		userInterupt = false;
 	}
+	
 	public Match3Board(int tileColor){
 		super();
+		this.name = "Match3";
+	    this.score = new SimpleScore();
 		this.tileColor=tileColor;
+		userInterupt = false;
 	}
+	
 	public void buildGameBoard() {
 		tilePile = new TilePile(new Rectangle(new Point(0, 0), new Size(getWidth(), getHeight() - (getHeight() / 10))));
 		addStationaryPiece(tilePile);	
+		
+		addText(new TextSprite( "Score: "+score, Color.BLACK, 10, (float)(getWidth() * 0.05), (float)(getHeight() * 0.9) ));
 	}
 
 	public String getSaveData() {
@@ -97,9 +106,9 @@ public class Match3Board extends ContinuousActionBoard {
 	}
 
 	protected void handleCollisionException(CollisionException ce) {
-		if (ce.getSprite1().name.equals("Puck")
+		/*if (ce.getSprite1().name.equals("Puck")
 				&& ce.getSprite2().name.equals("Brick"))
-			score.incScore(1);
+			score.incScore(1);*/
 	}
 
 	public void ptrPressed(int x, int y) {
@@ -325,7 +334,8 @@ public class Match3Board extends ContinuousActionBoard {
 							for(int k = 0; k < length; k++){
 								tilePile.pile[i][j+k].setColor(0);
 							}
-							
+							score.incScore(length);
+							textComponents.elementAt(0).setValue("Score: "+score);
 		//						fillBoard();
 						}	
 					}
@@ -359,6 +369,7 @@ public class Match3Board extends ContinuousActionBoard {
 								tilePile.pile[i+k][j].setColor(0);
 							}
 							score.incScore(length);
+							textComponents.elementAt(0).setValue("Score: "+score);
 				//			fillBoard();
 						}	
 					}
