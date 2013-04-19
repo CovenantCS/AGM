@@ -83,11 +83,11 @@ public class Tile extends StationarySprite {
 		}
 	}
 	
-	public void reveal() throws CollisionException {
+	public void reveal() throws CollisionException, GameOverException {
 		if(isMine) {
 			//End Game
 			color = RED;
-			System.exit(0);
+			throw new GameOverException(true, "");
 		} else if(!isRevealed) {
 //			TilePile.curSelected.setSelected(false);
 			TilePile.curSelected = null;

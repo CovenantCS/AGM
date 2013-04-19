@@ -153,6 +153,10 @@ public class MinesweeperBoard extends ContinuousActionBoard {
 			} catch (CollisionException e) {
 				handleCollisionException(e);
 			}
+            catch ( GameOverException e )
+            {
+                gameOver = true;
+            }
 		}
 	}
 	
@@ -184,6 +188,10 @@ public class MinesweeperBoard extends ContinuousActionBoard {
 			} catch (CollisionException e) {
 				handleCollisionException(e);
 			}
+            catch ( GameOverException e )
+            {
+                gameOver = true;
+            }
 		}
 	}
 

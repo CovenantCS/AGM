@@ -59,6 +59,10 @@ public abstract class ContinuousActionBoard extends GenericBoard {
 		} catch (CollisionException ce) {
 			handleCollisionException(ce);
 		}
+		if(gameOver)
+		{
+		    throw new GameOverException( false, "" );
+		}
 	}
 
 	protected void handleGameOverException(boolean won) {
