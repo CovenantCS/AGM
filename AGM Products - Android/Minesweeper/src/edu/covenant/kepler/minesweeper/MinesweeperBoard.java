@@ -2,6 +2,7 @@ package edu.covenant.kepler.minesweeper;
 
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,6 +21,7 @@ import coreAssets.Rectangle;
 import coreAssets.SideWall;
 import coreAssets.SimpleScore;
 import coreAssets.Size;
+import coreAssets.TextSprite;
 
 public class MinesweeperBoard extends ContinuousActionBoard {
 	
@@ -28,14 +30,18 @@ public class MinesweeperBoard extends ContinuousActionBoard {
 
 	public MinesweeperBoard(int width, int height) {
 		super(width, height);
-		this.name = "Minesweeper";
-		userInterupt = false;
+		init();
 	}
 	
 	public MinesweeperBoard(Context context) {
 		super();
+		init();
+	}
+	
+	public void init() {
 		this.name = "Minesweeper";
 		userInterupt = false;
+		this.score = new SimpleScore();
 	}
 
 	public void buildGameBoard() {
@@ -46,6 +52,8 @@ public class MinesweeperBoard extends ContinuousActionBoard {
 
 		tilePile = new TilePile(new Rectangle(new Point(0, getHeight() / 10), new Size(getWidth(), getHeight() - (getHeight() / 10))), this);
 		addStationaryPiece(tilePile);
+		
+		addText( new TextSprite( "Score: " + score, Color.BLACK, 10, (float)(getHeight() / 20), (float)(getWidth() / 2)) );
 	}
 
 	public String getSaveData() {
