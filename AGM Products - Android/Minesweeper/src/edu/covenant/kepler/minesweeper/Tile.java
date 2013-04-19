@@ -87,12 +87,24 @@ public class Tile extends StationarySprite {
 		if(isMine) {
 			//End Game
 			color = RED;
-			throw new GameOverException(true, "");
+			throw new GameOverException(false, "");
 		} else if(!isRevealed) {
 //			TilePile.curSelected.setSelected(false);
 			TilePile.curSelected = null;
+			isRevealed = true;
 			color = LIGHT_BLUE;
 			board.addText( new TextSprite( ""+num, Color.BLACK, 10, r.getLocation().getRealX()+10, r.getLocation().getRealY()+10 ) );
+			boolean win = true;
+			for(int i = 0; i < pile.length; i++) {
+				for(int j = 0; j < pile[0].length; j++) {
+					if(!pile[i][j].isRevealed && !pile[i][j].isMine) {
+						win = false;
+					}
+				}
+			}
+			if(win) {
+				throw new GameOverException(true, "YOU WIN!!!!");
+			}
 			throw new CollisionException(this);
 		}
 	}

@@ -16,8 +16,8 @@ public class msBoardActivity extends AndroidBoardActivity
     public void onCreate( Bundle savedInstanceState )
     {
         super.onCreate( savedInstanceState );
-      
-        this.boardViewer.setBoard( new MinesweeperBoard( this));
+        int tileColor = getResources().getColor( R.color.tile );
+        this.boardViewer.setBoard( new MinesweeperBoard( this, tileColor));
         this.boardViewer.setActivity(this);
     }
 }

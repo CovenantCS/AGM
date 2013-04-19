@@ -27,14 +27,17 @@ public class MinesweeperBoard extends ContinuousActionBoard {
 	
 	private TilePile tilePile;
 	private Context context;
+	private int tileColor;
 
-	public MinesweeperBoard(int width, int height) {
+	public MinesweeperBoard(int width, int height, int tileColor) {
 		super(width, height);
+		this.tileColor = tileColor;
 		init();
 	}
 	
-	public MinesweeperBoard(Context context) {
+	public MinesweeperBoard(Context context, int tileColor) {
 		super();
+		this.tileColor = tileColor;
 		init();
 	}
 	

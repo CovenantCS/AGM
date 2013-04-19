@@ -21,10 +21,10 @@ public class TilePile extends StationarySprite {
 	private MinesweeperBoard board;
 
 	// number of rows
-	private int numRows = 32;
+	private int numRows = 10;
 
 	// bricks per row
-	private int numColumns = 16;
+	private int numColumns = 5;
 
 	
 	// bricks in the pile
