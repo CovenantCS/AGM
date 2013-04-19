@@ -24,10 +24,10 @@ public class TilePile extends StationarySprite {
 	//  so that it looks good on the phone
 	
 	// number of rows
-	private int numRows = 20;
+	private int numRows = 10;
 
 	// bricks per row
-	private int numColumns = 10;
+	private int numColumns = 5;
 
 	
 	// bricks in the pile

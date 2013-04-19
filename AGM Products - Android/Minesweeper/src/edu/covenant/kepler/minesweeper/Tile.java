@@ -113,6 +113,10 @@ public class Tile extends StationarySprite {
 			}
 //			throw new CollisionException(this);
 			board.updateScore();
+		} else if (isRevealed && !isMine) {
+			// Should only do this when resuming a game
+			color = LIGHT_BLUE;
+			board.addText( new TextSprite( ""+num, Color.BLACK, 10, r.getLocation().getRealX()+10, r.getLocation().getRealY()+10 ) );			
 		}
 	}
 	
@@ -211,7 +215,7 @@ public class Tile extends StationarySprite {
 
 	public String getSaveData() {
 		Point p = r.getLocation();
-		Size s = r.getSize();
+		Size s = r.getSize();  
 		return p.getFixedX() + "," + p.getFixedY() + "," + s.getWidth() + ","
 				+ s.getHeight() + "," + (isMine ? 1 : 0) + (isRevealed ? 1 : 0);
 	}
@@ -229,18 +233,34 @@ public class Tile extends StationarySprite {
 		datum = data.substring(0, data.indexOf(","));
 		data = data.substring(data.indexOf(",") + 1);
 		int height = Integer.parseInt(datum);
+		r.getLocation().setFixedX(x);
+		r.getLocation().setFixedY(y);
+		r.getSize().setWidth(width);
+		r.getSize().setHeight(height);
+		
 		int index = data.indexOf(";");
 		if (index != -1) {
+			datum = data.substring(0, index);
+			data = data.substring(index + 1);
+
+		} else if (data.indexOf(":") != -1) {
+			index = data.indexOf(":");
 			datum = data.substring(0, index);
 			data = data.substring(index + 1);
 		} else {
 			datum = data;
 		}
-//		isMine = (Integer.parseInt(datum) == 1 ? true : false);
-		r.getLocation().setFixedX(x);
-		r.getLocation().setFixedY(y);
-		r.getSize().setWidth(width);
-		r.getSize().setHeight(height);
+		isMine = (Integer.parseInt(datum.charAt(0)+"") == 1 ? true : false);
+		isRevealed = (Integer.parseInt(datum.charAt(1)+"") == 1 ? true : false);
+		if (isRevealed) {
+			try {
+				reveal();
+				System.out.println("after reveal ");
+			} catch (CollisionException e) {
+			} catch (GameOverException e) {
+				// Should never get here because user shouldn't be able to save the game after getting game over 
+			}
+		}
 	}
 
 	public boolean isMine() {
