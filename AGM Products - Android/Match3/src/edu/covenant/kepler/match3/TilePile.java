@@ -48,6 +48,10 @@ public class TilePile extends StationarySprite {
 		int x = initialX;
 		int y = initialY;
 		numLeft = numberOfBricks;
+		int length=s.getWidth();
+		if (s.getHeight()>s.getWidth()){
+			length=s.getHeight();
+		}
 		for (int i = 0; i < numRows; i++) {
 			x = initialX;
 			for (int j = 0; j < numberOfBricksPerRow; j++) {
@@ -55,12 +59,12 @@ public class TilePile extends StationarySprite {
 				int tmpColor = rand.nextInt(8);
 				
 				pile[i][j] = new Tile(new Rectangle(new Point(x, y), new Size(
-						s.getWidth() / numberOfBricksPerRow, s.getWidth()/numberOfBricksPerRow)),colors[tmpColor], tmpColor);
+						length / numberOfBricksPerRow, length/numberOfBricksPerRow)),colors[tmpColor], tmpColor);
 				
-				x += s.getWidth() / numberOfBricksPerRow;
+				x += length / numberOfBricksPerRow;
 			}
 			//y += s.getHeight() / (numRows+3);
-			y+=s.getWidth()/numberOfBricksPerRow;
+			y+=length/numberOfBricksPerRow;
 		}
 		
 		name = "TilePile";

@@ -1,6 +1,7 @@
 package edu.covenant.kepler.match3;
 
 import java.util.Random;
+import java.util.Scanner;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -63,7 +64,19 @@ public class Match3Board extends ContinuousActionBoard {
 		/*return pucksupply.getSaveData() + ":" + puck.getSaveData() + ":"
 				+ paddle.getSaveData() + ":" + brickpile.getSaveData() + ":"
 				+ score;*/
-		return (tilePile.getSaveData()+":"+score);
+		String x="";
+		for (int i = 0; i < tilePile.pile.length; i++) {
+			
+			for (int j = 0; j < tilePile.pile.length; j++) {
+				
+				x+=tilePile.pile[i][j].getColor()+",";
+				
+				
+			}
+		}
+		x+=score;
+		return x;
+//		return (tilePile.getSaveData()+":"+score);
 		
 	}
 
@@ -80,9 +93,26 @@ public class Match3Board extends ContinuousActionBoard {
 		score = new SimpleScore(Integer.parseInt(data));*/
 		
 		gameOver = false;
-		tilePile.setSaveData(data);
+		//tilePile.setSaveData(data);
+		//Scanner split=new Scanner(data);
+		//split.useDelimiter(":");
+		
+		Scanner check=new Scanner(data);
+		check.useDelimiter(",");
+		
+		for (int i = 0; i < tilePile.pile.length; i++) {
+			
+			for (int j = 0; j < tilePile.pile.length; j++) {
+				String x=check.next();
+				System.out.println(x);
+				tilePile.pile[i][j].setColor(Integer.parseInt(x));
+				
+				
+			}
+		}
 		data = data.substring(data.indexOf(":") + 1);
-		score = new SimpleScore(Integer.parseInt(data));
+		score = new SimpleScore(Integer.parseInt(check.next()));
+		textComponents.elementAt(0).setValue("Score: "+score);
 	}
 
 	protected void handleGameOverException(boolean won) {
@@ -112,6 +142,7 @@ public class Match3Board extends ContinuousActionBoard {
 	}
 
 	public void ptrPressed(int x, int y) {
+		
 		 if (ptrReleased==true){
 			 tile1[1]=(int) (x)/(getWidth()/tilePile.pile.length);
 		        tile1[0]= (int) (y)/(getWidth()/tilePile.pile.length);
@@ -144,6 +175,7 @@ public class Match3Board extends ContinuousActionBoard {
     	   tilePile.pile[tile2[0]][tile2[1]].num = tmp;
     	   
         	// Start check for matches
+    	   boolean firstcheck=true;
     	   for (int c=0; c<2; c++){
     		   while (!allClear()){
     				//if(match==true){
@@ -183,110 +215,118 @@ public class Match3Board extends ContinuousActionBoard {
 		   
 		 
 		   
-		   if(match==false&&c==0){
-				tilePile.pile[tile2[0]][tile2[1]].setColor(color2);
-		    	   tilePile.pile[tile1[0]][tile1[1]].setColor(color1);
-		    	   
-			}
+    	   if(match==false&&firstcheck){
+               tilePile.pile[tile2[0]][tile2[1]].setColor(color2);
+                  tilePile.pile[tile1[0]][tile1[1]].setColor(color1);
+                 
+           }
+          firstcheck=false;
 			
 			
        }
-    	   boolean gover=true;
+    	   
     	  
-    	   for (int q=0; q<tilePile.pile.length; q++){
-    		   for (int r=0; r<tilePile.pile.length-2; r++){
-    			   int tmp2=0;
-    			   tmp2=tilePile.pile[q][r].getColor();
-    			   tilePile.pile[q][r].setColor(tilePile.pile[q][r+1].getColor());
-    			   tilePile.pile[q][r+1].setColor(tmp2);
-    			   for(int i = 0; i < tilePile.pile.length; i++){
-    				   for(int j = 0; j < tilePile.pile[0].length-2; j++){
-    						if((tilePile.pile[i][j].getColor() != 0) && (tilePile.pile[i][j].getColor() == tilePile.pile[i][j+1].getColor()) ){
-    							if(tilePile.pile[i][j+1].getColor() == tilePile.pile[i][j+2].getColor()){
-    								gover= false;	
-    							}	
-    						}
-    						else{
-    							//System.out.println("check k: "+k);
-    						}
-    					}
-    				}
-    				
-    				//Vertical = a[0][0] == a[1][0]
-    			   
-    				for(int j = 0; j < tilePile.pile.length; j++){
-    					for(int i = 0; i < tilePile.pile[0].length-2; i++){
-    						if((tilePile.pile[i][j].getColor() != 0) && (tilePile.pile[i][j].getColor() == tilePile.pile[i+1][j].getColor())){
-    							if(tilePile.pile[i][j].getColor()== tilePile.pile[i+2][j].getColor()){
-    								gover = false;
-    								
-    							}	
-    						}
-    						else{
-    							//System.out.println("check k: "+k);
-    						}
-    					}
-    			   
-    			  
-    				
-    		   }
-    				tmp2=tilePile.pile[q][r].getColor();
-     			   tilePile.pile[q][r].setColor(tilePile.pile[q][r+1].getColor());
-     			   tilePile.pile[q][r+1].setColor(tmp2);
-    	   }
-    	   }
-    	   for (int r=0; r<tilePile.pile.length; r++){
-    		   for (int q=0; q<tilePile.pile.length-2; q++){
-    			   int tmp2=0;
-    			   tmp2=tilePile.pile[q][r].getColor();
-    			   tilePile.pile[q][r].setColor(tilePile.pile[q+1][r].getColor());
-    			   tilePile.pile[q+1][r].setColor(tmp2);
-    			   for(int i = 0; i < tilePile.pile.length; i++){
-    				   for(int j = 0; j < tilePile.pile[0].length-2; j++){
-    						if((tilePile.pile[i][j].getColor() != 0) && (tilePile.pile[i][j].getColor() == tilePile.pile[i][j+1].getColor()) ){
-    							if(tilePile.pile[i][j+1].getColor() == tilePile.pile[i][j+2].getColor()){
-    								gover= false;	
-    							}	
-    						}
-    						else{
-    							//System.out.println("check k: "+k);
-    						}
-    					}
-    				}
-    				
-    				//Vertical = a[0][0] == a[1][0]
-    			   
-    				for(int j = 0; j < tilePile.pile.length; j++){
-    					for(int i = 0; i < tilePile.pile[0].length-2; i++){
-    						if((tilePile.pile[i][j].getColor() != 0) && (tilePile.pile[i][j].getColor() == tilePile.pile[i+1][j].getColor())){
-    							if(tilePile.pile[i][j].getColor()== tilePile.pile[i+2][j].getColor()){
-    								gover = false;
-    								
-    							}	
-    						}
-    						else{
-    							//System.out.println("check k: "+k);
-    						}
-    					}
-    			   
-    			  
-    				
-    		   }
-    			if( gover )
-    			{
-    				this.gameOver = true;
-    			}
-    				
-    				
-    				tmp2=tilePile.pile[q][r].getColor();
-     			   tilePile.pile[q][r].setColor(tilePile.pile[q+1][r].getColor());
-     			   tilePile.pile[q+1][r].setColor(tmp2);
-    	   }
-    	   }
+    	   
+    	   if(gameOver())
+			{
+				this.gameOver = true;
+			}
     	   
     	   
        }
     }
+	public boolean gameOver(){
+		for (int q=0; q<tilePile.pile.length; q++){
+ 		   for (int r=0; r<tilePile.pile.length-1; r++){
+ 			   int tmp2=0;
+ 			   tmp2=tilePile.pile[q][r].getColor();
+ 			   tilePile.pile[q][r].setColor(tilePile.pile[q][r+1].getColor());
+ 			   tilePile.pile[q][r+1].setColor(tmp2);
+ 			   for(int i = 0; i < tilePile.pile.length; i++){
+ 				   for(int j = 0; j < tilePile.pile[0].length-2; j++){
+ 						if((tilePile.pile[i][j].getColor() != 0) && (tilePile.pile[i][j].getColor() == tilePile.pile[i][j+1].getColor()) ){
+ 							if(tilePile.pile[i][j+1].getColor() == tilePile.pile[i][j+2].getColor()){
+ 								tmp2=tilePile.pile[q][r].getColor();
+ 				 				tilePile.pile[q][r].setColor(tilePile.pile[q][r+1].getColor());
+ 				 				tilePile.pile[q][r+1].setColor(tmp2);
+ 								return false;	
+ 							}	
+ 						}
+ 						else{
+ 							//System.out.println("check k: "+k);
+ 						}
+ 					}
+ 				}
+ 				
+ 				//Vertical = a[0][0] == a[1][0]
+ 			   
+ 				for(int j = 0; j < tilePile.pile.length; j++){
+ 					for(int i = 0; i < tilePile.pile[0].length-2; i++){
+ 						if((tilePile.pile[i][j].getColor() != 0) && (tilePile.pile[i][j].getColor() == tilePile.pile[i+1][j].getColor())){
+ 							if(tilePile.pile[i][j].getColor()== tilePile.pile[i+2][j].getColor()){
+ 								tmp2=tilePile.pile[q][r].getColor();
+ 				 				tilePile.pile[q][r].setColor(tilePile.pile[q][r+1].getColor());
+ 				 				tilePile.pile[q][r+1].setColor(tmp2);
+ 								return false;
+ 								
+ 							}	
+ 						}
+ 						else{
+ 							//System.out.println("check k: "+k);
+ 						}
+ 					}
+ 				}
+ 				tmp2=tilePile.pile[q][r].getColor();
+ 				tilePile.pile[q][r].setColor(tilePile.pile[q][r+1].getColor());
+ 				tilePile.pile[q][r+1].setColor(tmp2);
+ 		   }
+ 	   }
+ 	   for (int r=0; r<tilePile.pile.length; r++){
+ 		   for (int q=0; q<tilePile.pile.length-1; q++){
+ 			   int tmp2=0;
+ 			   tmp2=tilePile.pile[q][r].getColor();
+ 			   tilePile.pile[q][r].setColor(tilePile.pile[q+1][r].getColor());
+ 			   tilePile.pile[q+1][r].setColor(tmp2);
+ 			   for(int i = 0; i < tilePile.pile.length; i++){
+ 				   for(int j = 0; j < tilePile.pile[0].length-2; j++){
+ 						if((tilePile.pile[i][j].getColor() != 0) && (tilePile.pile[i][j].getColor() == tilePile.pile[i][j+1].getColor()) ){
+ 							if(tilePile.pile[i][j+1].getColor() == tilePile.pile[i][j+2].getColor()){
+ 								tmp2=tilePile.pile[q][r].getColor();
+ 				 				tilePile.pile[q][r].setColor(tilePile.pile[q+1][r].getColor());
+ 				 				tilePile.pile[q+1][r].setColor(tmp2);
+ 								return false;	
+ 							}	
+ 						}
+ 						else{
+ 							//System.out.println("check k: "+k);
+ 						}
+ 					}
+ 				}
+ 				
+ 				//Vertical = a[0][0] == a[1][0]
+ 			   
+ 				for(int j = 0; j < tilePile.pile.length; j++){
+ 					for(int i = 0; i < tilePile.pile[0].length-2; i++){
+ 						if((tilePile.pile[i][j].getColor() != 0) && (tilePile.pile[i][j].getColor() == tilePile.pile[i+1][j].getColor())){
+ 							if(tilePile.pile[i][j].getColor()== tilePile.pile[i+2][j].getColor()){
+ 								tmp2=tilePile.pile[q][r].getColor();
+ 				 				tilePile.pile[q][r].setColor(tilePile.pile[q+1][r].getColor());
+ 				 				tilePile.pile[q+1][r].setColor(tmp2);
+ 								return false;
+ 							}	
+ 						}
+ 						else{
+ 							//System.out.println("check k: "+k);
+ 						}
+ 					}
+ 				}
+ 				tmp2=tilePile.pile[q][r].getColor();
+ 				tilePile.pile[q][r].setColor(tilePile.pile[q+1][r].getColor());
+ 				tilePile.pile[q+1][r].setColor(tmp2);
+ 		   }
+ 	   }
+ 	   return true;
+	}
 	
 	public boolean allClear(){
 		for(int i = 0; i < tilePile.pile.length; i++){
