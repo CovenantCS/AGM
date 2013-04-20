@@ -23,6 +23,7 @@ public class BowlingBoard extends StimulasActionBoard {
 	protected RackOfPins rack;
 	private Random rand;
 	private int ballColor;
+	private int ballSize;
 	private int pinColor;
 	protected int frame = 0; // for each game you get 10 frames
 	protected int ballNum = 1; // for each frame you get two balls
@@ -53,6 +54,8 @@ public class BowlingBoard extends StimulasActionBoard {
 		EndWall endOfAlley;
 		Lane lane;
 
+		this.ballSize = getWidth() / 24;
+		
 		TextArea textarea;
 
 		endOfAlley = new EndWall(new Rectangle(new Point(-5, -5), new Size(
@@ -89,7 +92,7 @@ public class BowlingBoard extends StimulasActionBoard {
 	}
 
 	public void bowl(int x, int y) {
-		ball = new BowlingBall(new Point(x, getHeight() - (getHeight() / 20)), this.ballColor);
+		ball = new BowlingBall(new Point(x, getHeight() - (getHeight() / 20)), this.ballColor, this.ballSize);
 		int i = rand.nextInt();
 		i = (i >= 0 ? i : -i);
 		ball.setDirection((i % 60) + 60);

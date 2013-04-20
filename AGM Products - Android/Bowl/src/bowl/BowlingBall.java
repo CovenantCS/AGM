@@ -18,23 +18,33 @@ public class BowlingBall extends MovableSprite {
 	private int color = 255 << 24 | 255 << 16 | 255 << 8 | 0;
 
 	// the height and width of the ball sprite
-	private static final int ballDim = 5;
+	private int ballDim = 5;
 
 	// the ball has been deleted or not
 	protected boolean isDead;
 
-	public BowlingBall(Point p) {
-		super(new Rectangle(p, new Size(ballDim, ballDim)), 90);
-		v.setSpeed(2);
-		name = "Ball";
-	}
+//	public BowlingBall(Point p) {
+//		super(new Rectangle(p, new Size(ballDim, ballDim)), 90);
+//		v.setSpeed(2);
+//		name = "Ball";
+//	}
 	
-	public BowlingBall(Point p, int color) {
-        super(new Rectangle(p, new Size(ballDim, ballDim)), 90);
-        v.setSpeed(2);
-        name = "Ball";
-        this.color = color;
-    }
+//	public BowlingBall(Point p, int color) {
+//        super(new Rectangle(p, new Size(ballDim, ballDim)), 90);
+//        v.setSpeed(2);
+//        name = "Ball";
+//        this.color = color;
+//    }
+
+	public BowlingBall(Point point, int ballColor, int ballSize) 
+	{
+		super(new Rectangle(point, new Size(ballSize, ballSize)), 90);
+		 v.setSpeed(2);
+	     name = "Ball";
+	     this.color = color;
+	     this.ballDim = ballSize;
+		// TODO Auto-generated constructor stub
+	}
 
 	// delete the ball
 	public void delete() throws SpriteDeletedException {
