@@ -8,9 +8,6 @@ package bowl;
 
 import java.util.Vector;
 
-
-import android.content.Context;
-import android.graphics.BitmapFactory;
 import coreAssets.CollisionException;
 import coreAssets.GameSprite;
 import coreAssets.MovableSprite;
@@ -18,6 +15,8 @@ import coreAssets.Point;
 import coreAssets.Rectangle;
 import coreAssets.Size;
 import coreAssets.SpriteDesc;
+import android.content.Context;
+import android.graphics.BitmapFactory;
 
 public class BowlingPin extends MovableSprite {
 	private int color = 255 << 24 | 255 << 16 | 255 << 8 | 255;
@@ -33,7 +32,7 @@ public class BowlingPin extends MovableSprite {
 		name = "Pin";
 	}
 	
-	public BowlingPin(Context context, Rectangle r, int color )
+	public BowlingPin(Context context, Rectangle r, int color)
 	{
 	    super(r, 0, BitmapFactory.decodeResource(context.getResources(), edu.covenant.kepler.bowl.R.drawable.bowling_pin));
         v.setSpeed(0);
@@ -43,16 +42,13 @@ public class BowlingPin extends MovableSprite {
         this.color = color;
 	}
 
-	public void buildSpriteDesc(Vector sdv) {
+	public void buildSpriteDesc(Vector<SpriteDesc> sdv) {
 
 		if (!isBroken || moving()) {
 
-			sdv.addElement(new SpriteDesc(getBm(), 
-					getColor(),
-					r.getLocation().getRealX() + 1,
-					r.getLocation().getRealY() + 1,
-					r.getSize().getWidth() - 1,
-					r.getSize().getHeight() - 1));
+			sdv.addElement(new SpriteDesc(getBm(), getColor(), r.getLocation()
+					.getRealX() + 1, r.getLocation().getRealY() + 1, r
+					.getSize().getWidth() - 1, r.getSize().getHeight() - 1));
 		}
 	}
 
@@ -91,11 +87,10 @@ public class BowlingPin extends MovableSprite {
 		if (index != -1) {
 			datum = data.substring(0, index);
 			data = data.substring(index + 1);
-
 		} else if (data.indexOf(":") != -1) {
 			index = data.indexOf(":");
 			datum = data.substring(0, index);
-			data = data.substring(index + 1);
+			data = data.substring(index + 1);			
 		} else {
 			datum = data;
 		}
