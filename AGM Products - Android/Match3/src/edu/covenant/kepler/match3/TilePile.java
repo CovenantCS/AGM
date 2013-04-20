@@ -49,7 +49,7 @@ public class TilePile extends StationarySprite {
 		int y = initialY;
 		numLeft = numberOfBricks;
 		int length=s.getWidth();
-		if (s.getHeight()>s.getWidth()){
+		if (s.getHeight()<s.getWidth()){
 			length=s.getHeight();
 		}
 		for (int i = 0; i < numRows; i++) {
