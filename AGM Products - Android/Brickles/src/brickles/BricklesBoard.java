@@ -106,9 +106,14 @@ public class BricklesBoard extends ContinuousActionBoard {
 	}
 
 	public String getSaveData() {
-		return pucksupply.getSaveData() + ":" + puck.getSaveData() + ":"
-				+ paddle.getSaveData() + ":" + brickpile.getSaveData() + ":"
-				+ score;
+    	try {
+    		return pucksupply.getSaveData() + ":" + puck.getSaveData() + ":"
+    				+ paddle.getSaveData() + ":" + brickpile.getSaveData() + ":"
+    				+ score;
+    	}
+    	catch (NullPointerException e) {
+    		return "";
+    	}
 	}
 
 	public void setSaveData(String data) {

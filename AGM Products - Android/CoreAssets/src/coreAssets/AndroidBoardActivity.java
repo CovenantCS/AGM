@@ -61,6 +61,7 @@ public abstract class AndroidBoardActivity extends Activity
     {
         super.onPause();
         boardViewer.getBoard().saveGame( this );
+        System.err.println("in onpause");
     }
     
     public void onDestroy()

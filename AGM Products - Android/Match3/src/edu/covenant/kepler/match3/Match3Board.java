@@ -61,23 +61,27 @@ public class Match3Board extends ContinuousActionBoard {
 	}
 
 	public String getSaveData() {
-		/*return pucksupply.getSaveData() + ":" + puck.getSaveData() + ":"
-				+ paddle.getSaveData() + ":" + brickpile.getSaveData() + ":"
-				+ score;*/
-		String x="";
-		for (int i = 0; i < tilePile.pile.length; i++) {
-			
-			for (int j = 0; j < tilePile.pile.length; j++) {
+    	try {
+    		/*return pucksupply.getSaveData() + ":" + puck.getSaveData() + ":"
+					+ paddle.getSaveData() + ":" + brickpile.getSaveData() + ":"
+					+ score;*/
+			String x="";
+			for (int i = 0; i < tilePile.pile.length; i++) {
 				
-				x+=tilePile.pile[i][j].getColor()+",";
-				
-				
+				for (int j = 0; j < tilePile.pile.length; j++) {
+					
+					x+=tilePile.pile[i][j].getColor()+",";
+					
+					
+				}
 			}
-		}
-		x+=score;
-		return x;
-//		return (tilePile.getSaveData()+":"+score);
-		
+			x+=score;
+			return x;
+		//	return (tilePile.getSaveData()+":"+score);
+    	}
+    	catch (NullPointerException e) {
+    		return "";
+    	}
 	}
 
 	public void setSaveData(String data) {

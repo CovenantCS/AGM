@@ -264,6 +264,7 @@ public abstract class GenericBoard implements Board {
     public void saveGame( Context context )
     {
         String data = getSaveData();
+        System.err.println("save "+data);
         String fileName = this.name;
         FileOutputStream outputStream;
         try

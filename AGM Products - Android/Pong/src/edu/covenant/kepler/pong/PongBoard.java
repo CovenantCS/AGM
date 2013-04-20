@@ -169,9 +169,14 @@ public class PongBoard extends ContinuousActionBoard
 
     public String getSaveData()
     {
-        return score + ":" + topHitLast + ":" + puck.getSaveData() + ":"
+    	try {
+    		return score + ":" + topHitLast + ":" + puck.getSaveData() + ":"
                 + topPaddle.getSaveData() + ":" + bottomPaddle.getSaveData()
                 + ":" + pucksupply.getSaveData() + ":";
+    	}
+    	catch (NullPointerException e) {
+    		return "";
+    	}
     }
 
     public void setSaveData( String data )

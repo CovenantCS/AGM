@@ -65,7 +65,12 @@ public class MinesweeperBoard extends ContinuousActionBoard {
 		/*return pucksupply.getSaveData() + ":" + puck.getSaveData() + ":"
 				+ paddle.getSaveData() + ":" + brickpile.getSaveData() + ":"
 				+ score;*/
-		return tilePile.getSaveData() + ":" + score;
+    	try {
+    		return tilePile.getSaveData() + ":" + score;
+    	}
+    	catch (NullPointerException e) {
+    		return "";
+    	}
 	}
 
 	public void setSaveData(String data) {

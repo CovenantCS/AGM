@@ -75,6 +75,7 @@ public class BowlingBoard extends StimulasActionBoard {
 				getHeight() / 20), new Size(((3 * getWidth() - 60) / 5)
 				- getWidth() / 10, getHeight() / 5)), this.pinColor);
 		addStationaryPiece(rack);
+		System.err.println("rack created");
 	}
 
 	public int checkPointerX(int x) {
@@ -113,27 +114,37 @@ public class BowlingBoard extends StimulasActionBoard {
 		userInterupt = true;
 	}
 
-	public String getSaveData() {		
-		if (ball == null) {
-			return "null:" + rack.getSaveData() + ":" + score;
-		} else {
-			return ball.getSaveData() + ":" + rack.getSaveData() + ":" + score;
-		}
+	public String getSaveData() {
+    	try {
+    		/*if (rack != null) System.err.println("rack");
+    		if (ball != null) System.err.println("ball");
+    		if (score != null) System.err.println("score");*/
+    		if (ball == null) {
+    			return "null:" + rack.getSaveData() + ":" + score;
+    		} else {
+    			return ball.getSaveData() + ":" + rack.getSaveData() + ":" + score;
+    		}
+    	}
+    	catch (NullPointerException e) {
+    		return "";
+    	}
 	}
 
 	public void setSaveData(String data) {
-System.out.println(data);
-		if (!data.substring(0, 4).equals("null")) {
-			if (ball == null) {
-				bowl(getWidth() / 2 - 10, 10);
+System.err.println("set "+data);
+		if (data.length() > 5) { 
+			if (!data.substring(0, 4).equals("null")) {
+				if (ball == null) {
+					bowl(getWidth() / 2 - 10, 10);
+				}
+				ball.setSaveData(data);
+				ball.startMoving();
 			}
-			ball.setSaveData(data);
-			ball.startMoving();
+			data = data.substring(data.indexOf(":") + 1);
+			rack.setSaveData(data);
+			data = data.substring(data.indexOf(":") + 1);
+			score = new SimpleScore(data);
 		}
-		data = data.substring(data.indexOf(":") + 1);
-		rack.setSaveData(data);
-		data = data.substring(data.indexOf(":") + 1);
-		score = new SimpleScore(data);
 	}
 
 	protected void handleSpriteDeletedException() throws GameOverException {
