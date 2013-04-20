@@ -19,6 +19,7 @@ import coreAssets.TextSprite;
 public class BricklesBoard extends ContinuousActionBoard {
 	private Paddle paddle;
 	private Puck puck;
+	private int puckSize;
 	private BrickPile brickpile;
 	private PuckSupply pucksupply;
 	private int paddleColor;
@@ -63,6 +64,7 @@ public class BricklesBoard extends ContinuousActionBoard {
 		SideWall leftwall;
 		SideWall rightwall;
 
+		this.puckSize = getWidth() / 24;
 		int paddleWidth = getWidth() / 8;
 		int paddleHeight = getHeight() /40;
 		paddle = new Paddle(new Rectangle(new Point((getWidth() / 2)
@@ -73,7 +75,7 @@ public class BricklesBoard extends ContinuousActionBoard {
 
 		try {
 			puck = pucksupply.getPuck(new Point((getWidth() / 2),
-					(getHeight() / 2)), 30);
+					(getHeight() / 2)), puckSize);
 			addMovablePiece(puck);
 		} catch (GameOverException e) {
 			// this is the first puck. It should always succeed
@@ -132,7 +134,7 @@ public class BricklesBoard extends ContinuousActionBoard {
 		try {
 			movableComponents.removeElement(puck);
 			puck = pucksupply.getPuck(new Point((getWidth() / 2),
-					(getHeight() / 2)), 10);
+					(getHeight() / 2)), puckSize);
 			movableComponents.addElement(puck);
 		} catch (GameOverException oope) {
 			stopMovement();

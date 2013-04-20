@@ -68,7 +68,8 @@ public class PongBoard extends ContinuousActionBoard
         DividingLine dl;
 
         int paddleWidth = getWidth() / 8;
-        int paddleHeight = 3;
+        int paddleHeight = getHeight() / 30;
+        this.puckSize = getWidth() / 24;
         
         topPaddle = new Paddle( new Rectangle( new Point( ( getWidth() / 2 )
                 - ( paddleWidth / 2 ) + 15, ( getHeight() / 10 ) ), new Size(
