@@ -1,7 +1,6 @@
 package bowl;
 
 import java.util.Vector;
-
 import android.content.Context;
 import coreAssets.CollisionException;
 import coreAssets.GameSprite;
@@ -28,8 +27,7 @@ public class RackOfPins extends StationarySprite {
 	// aggregated sprites that havent been hit
 	private int numLeft;
 
-
-	public RackOfPins(Context context, Rectangle r, int pinColor) {
+	public RackOfPins(Context context,Rectangle r, int pinColor) {
 		super(r);
 		Point p = r.getLocation();
 		Size s = r.getSize();
@@ -56,6 +54,7 @@ public class RackOfPins extends StationarySprite {
 		}
 		name = "RackOfPins";
 	}
+
 	public void buildSpriteDesc(Vector<SpriteDesc> sdv) {
 		for (int i = 0; i < rack.length; i++) {
 			for (int j = 0; j < rack[i].length; j++) {
