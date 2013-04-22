@@ -63,10 +63,10 @@ public class BowlingBoard extends StimulasActionBoard {
 		rackPins(this.context);
 
 		addText(new TextSprite( "Score: "+score, Color.YELLOW, (getHeight() / 25 ), (float)(getWidth() * 0.75), (float)getHeight() / 10 ));
-		addText(new TextSprite( "To start:", Color.YELLOW, (getHeight() / 25 ), (float)(getWidth() * 0.75), (float)getHeight() - (10*5) ));
+		/*addText(new TextSprite( "To start:", Color.YELLOW, (getHeight() / 25 ), (float)(getWidth() * 0.75), (float)getHeight() - (10*5) ));
 		addText(new TextSprite( "Tap screen or", Color.YELLOW, (getHeight() / 25 ), (float)(getWidth() * 0.75), (float)getHeight() - (10*4) ));
 		addText(new TextSprite( "press left", Color.YELLOW, (getHeight() / 25 ), (float)(getWidth() * 0.75), (float)getHeight() - (10*3) ));
-		addText(new TextSprite( "arrow key.", Color.YELLOW, (getHeight() / 25 ), (float)(getWidth() * 0.75), (float)getHeight() - (10*2) ));
+		addText(new TextSprite( "arrow key.", Color.YELLOW, (getHeight() / 25 ), (float)(getWidth() * 0.75), (float)getHeight() - (10*2) ));*/
 	}
 
 	public void rackPins(Context context) {
