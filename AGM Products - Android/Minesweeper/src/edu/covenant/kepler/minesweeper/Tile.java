@@ -99,7 +99,7 @@ public class Tile extends StationarySprite {
 			TilePile.curSelected = null;
 			isRevealed = true;
 			color = LIGHT_BLUE;
-			board.addText( new TextSprite( ""+num, Color.BLACK, 10, r.getLocation().getRealX()+10, r.getLocation().getRealY()+10 ) );
+			board.addText( new TextSprite( ""+num, Color.BLACK, (board.getHeight() / 25 ), r.getLocation().getRealX()+10, r.getLocation().getRealY()+10 ) );
 			boolean win = true;
 			for(int i = 0; i < pile.length; i++) {
 				for(int j = 0; j < pile[0].length; j++) {

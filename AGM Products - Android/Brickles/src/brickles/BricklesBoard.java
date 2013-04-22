@@ -102,7 +102,7 @@ public class BricklesBoard extends ContinuousActionBoard {
 				getHeight() / 5)), brickColor);
 		addStationaryPiece(brickpile);
 
-		addText(new TextSprite( score.toString(), Color.YELLOW, 10, (float)getWidth() / 2, (float)getHeight() / 10 ));
+		addText(new TextSprite( score.toString(), Color.YELLOW, (getHeight() / 25 ), (float)getWidth() / 2, (float)getHeight() / 10 ));
 	}
 
 	public String getSaveData() {

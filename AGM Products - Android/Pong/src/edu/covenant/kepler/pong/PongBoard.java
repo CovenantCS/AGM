@@ -115,7 +115,7 @@ public class PongBoard extends ContinuousActionBoard
                 new Size( 5, getHeight() + 10 ) ), false );
         addStationaryPiece( rightwall );
 
-		addText(new TextSprite( score.toString(), Color.BLACK, 10, (float)getWidth() / 20, (float)getHeight() / 2 ));
+		addText(new TextSprite( score.toString(), Color.BLACK, (getHeight() / 25 ), (float)getWidth() / 20, (float)getHeight() / 2 ));
     }
 
     public void ptrPressed( int x, int y )

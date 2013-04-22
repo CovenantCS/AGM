@@ -57,7 +57,7 @@ public class Match3Board extends ContinuousActionBoard {
 		tilePile = new TilePile(new Rectangle(new Point(0, 0), new Size(getWidth(), getHeight() - (getHeight() / 10))));
 		addStationaryPiece(tilePile);	
 		
-		addText(new TextSprite( "Score: "+score, Color.BLACK, 10, (float)(getWidth() * 0.05), (float)(getHeight() * 0.9) ));
+		addText(new TextSprite( "Score: "+score, Color.BLACK, (getHeight() / 25 ), (float)(getWidth() * 0.05), (float)(getHeight() * 0.9) ));
 	}
 
 	public String getSaveData() {

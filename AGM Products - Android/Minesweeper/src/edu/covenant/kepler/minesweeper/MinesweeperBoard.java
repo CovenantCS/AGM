@@ -58,7 +58,7 @@ public class MinesweeperBoard extends ContinuousActionBoard {
 		tilePile = new TilePile(new Rectangle(new Point(0, getHeight() / 10), new Size(getWidth(), getHeight() - (getHeight() / 10))), this, tileColor);
 		addStationaryPiece(tilePile);
 		
-		addText( new TextSprite( "Score: " + score, Color.BLACK, 10, (float)(getWidth() / 10), (float)(getHeight() / 20) ) );
+		addText( new TextSprite( "Score: " + score, Color.BLACK, (getHeight() / 25 ), (float)(getWidth() / 10), (float)(getHeight() / 20) ) );
 	}
 
 	public String getSaveData() {
@@ -144,25 +144,6 @@ public class MinesweeperBoard extends ContinuousActionBoard {
 					selected = t;
 					break;
 				}
-//				Point click = new Point(x,y);
-//				Rectangle r = t.getRectangle();
-//				Point point = r.getLocation();
-//				Size size = r.getSize();
-//				boolean found;
-//				if(click.getRealX() > point.getRealX() - size.getWidth() / 2 && click.getRealX() < point.getRealX() + size.getWidth() / 2) {
-//					found = true;
-//				} else {
-//					found = false;
-//				}
-//				if(click.getRealY() > point.getRealY() - size.getHeight() / 2 && click.getRealY() < point.getRealY() + size.getHeight() / 2) {
-//					found = true;
-//				} else {
-//					found = false;
-//				}
-//				if(found) {
-//					selected = t;
-//					break;
-//				}
 			}
 		}
 		if(selected != null) {
@@ -181,21 +162,6 @@ public class MinesweeperBoard extends ContinuousActionBoard {
             }
 		}
 	}
-	
-//	 private OnClickListener leftListener = new OnClickListener() {
-//	        public void onClick(View v) {
-//	        	if(TilePile.curSelected != null) {
-//	    			TilePile.curSelected.flag();
-//	    		}
-//	     }
-//	 };
-//	 private OnClickListener rightListener = new OnClickListener() {
-//	        public void onClick(View v) {
-//	        	if(TilePile.curSelected != null) {
-//	    			TilePile.curSelected.reveal();
-//	    		}
-//	     }
-//	 };
 	
 	public void keyLeft(boolean down) {
 		if(TilePile.curSelected != null) {
