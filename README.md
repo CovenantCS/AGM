@@ -1,4 +1,4 @@
-Arcade Game MAker Android Port
+Arcade Game Maker Android Port
 ==============================
 
 Get Started
